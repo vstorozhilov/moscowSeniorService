@@ -1,0 +1,139 @@
+@font-face {
+    font-family: "GT Eesti Pro Text";
+    src: url(./fonts/gteestiprotext_regular.otf) format(opentype);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "GT Eesti Pro Text";
+    src: url(./fonts/gteestiprotext_medium.otf) format(opentype);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+* {
+    font-family: 'GT Eesti Pro Text';
+    box-sizing: border-box;
+}
+
+.mainContainer {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: absolute;
+}
+
+.hintLabel {
+    font-family: 'GT Eesti Pro Text';
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #8C8C8C;
+}
+
+.mainLabel {
+    font-family: 'GT Eesti Pro Text';
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 20px;
+}
+
+.inputTextField fieldset {
+    border-color: #B3B3B3 !important;
+}
+
+.inputTextField {
+    .MuiInputBase-root {
+        border-radius: 20px;
+        background-color: #F7F8FA;
+        font-family: 'GT Eesti Pro Text';
+        font-weight: 400;
+    }
+}
+
+.MuiAutocomplete-option {
+    font-family: 'GT Eesti Pro Text';
+    font-weight: 400;
+}
+
+.MuiAutocomplete-popperDisablePortal {
+    border: solid 1px #B3B3B3;
+    box-shadow: none;
+}
+
+.inputTextField .MuiFormLabel-root, .inputTextField .MuiFormLabel-root.Mui-focused {
+    font-family: 'GT Eesti Pro Text';
+    font-weight: 400;
+    color: #8C8C8C;
+}
+
+.actionButton.MuiButtonBase-root,  .actionButton.MuiButtonBase-root:hover{
+    background-color: #F7F5ED;
+    border: 2px solid #C5B577;
+    box-shadow: none;
+    border-radius: 16px;
+    font-family: 'GT Eesti Pro Text';
+    font-weight: 400;
+    color: black;
+    text-transform: none;
+    font-size: 14px;
+}
+
+.toggleGroupButton button {
+    line-height: 20px !important;
+    padding:  6px 10px !important;
+    text-transform: none !important;
+    color : #C5B577;
+    border: solid 1px #C5B577 !important;
+    border-radius: 20px !important;
+    font-family: 'GT Eesti Pro Text';
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.toggleGroupButton button.Mui-selected {
+    background-color: #CC2222 !important;
+    color : white !important;
+}
+
+.toggleGroupButton {
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-transition-forward-enter {
+    transform: translateX(100%);
+}
+
+.page-transition-forward-enter-active {
+    transform: translateX(0%);
+    transition: transform 300ms ease-in;
+}
+
+.page-transition-forward-exit {
+    transform: translateX(0%);
+}
+
+.page-transition-forward-exit-active {
+    transform: translateX(-100%);
+    transition: transform 300ms ease-in;
+}
+
+.page-transition-backward-enter {
+    transform: translateX(-100%);
+}
+
+.page-transition-backward-enter-active {
+    transform: translateX(0%);
+    transition: transform 300ms ease-in;
+}
+
+.page-transition-backward-exit {
+    transform: translateX(0%);
+}
+
+.page-transition-backward-exit-active {
+    transform: translateX(100%);
+    transition: transform 300ms ease-in;
+}
