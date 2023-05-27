@@ -66,32 +66,6 @@ export default function AddressScheduleAndTripTime (props) {
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
   console.log(selectedPageIndex, prevPageIndex, pageIndex);
 
-  const [alignment, setAlignment] = React.useState('left');
-  const [weekday, setWeekday] = React.useState('Пн');
-  const [dayTime, setDayTime] = React.useState({
-    morning : false,
-    afternoon : false,
-    evening : false
-  });
-
-  const handleWeekday = (
-    event: React.MouseEvent<HTMLElement>,
-    newWeekday: string | null
-  ) => {
-    if (newWeekday != null) {
-      setWeekday(newWeekday);
-    }
-  };
-
-  const handleAlignment = (
-    event: React.MouseEvent<HTMLElement>,
-    newAlignment: string | null,
-  ) => {
-    if (newAlignment !== null) {
-      setAlignment(newAlignment);
-    }
-  };
-
   return <CSSTransition
       timeout={500}
       nodeRef={nodeRef}
@@ -130,7 +104,11 @@ export default function AddressScheduleAndTripTime (props) {
               <MaxTripTimeSelector/>
               <ScheduleConstructor/>
             <Stack direction='row' justifyContent='flex-end'>
-                <Button className="actionButton" variant="contained" endIcon={<ArrowForwardIcon/>}>
+                <Button
+                className="actionButton"
+                variant="contained"
+                endIcon={<ArrowForwardIcon/>}
+                onClick={()=>dispatch(selectedAndPrevPageResolver(3))}>
                   <Box>Вперед</Box>
                 </Button>
             </Stack>

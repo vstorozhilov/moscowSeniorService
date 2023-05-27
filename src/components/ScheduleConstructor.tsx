@@ -14,27 +14,25 @@ export default function ScheduleConstructor () {
 
     const [weekday, setWeekday] = React.useState<number>(0);
     const handleWeekday = (
-        event: React.MouseEvent<HTMLElement>,
+        __: React.MouseEvent<HTMLElement>,
         newWeekday: number | null
       ) => {
         if (newWeekday != null) {
           setWeekday(newWeekday);
         }
       };
-    
+
     const handleDaytime = (
-        event: React.MouseEvent<HTMLElement>,
+        __: React.MouseEvent<HTMLElement>,
         dayTimes: Array<string>
       ) => {
         console.log(dayTimes);
-        if (dayTimes.length) {
-            changeSchedule({
-                weekday,
-                dayTimes
-            });
-        }
+        dispatch(changeSchedule({
+            weekday,
+            dayTimes
+        }));
       };
-    
+
     console.log(dayTimes)
 
 
@@ -67,6 +65,7 @@ export default function ScheduleConstructor () {
         Вс
       </ToggleButton>
     </ToggleButtonGroup>
+    <Box>Укажите удобное время в желаемые дни недели</Box>
     <ToggleButtonGroup
       className='toggleGroupButton'
       value={Object.keys(dayTimes[weekday]).filter(key=>dayTimes[weekday][key]==true)}

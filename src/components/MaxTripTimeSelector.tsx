@@ -12,13 +12,19 @@ export default function MaxTripTimeSelector () {
     const { maxTripTimeChange } = maxTripTimeSlice.actions;
     const { maxTripTime } = useAppSelector(state=>state.maxTripTimeReducer);
 
+    const handleNewMaxTripTime = (
+        __ : React.MouseEvent<HTMLElement>,
+        newValue : number | null
+    ) => {
+        if (newValue != null) dispatch(maxTripTimeChange(newValue));
+    }
 
     return <><Box>Допустимое время на дорогу</Box>
             <ToggleButtonGroup
             className='toggleGroupButton'
             value={maxTripTime}
             exclusive
-            onChange={(__, newValue : number)=>dispatch(maxTripTimeChange(newValue))}
+            onChange={handleNewMaxTripTime}
             aria-label="text alignment"
             >
             <ToggleButton value={30} aria-label="left aligned">

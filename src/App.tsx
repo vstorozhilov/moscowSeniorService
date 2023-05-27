@@ -7,6 +7,9 @@ import {
   TransitionGroup,
 } from 'react-transition-group';
 import AddressScheduleAndTripTime from './pages/AddressScheduleAndTripTime';
+import ActivityCategoriesPage from './pages/ActivityCategoryPage';
+import ActivityPage from './pages/ActivitesPage';
+import MapPage from './pages/MapPage';
 
 export default function App() {
 
@@ -14,8 +17,11 @@ export default function App() {
       height : 'inherit',
       width : 'inherit',
     }}>
-        <Hello pageIndex={0}/>
-        <SurNameAndBirthDateInput pageIndex={1}/>
-        <AddressScheduleAndTripTime pageIndex={2}/>
-      </TransitionGroup>
+      <Hello pageIndex={0}/>
+      <SurNameAndBirthDateInput pageIndex={1}/>
+      <AddressScheduleAndTripTime pageIndex={2}/>
+      <ActivityCategoriesPage pageIndex={3}/>
+      <ActivityPage pageIndex={4}/>
+      <MapPage pageIndex={5}/>
+    </TransitionGroup>
 }
