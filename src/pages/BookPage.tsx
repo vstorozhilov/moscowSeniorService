@@ -29,8 +29,6 @@ export default function BookPage (props) {
 
   const activityCategoriesId = useAppSelector(state=>state.ActivityCategoriesReducer.map(item=>item.id));
 
-  console.log(selectedPageIndex, prevPageIndex, pageIndex);
-
   return <CSSTransition
       timeout={500}
       nodeRef={nodeRef}

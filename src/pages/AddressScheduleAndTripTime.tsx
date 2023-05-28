@@ -36,8 +36,6 @@ export default function AddressScheduleAndTripTime (props) {
     createSchedule(resJSON.schedule);
   }
 
-  console.log(userSettings);
-
   useEffect(()=>{
     fetchUserSettings();
   }, []);

@@ -30,7 +30,6 @@ export default function ActivityCategoryCard (params : { activityCategoryId : nu
         dispatch(setActivities(newRes));
     }
 
-    console.log(activityCategoryId)
     const [isExpanded, setIsExpanded] = useState(false);
 
     return <Card className='activityCategoryCard'>

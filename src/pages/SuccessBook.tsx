@@ -17,8 +17,6 @@ export default function SuccessBook (props) {
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
   const booking = useAppSelector(state=>state.BookingReducer[state.BookingReducer.length - 1]);
 
-  console.log(selectedPageIndex, prevPageIndex, pageIndex);
-
   return <CSSTransition
       timeout={500}
       nodeRef={nodeRef}

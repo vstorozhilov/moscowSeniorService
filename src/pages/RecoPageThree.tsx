@@ -109,13 +109,13 @@ export default function RecoPageThree (props) {
         <Button
         disabled={isLoading}
         onClick={async ()=>{
-            await getRecommends('Активные занятия');
-            dispatch(changeAnswer(
-                {
-                    answer : 'activity',
-                    value : 'Активные занятия'
-                }
-            ))
+            // await getRecommends('Активные занятия');
+            // dispatch(changeAnswer(
+            //     {
+            //         answer : 'activity',
+            //         value : 'Активные занятия'
+            //     }
+            // ))
             dispatch(selectedAndPrevPageResolver(3))
         }}
         className="actionButton"
@@ -131,13 +131,13 @@ export default function RecoPageThree (props) {
         <Button
         disabled={isLoading}
         onClick={async ()=>{
-            await getRecommends('Cпокойные занятия');
-            dispatch(changeAnswer(
-                {
-                    answer : 'activity',
-                    value : 'Cпокойные занятия'
-                }
-            ))
+            // await getRecommends('Cпокойные занятия');
+            // dispatch(changeAnswer(
+            //     {
+            //         answer : 'activity',
+            //         value : 'Cпокойные занятия'
+            //     }
+            // ))
             dispatch(selectedAndPrevPageResolver(3))
         }}
         className="actionButton"

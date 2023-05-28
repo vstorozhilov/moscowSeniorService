@@ -31,9 +31,7 @@ export default function MainPage (props) {
 
   const activityCategoriesId = useAppSelector(state=>state.ActivityCategoriesReducer.map(item=>item.id));
 
-  console.log(selectedPageIndex, prevPageIndex, pageIndex);
-
-  const [tab, setTab] = React.useState<string>('bookings');
+  const [tab, setTab] = React.useState<string>('activityCategories');
   const handleTab = (
       __: React.MouseEvent<HTMLElement>,
       newTab: string | null

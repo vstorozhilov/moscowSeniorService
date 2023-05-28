@@ -18,8 +18,6 @@ export default function ActivityPage (props) {
 
   const activitiesId = useAppSelector(state=>state.ActivityReducer.map(item=>item.id));
 
-  console.log(selectedPageIndex, prevPageIndex, pageIndex);
-
   return <CSSTransition
       timeout={500}
       nodeRef={nodeRef}

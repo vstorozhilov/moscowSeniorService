@@ -26,15 +26,11 @@ export default function ScheduleConstructor () {
         __: React.MouseEvent<HTMLElement>,
         dayTimes: Array<string>
       ) => {
-        console.log(dayTimes);
         dispatch(changeSchedule({
             weekday,
             dayTimes
         }));
       };
-
-    console.log(dayTimes)
-
 
     return <><Box>Укажите удобное время в желаемые дни недели</Box>
     <ToggleButtonGroup

@@ -37,7 +37,6 @@ export default function Hello (props) {
     const dispatch = useAppDispatch();
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
-    console.log(selectedPageIndex, prevPageIndex, pageIndex);
 
 
     return <CSSTransition

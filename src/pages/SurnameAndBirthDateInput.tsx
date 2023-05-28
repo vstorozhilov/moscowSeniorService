@@ -41,8 +41,6 @@ export default function SurNameAndBirthDateInput (props) {
       mode : 'cors'
     });
     let resJSON = await response.json();
-
-    console.log(resJSON);
   
     setDemoUsers(resJSON.map(item=>({
       id : item.id,
@@ -55,8 +53,6 @@ export default function SurNameAndBirthDateInput (props) {
     fetchDemoUsers();
   }, [])
 
-
-  console.log(selectedPageIndex, prevPageIndex, pageIndex);
 
   return <CSSTransition
       timeout={500}

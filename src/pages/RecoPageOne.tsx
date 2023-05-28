@@ -26,7 +26,6 @@ export default function RecoPageOne (props) {
     const { changeAnswer } = answerSlice.actions;
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
-    console.log(selectedPageIndex, prevPageIndex, pageIndex);
 
 
     return <CSSTransition
@@ -78,7 +77,7 @@ export default function RecoPageOne (props) {
                     value : 'C cердечно-сосудистой системой'
                 }
             ))
-            dispatch(selectedAndPrevPageResolver(10))
+            dispatch(selectedAndPrevPageResolver(9))
         }}
         className="actionButton"
         variant="contained"
