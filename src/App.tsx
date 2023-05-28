@@ -13,6 +13,9 @@ import MapPage from './pages/MapPage';
 import BookPage from './pages/BookPage';
 import SuccessBook from './pages/SuccessBook';
 import { useAppSelector } from './stateManager/hooks';
+import RecoPageOne from './pages/RecoPageOne';
+import RecoPageTwo from './pages/RecoPageTwo';
+import RecoPageThree from './pages/RecoPageThree';
 
 export default function App() {
 
@@ -30,5 +33,8 @@ export default function App() {
       { selectedPageIndex == 5 ? <MapPage pageIndex={5}/> : null}
       { selectedPageIndex == 6 ? <BookPage pageIndex={6}></BookPage> : null}
       { selectedPageIndex == 7 ? <SuccessBook pageIndex={7}></SuccessBook> : null}
+      { selectedPageIndex == 8 ? <RecoPageOne pageIndex={8}></RecoPageOne> : null}
+      { selectedPageIndex == 9 ? <RecoPageTwo pageIndex={9}></RecoPageTwo> : null}
+      { selectedPageIndex == 10 ? <RecoPageThree pageIndex={10}></RecoPageThree> : null}
     </TransitionGroup>
 }

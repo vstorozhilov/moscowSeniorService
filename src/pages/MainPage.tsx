@@ -21,7 +21,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ActivityCategories from './ActivityCategories';
 import Bookings from './Bookings';
 
-export default function ActivityCategoriesPage (props) {
+export default function MainPage (props) {
 
   const nodeRef = useRef(null);
   const { pageIndex } = props;
@@ -113,7 +113,9 @@ export default function ActivityCategoriesPage (props) {
                     </Stack>
                 </ToggleButton>
             </ToggleButtonGroup>
-            <Button className='startChat'>
+            <Button className='startChat' onClick={()=>{
+                dispatch(selectedAndPrevPageResolver(8));
+            }}>
                 <Stack width='100%' direction='column' alignItems='start'>
                     <Box>Подобрать активность</Box>
                     <Box sx={{

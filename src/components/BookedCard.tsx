@@ -43,9 +43,6 @@ export default function BookedCard (params : {activityInfo : Booking}) {
                 </Stack>
                 <Box>{activityInfo?.location.address}</Box>
                 <Stack direction='row' spacing={2}>
-                {activityInfo?.tags.map((tag, index)=>{
-                    return <Box className='activityTagsOther'>{tag}</Box>
-                })}
                 </Stack>
                 <Stack justifyContent='flex-end' direction='row'>
                     <Button

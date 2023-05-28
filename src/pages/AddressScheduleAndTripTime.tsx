@@ -89,9 +89,10 @@ export default function AddressScheduleAndTripTime (props) {
                     // const newUserSettings = { ...userSettings }
                     // newUserSettings.schedule = schedule;
                     // newUserSettings.travelTime = maxTripTime;
+                    // console.log(newUserSettings);
                     // await fetch(`http://62.109.9.1:1337/users/${userId}/settings`, {
                     //   method : 'PUT',
-                    //   body : JSON.stringify(newUserSettings)
+                    //   body : JSON.stringify({})
                     // });
                     dispatch(selectedAndPrevPageResolver(3))
                   }

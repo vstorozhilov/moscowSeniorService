@@ -58,9 +58,6 @@ export default function BookCard (params : { activityId : number}) {
                     {activityInfo?.location.address}
                 </Box>
                 <Stack direction='row' spacing={2}>
-                    {activityInfo?.tags.map((tag, index)=>{
-                        return <Box className={index ==0 ? 'activityTagsMain' : 'activityTagsOther'}>{tag}</Box>
-                    })}
                 </Stack>
             </Stack>
         </CardContent>

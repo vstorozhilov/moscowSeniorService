@@ -14,8 +14,7 @@ export interface Activity {
     isNear : boolean,
     estimatedTime : number
   },
-  schedule: string,
-  tags : string[]
+  schedule: string
 };
 
 const initialState: Activity[] = [
@@ -33,8 +32,7 @@ const initialState: Activity[] = [
           isNear : true,
           estimatedTime : 30,
         },
-        schedule : "c 01.01.2023 по 28.02.2023, Чт. 12:00-14:00, без перерыва; c 01.09.2022 по 31.12.2022, Чт. 12:00-14:00",
-        tags : ["Помещение", "Групповые", "Новое"]
+        schedule : "c 01.01.2023 по 28.02.2023, Чт. 12:00-14:00, без перерыва; c 01.09.2022 по 31.12.2022, Чт. 12:00-14:00"
     },
     {
       id : 1,
@@ -50,8 +48,7 @@ const initialState: Activity[] = [
         isNear : true,
         estimatedTime : 45,
       },
-      schedule : "c 01.01.2023 по 28.02.2023, Чт. 12:00-14:00, без перерыва; c 01.09.2022 по 31.12.2022, Чт. 12:00-14:00",
-      tags : ["Помещение", "Групповые", "Новое"]
+      schedule : "c 01.01.2023 по 28.02.2023, Чт. 12:00-14:00, без перерыва; c 01.09.2022 по 31.12.2022, Чт. 12:00-14:00"
   },
 ];
 

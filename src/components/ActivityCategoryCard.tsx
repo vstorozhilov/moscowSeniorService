@@ -9,15 +9,28 @@ import Collapse from '@mui/material/Collapse';
 import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
 import { ActivityCategorySlice } from '../stateManager/ActivityCategories';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
+import { ActivitySlice } from '../stateManager/Activities';
 
 export default function ActivityCategoryCard (params : { activityCategoryId : number}) {
 
     const { activityCategoryId } = params;
-
     const dispatch = useAppDispatch();
     const activityCategory = useAppSelector(state=>state.ActivityCategoriesReducer.find(item=>item.id==activityCategoryId));
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
+    const { userId } = useAppSelector(state=>state.UserProfileReducer);
+    const { setActivities } = ActivitySlice.actions;
 
+    const fetchGroups = async () => {
+        const response = await fetch(`http://62.109.9.1:1337/users/${userId}/recommendations/groups?category=${activityCategoryId}`);
+        const resJSON = await response.json();
+        const newRes = resJSON.map(item=>{
+            item.location.estimatedTime = Math.floor(Math.random() * 100);
+            return item;
+        })
+        dispatch(setActivities(newRes));
+    }
+
+    console.log(activityCategoryId)
     const [isExpanded, setIsExpanded] = useState(false);
 
     return <Card className='activityCategoryCard'>
@@ -56,11 +69,17 @@ export default function ActivityCategoryCard (params : { activityCategoryId : nu
             }}>
                 <Button
                 className="activityCategoryActionButtonList"
-                onClick={()=>dispatch(selectedAndPrevPageResolver(4))}
+                onClick={()=>{
+                    fetchGroups();
+                    dispatch(selectedAndPrevPageResolver(4))
+                }}
                 >Выбрать в списке</Button>
                 <Button
                 className="activityCategoryActionButtonMap"
-                onClick={()=>dispatch(selectedAndPrevPageResolver(5))}
+                onClick={()=>{
+                    fetchGroups();
+                    dispatch(selectedAndPrevPageResolver(5))
+                }}
                 >Выбрать на карте</Button>
             </CardActions>
         </Collapse>

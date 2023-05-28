@@ -74,7 +74,7 @@ export default function ScheduleConstructor () {
       <ToggleButton value='morning'>
         Утро
       </ToggleButton>
-      <ToggleButton value='afternoon'>
+      <ToggleButton value='noon'>
         День
       </ToggleButton>
       <ToggleButton value='evening'>
