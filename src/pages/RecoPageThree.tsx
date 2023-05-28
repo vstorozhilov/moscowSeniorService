@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -16,6 +16,8 @@ import { useAppSelector,
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import RecoLogo from '../pages/svg/recoLogo.svg';
+import { answerSlice } from '../stateManager/Answers';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function RecoPageThree (props) {
 
@@ -24,7 +26,37 @@ export default function RecoPageThree (props) {
     const dispatch = useAppDispatch();
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
-    console.log(selectedPageIndex, prevPageIndex, pageIndex);
+    const { changeAnswer } = answerSlice.actions;
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const answers = useAppSelector(state=>state.AnswerReducer);
+
+    const getRecommends = async (activity) => {
+
+        setIsLoading(true);
+
+        let responce = await fetch('http://62.109.9.1:9999/send/', {
+                            method : 'POST',
+                            headers : {
+                                accept : 'application/json',
+                                'Content-Type' : 'application/json'
+                            },
+                            body : JSON.stringify(
+                                {
+                                "sex_male": true,
+                                "age": 60,
+                                "health_issue": `Есть проблемы ${answers.health_issue}`,
+                                "sociality": `Мне больше нравится заниматься ${answers.sociality}`,
+                                "activity": `Мне больше нравятся ${activity}`
+                                }
+                            )
+                        });
+
+        let reccomends = await responce.json();
+
+        setIsLoading(false);
+    }
 
 
     return <CSSTransition
@@ -57,6 +89,12 @@ export default function RecoPageThree (props) {
                 // backdropFilter: 'blur(10px)'
             }}
         />
+        {isLoading ? <CircularProgress sx={{
+            color : 'white',
+            position : 'absolute',
+            top : '70vh',
+            left : '45vw'
+        }}/> : null}
         <Box sx={{
             position : 'absolute',
             top : 110,
@@ -69,8 +107,16 @@ export default function RecoPageThree (props) {
         </Box>
 
         <Button
-        onClick={()=>{
-            // dispatch(selectedAndPrevPageResolver(1))
+        disabled={isLoading}
+        onClick={async ()=>{
+            await getRecommends('Активные занятия');
+            dispatch(changeAnswer(
+                {
+                    answer : 'activity',
+                    value : 'Активные занятия'
+                }
+            ))
+            dispatch(selectedAndPrevPageResolver(3))
         }}
         className="actionButton"
         variant="contained"
@@ -83,8 +129,16 @@ export default function RecoPageThree (props) {
             <Box>Активные занятия</Box>
         </Button>
         <Button
-        onClick={()=>{
-            // dispatch(selectedAndPrevPageResolver(9))
+        disabled={isLoading}
+        onClick={async ()=>{
+            await getRecommends('Cпокойные занятия');
+            dispatch(changeAnswer(
+                {
+                    answer : 'activity',
+                    value : 'Cпокойные занятия'
+                }
+            ))
+            dispatch(selectedAndPrevPageResolver(3))
         }}
         className="actionButton"
         variant="contained"
@@ -98,6 +152,7 @@ export default function RecoPageThree (props) {
         </Button>
 
         <Button
+        // disabled={isLoading}
         onClick={()=>dispatch(selectedAndPrevPageResolver(3))}
         className="actionButton"
         variant="contained"

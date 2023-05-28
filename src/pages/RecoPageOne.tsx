@@ -16,12 +16,14 @@ import { useAppSelector,
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import RecoLogo from '../pages/svg/recoLogo.svg';
+import { answerSlice } from '../stateManager/Answers';
 
 export default function RecoPageOne (props) {
 
     const nodeRef = useRef(null);
     const { pageIndex } = props;
     const dispatch = useAppDispatch();
+    const { changeAnswer } = answerSlice.actions;
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
     console.log(selectedPageIndex, prevPageIndex, pageIndex);
@@ -70,6 +72,12 @@ export default function RecoPageOne (props) {
 
         <Button
         onClick={()=>{
+            dispatch(changeAnswer(
+                {
+                    answer : 'health_issue',
+                    value : 'C cердечно-сосудистой системой'
+                }
+            ))
             dispatch(selectedAndPrevPageResolver(10))
         }}
         className="actionButton"
@@ -84,6 +92,12 @@ export default function RecoPageOne (props) {
         </Button>
         <Button
         onClick={()=>{
+            dispatch(changeAnswer(
+                {
+                    answer : 'health_issue',
+                    value : 'С опорно-двигательным аппаратом'
+                }
+            ))
             dispatch(selectedAndPrevPageResolver(9))
         }}
         className="actionButton"
@@ -98,6 +112,12 @@ export default function RecoPageOne (props) {
         </Button>
         <Button
         onClick={()=>{
+            dispatch(changeAnswer(
+                {
+                    answer : 'health_issue',
+                    value : 'Со слухом'
+                }
+            ))
             dispatch(selectedAndPrevPageResolver(9))
         }}
         className="actionButton"
@@ -112,6 +132,12 @@ export default function RecoPageOne (props) {
         </Button>
         <Button
         onClick={()=>{
+            dispatch(changeAnswer(
+                {
+                    answer : 'health_issue',
+                    value : 'Со зрением'
+                }
+            ))
             dispatch(selectedAndPrevPageResolver(9))
         }}
         className="actionButton"
@@ -127,6 +153,12 @@ export default function RecoPageOne (props) {
 
         <Button
         onClick={()=>{
+            dispatch(changeAnswer(
+                {
+                    answer : 'health_issue',
+                    value : 'Проблем нет'
+                }
+            ))
             dispatch(selectedAndPrevPageResolver(9))
         }}
         className="actionButton"

@@ -16,6 +16,7 @@ import { useAppSelector,
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import RecoLogo from '../pages/svg/recoLogo.svg';
+import { answerSlice } from '../stateManager/Answers';
 
 export default function RecoPageTwo (props) {
 
@@ -24,7 +25,7 @@ export default function RecoPageTwo (props) {
     const dispatch = useAppDispatch();
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
-    console.log(selectedPageIndex, prevPageIndex, pageIndex);
+    const { changeAnswer } = answerSlice.actions;
 
 
     return <CSSTransition
@@ -70,6 +71,12 @@ export default function RecoPageTwo (props) {
 
         <Button
         onClick={()=>{
+            dispatch(changeAnswer(
+                {
+                    answer : 'sociality',
+                    value : 'Одному'
+                }
+            ))
             dispatch(selectedAndPrevPageResolver(10))
         }}
         className="actionButton"
@@ -84,7 +91,13 @@ export default function RecoPageTwo (props) {
         </Button>
         <Button
         onClick={()=>{
-            dispatch(selectedAndPrevPageResolver(10))
+            dispatch(changeAnswer(
+                {
+                    answer : 'sociality',
+                    value : 'В группе, коллективе'
+                }
+            ))
+            dispatch(selectedAndPrevPageResolver(10));
         }}
         className="actionButton"
         variant="contained"

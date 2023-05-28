@@ -8,6 +8,7 @@ import ActivitiesMapReducer from './ActivitiesMap';
 import SelectedActivityReducer from './SelectedActivity';
 import BookingReducer from './Bookings';
 import UserProfileReducer from './UserProfile';
+import AnswerReducer from './Answers'; 
 
 const rootReducer = combineReducers({
     selectedAndPrevPageReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     ActivitiesMapReducer,
     SelectedActivityReducer,
     BookingReducer,
-    UserProfileReducer
+    UserProfileReducer,
+    AnswerReducer
 })
 
 const store = configureStore({
