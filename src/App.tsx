@@ -10,7 +10,7 @@ import AddressScheduleAndTripTime from './pages/AddressScheduleAndTripTime';
 import ActivityCategoriesPage from './pages/MainPage';
 import ActivityPage from './pages/ActivitesPage';
 import MapPage from './pages/MapPage';
-import BookPage from './pages/bookPage';
+import BookPage from './pages/BookPage';
 import SuccessBook from './pages/SuccessBook';
 import { useAppSelector } from './stateManager/hooks';
 
