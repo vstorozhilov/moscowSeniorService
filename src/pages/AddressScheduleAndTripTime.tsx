@@ -11,7 +11,7 @@ import { useAppSelector,
     useAppDispatch
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
-import MaxTripTimeSelector from '../components/MaxTripTImeSelector';
+import MaxTripTimeSelector from '../components/MaxTripTimeSelector';
 import ScheduleConstructor from '../components/ScheduleConstructor';
 import { scheduleSlice } from '../stateManager/ScheduleConstructor';
 
