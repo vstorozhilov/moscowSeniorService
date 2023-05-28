@@ -7,6 +7,7 @@ import {createPortal} from 'react-dom';
 import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MapInfoCard from '../components/MapInfoCard';
+import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 
 var activityId = -1;
 
@@ -14,6 +15,8 @@ export default function MapPage(props) {
     
     const nodeRef = useRef(null);
     const { pageIndex } = props;
+    const dispatch = useAppDispatch();
+    const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
     const [ activePortal, setActivePortal ] = useState(false);
     const activitiesInfo = useAppSelector(state=>state.ActivityReducer.map(item=>({
@@ -66,7 +69,9 @@ export default function MapPage(props) {
     key={pageIndex}>
         <Box>
             <YMaps version={ '2.1.79' }>
-                <IconButton sx={{
+                <IconButton
+                onClick={()=>dispatch(selectedAndPrevPageResolver(prevPageIndex))}
+                sx={{
                     top : 5,
                     left : 5,
                     position : 'absolute',

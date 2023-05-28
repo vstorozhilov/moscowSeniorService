@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Activity {
+export interface Activity {
   id: number,
   picture: string,
   categories : string[],
@@ -12,6 +12,7 @@ interface Activity {
     longitude: string,
     distance: string,
     isNear : boolean,
+    estimatedTime : number
   },
   schedule: string,
   tags : string[]
@@ -29,7 +30,8 @@ const initialState: Activity[] = [
           latitude : '55.96',
           longitude : '37.68',
           distance : '5 km',
-          isNear : true
+          isNear : true,
+          estimatedTime : 30,
         },
         schedule : "c 01.01.2023 по 28.02.2023, Чт. 12:00-14:00, без перерыва; c 01.09.2022 по 31.12.2022, Чт. 12:00-14:00",
         tags : ["Помещение", "Групповые", "Новое"]
@@ -45,7 +47,8 @@ const initialState: Activity[] = [
         latitude : '55.34',
         longitude : '37.23',
         distance : '5 km',
-        isNear : true
+        isNear : true,
+        estimatedTime : 45,
       },
       schedule : "c 01.01.2023 по 28.02.2023, Чт. 12:00-14:00, без перерыва; c 01.09.2022 по 31.12.2022, Чт. 12:00-14:00",
       tags : ["Помещение", "Групповые", "Новое"]

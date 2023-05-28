@@ -5,6 +5,9 @@ import maxTripTimeReducer from './MaxTripTime';
 import ActivityCategoriesReducer from './ActivityCategories';
 import ActivityReducer from './Activities';
 import ActivitiesMapReducer from './ActivitiesMap';
+import SelectedActivityReducer from './SelectedActivity';
+import BookingReducer from './Bookings';
+import UserProfileReducer from './UserProfile';
 
 const rootReducer = combineReducers({
     selectedAndPrevPageReducer,
@@ -12,7 +15,10 @@ const rootReducer = combineReducers({
     maxTripTimeReducer,
     ActivityCategoriesReducer,
     ActivityReducer,
-    ActivitiesMapReducer
+    ActivitiesMapReducer,
+    SelectedActivityReducer,
+    BookingReducer,
+    UserProfileReducer
 })
 
 const store = configureStore({

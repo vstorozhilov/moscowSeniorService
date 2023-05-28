@@ -1,61 +1,19 @@
-import React, { useRef } from 'react';
-import { useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { Stack } from '@mui/material';
-import { IMaskInput } from 'react-imask';
 import IconButton from '@mui/material/IconButton';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import InputAdornment from '@mui/material/InputAdornment';
-import { NumericFormat, NumericFormatProps } from 'react-number-format';
-import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
-import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import FormControl from '@mui/material/FormControl';
 import { CSSTransition } from 'react-transition-group';
 import { useAppSelector,
     useAppDispatch
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import MaxTripTimeSelector from '../components/MaxTripTImeSelector';
 import ScheduleConstructor from '../components/ScheduleConstructor';
-
-interface CustomProps {
-    onChange: (event: { target: { name: string; value: string } }) => void;
-    name: string;
-}
-
-  const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
-    function TextMaskCustom(props, ref) {
-      const { onChange, ...other } = props;
-      return (
-        <IMaskInput
-          {...other}
-          mask="+7 (9##) ###-####"
-          definitions={{
-            '#': /[0-9]/,
-          }}
-          inputRef={ref}
-          onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
-          overwrite
-        />
-      );
-    },
-  );
-
-  const persons = [
-    { label: 'The Shawshank Redemption', year: 1994 },
-    { label: 'The Godfather', year: 1972 },
-    { label: 'The Godfather: Part II', year: 1974 },
-    { label: 'The Dark Knight', year: 2008 },
-    { label: '12 Angry Men', year: 1957 }
-  ]
+import { scheduleSlice } from '../stateManager/ScheduleConstructor';
 
 export default function AddressScheduleAndTripTime (props) {
 
@@ -64,7 +22,25 @@ export default function AddressScheduleAndTripTime (props) {
   const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
-  console.log(selectedPageIndex, prevPageIndex, pageIndex);
+  const { userId } = useAppSelector(state=>state.UserProfileReducer);
+  const [ userSettings, setUserSettings ] = useState({});
+  const { createSchedule } = scheduleSlice.actions;
+  const schedule = useAppSelector(state=>state.scheduleReducer);
+  const { maxTripTime } = useAppSelector(state=>state.maxTripTimeReducer);
+
+  const fetchUserSettings = async () => {
+    const response = await fetch(`http://62.109.9.1:1337/users/${userId}/settings`);
+    const resJSON = await response.json();
+
+    setUserSettings(resJSON);
+    createSchedule(resJSON.schedule);
+  }
+
+  console.log(userSettings);
+
+  useEffect(()=>{
+    fetchUserSettings();
+  }, []);
 
   return <CSSTransition
       timeout={500}
@@ -96,10 +72,11 @@ export default function AddressScheduleAndTripTime (props) {
             <Box className='hintLabel'>
                 Заполните данные
             </Box>
-            <Autocomplete
-            disablePortal
-            options={persons}
-            renderInput={(params)=><TextField {...params} label="Адрес" className='inputTextField'/>}
+            <TextField
+                disabled
+                // label='Адрес'
+                className='inputTextField'
+                value={ Object.keys(userSettings).length > 0 ? userSettings.location.address : 'Адрес'}
             />
               <MaxTripTimeSelector/>
               <ScheduleConstructor/>
@@ -108,7 +85,17 @@ export default function AddressScheduleAndTripTime (props) {
                 className="actionButton"
                 variant="contained"
                 endIcon={<ArrowForwardIcon/>}
-                onClick={()=>dispatch(selectedAndPrevPageResolver(3))}>
+                  onClick={async ()=>{
+                    // const newUserSettings = { ...userSettings }
+                    // newUserSettings.schedule = schedule;
+                    // newUserSettings.travelTime = maxTripTime;
+                    // await fetch(`http://62.109.9.1:1337/users/${userId}/settings`, {
+                    //   method : 'PUT',
+                    //   body : JSON.stringify(newUserSettings)
+                    // });
+                    dispatch(selectedAndPrevPageResolver(3))
+                  }
+                }>
                   <Box>Вперед</Box>
                 </Button>
             </Stack>

@@ -3,26 +3,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Button, CardActions, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
-import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
-import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import busLogo from '../pages/svg/busIcon.svg';
 import personLogo from '../pages/svg/personIcon.svg';
 import carLogo from '../pages/svg/carIcon.svg';
-import { SelectedActivitySlice } from '../stateManager/SelectedActivity';
+import { Booking } from '../stateManager/Bookings';
 
-export default function ActivityCard (params : { activityId : number}) {
+export default function BookedCard (params : {activityInfo : Booking}) {
 
-    const { activityId } = params;
-
-    const dispatch = useAppDispatch();
-    const activityInfo = useAppSelector(state=>state.ActivityReducer.find(item=>item.id==activityId));
-    const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
-    const { setSelectedActivity } = SelectedActivitySlice.actions;
-    const regexp = new RegExp("[^0-9]{3} [0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}", 'g');
-    const slots = activityInfo?.schedule.match(regexp);
+    const { activityInfo } = params;
 
     return <Card className='activityCard'>
         <CardContent className='visible'>
@@ -36,9 +24,7 @@ export default function ActivityCard (params : { activityId : number}) {
                 </Stack>
                 <Stack direction='row' justifyContent='space-between'>
                     <Stack direction='column'>
-                        {slots?.map((slot, index)=>(
-                            <Box key={index}>{slot}</Box>
-                        ))}
+                        <Box>{activityInfo.timeslot}</Box>
                     </Stack>
                     <Stack direction='row' spacing={1} sx={{fontSize : 12}} alignItems='start'>
                         <Stack direction='row'spacing={0.5} alignItems='center'>
@@ -64,13 +50,8 @@ export default function ActivityCard (params : { activityId : number}) {
                 <Stack justifyContent='flex-end' direction='row'>
                     <Button
                     className='bookButton'
-                    onClick={
-                        ()=>{
-                            dispatch(setSelectedActivity(activityId));
-                            dispatch(selectedAndPrevPageResolver(6));
-                        }
-                    }
-                    >Записаться</Button>
+                    disabled
+                    >Отменить</Button>
                 </Stack>
             </Stack>
         </CardContent>

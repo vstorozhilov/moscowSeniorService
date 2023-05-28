@@ -15,9 +15,11 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import ActivityCategoryCard from '../components/ActivityCategoryCard';
 import { ActivityCategorySlice } from '../stateManager/ActivityCategories';
+import { SelectedActivitySlice } from '../stateManager/SelectedActivity';
 import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
+import BookCard from '../components/BookCard';
 
-export default function ActivityCategoriesPage (props) {
+export default function BookPage (props) {
 
   const nodeRef = useRef(null);
   const { pageIndex } = props;
@@ -44,7 +46,7 @@ export default function ActivityCategoriesPage (props) {
                 alignItems='center'
             >
                 <IconButton
-                onClick={()=>dispatch(selectedAndPrevPageResolver(2))}
+                onClick={()=>dispatch(selectedAndPrevPageResolver(prevPageIndex))}
                 sx={{
                     position : 'absolute',
                     left : 0
@@ -53,15 +55,12 @@ export default function ActivityCategoriesPage (props) {
                         color : 'black'
                     }}/>
                 </IconButton>
-                <Box className='mainLabel'>Вам подойдут</Box>
+                <Box className='mainLabel'>Запись</Box>
             </Stack>
-            {activityCategoriesId.map(id=>{
+            <BookCard  activityId={activityCategoriesId[0]}/>
+            {/* {activityCategoriesId.map(id=>{
                 return <ActivityCategoryCard activityCategoryId={id}/>
-            })}
-            <Box>Можно попробовать</Box>
-            {activityCategoriesId.map(id=>{
-                return <ActivityCategoryCard activityCategoryId={id}/>
-            })}
+            })} */}
         </Stack>
         </CSSTransition>
 };

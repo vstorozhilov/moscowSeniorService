@@ -2,19 +2,9 @@ import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
 import { Stack } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { CSSTransition } from 'react-transition-group';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import ActivityCategoryCard from '../components/ActivityCategoryCard';
-import { ActivityCategorySlice } from '../stateManager/ActivityCategories';
 import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
 import ActivityCard from '../components/ActivityCard';
 
@@ -45,7 +35,7 @@ export default function ActivityPage (props) {
                 alignItems='center'
             >
                 <IconButton
-                onClick={()=>dispatch(selectedAndPrevPageResolver(2))}
+                onClick={()=>dispatch(selectedAndPrevPageResolver(3))}
                 sx={{
                     position : 'absolute',
                     left : 0

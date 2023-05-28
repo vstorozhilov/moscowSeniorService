@@ -2,44 +2,44 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface dayTimes {
     morning : boolean,
-    afternoon : boolean,
+    noon : boolean,
     evening : boolean
 };
 
 const initialState: dayTimes[] = [
     {
         morning : false,
-        afternoon : false,
+        noon : false,
         evening : false
     },
     {
         morning : false,
-        afternoon : false,
+        noon : false,
         evening : false
     },
     {
         morning : false,
-        afternoon : false,
+        noon : false,
         evening : false
     },
     {
         morning : false,
-        afternoon : false,
+        noon : false,
         evening : false
     },
     {
         morning : false,
-        afternoon : false,
+        noon : false,
         evening : false
     },
     {
         morning : false,
-        afternoon : false,
+        noon : false,
         evening : false
     },
     {
         morning : false,
-        afternoon : false,
+        noon : false,
         evening : false
     }
 ];
@@ -57,12 +57,15 @@ export const scheduleSlice = createSlice({
 
       newSchedule[weekday] = {
         morning : false,
-        afternoon : false,
+        noon : false,
         evening : false
       }
-      console.log(dayTimes);
+
       dayTimes.forEach(daytime=>{newSchedule[weekday][daytime] = true});
       return newSchedule;
+    },
+    createSchedule : (prevSchedule, action : PayloadAction<dayTimes[]>) => {
+      return { ...action.payload };
     }
   },
 })
