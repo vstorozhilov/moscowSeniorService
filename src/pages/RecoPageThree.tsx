@@ -76,7 +76,8 @@ export default function RecoPageThree (props) {
             position : 'relative',
             width : 'inherit',
             height : 'inherit',
-            overflow : 'hidden',
+            overflowY : 'scroll',
+            overflowX : 'hidden',
             background: 'linear-gradient(70deg, #cd3931, #ccb280)',
             }}>
         <img src={RecoLogo}
