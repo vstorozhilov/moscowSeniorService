@@ -12,7 +12,7 @@ export default function ActivityCategories(props) {
     const { setActivityCategories } = ActivityCategorySlice.actions;
 
     const fetchRecs = async () => {
-        const responce = await fetch(`http://62.109.9.1:1337/users/${userId}/recommendations/categories`);
+        const responce = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/categories`);
         const resJSON = await responce.json();
         
         dispatch(setActivityCategories(resJSON.map((item, index)=>{

@@ -29,7 +29,7 @@ export default function AddressScheduleAndTripTime (props) {
   const { maxTripTime } = useAppSelector(state=>state.maxTripTimeReducer);
 
   const fetchUserSettings = async () => {
-    const response = await fetch(`http://62.109.9.1:1337/users/${userId}/settings`);
+    const response = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/settings`);
     const resJSON = await response.json();
 
     setUserSettings(resJSON);
@@ -88,7 +88,7 @@ export default function AddressScheduleAndTripTime (props) {
                     // newUserSettings.schedule = schedule;
                     // newUserSettings.travelTime = maxTripTime;
                     // console.log(newUserSettings);
-                    // await fetch(`http://62.109.9.1:1337/users/${userId}/settings`, {
+                    // await fetch(`http://alexhlins1.fvds.ru:1337/users/${userId}/settings`, {
                     //   method : 'PUT',
                     //   body : JSON.stringify({})
                     // });

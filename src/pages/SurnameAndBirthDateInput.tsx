@@ -37,7 +37,7 @@ export default function SurNameAndBirthDateInput (props) {
   const { setUserProfile } = UserProfileSlice.actions;
   
   const fetchDemoUsers = async () => {
-    let response = await fetch('http://62.109.9.1:1337/users/demo', {
+    let response = await fetch('https://alexhlins1.fvds.ru:1338/users/demo', {
       mode : 'cors'
     });
     let resJSON = await response.json();

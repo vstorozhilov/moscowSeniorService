@@ -21,7 +21,7 @@ export default function ActivityCategoryCard (params : { activityCategoryId : nu
     const { setActivities } = ActivitySlice.actions;
 
     const fetchGroups = async () => {
-        const response = await fetch(`http://62.109.9.1:1337/users/${userId}/recommendations/groups?category=${activityCategoryId}`);
+        const response = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/groups?category=${activityCategoryId}`);
         const resJSON = await response.json();
         const newRes = resJSON.map(item=>{
             item.location.estimatedTime = Math.floor(Math.random() * 100);

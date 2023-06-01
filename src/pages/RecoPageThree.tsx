@@ -36,7 +36,7 @@ export default function RecoPageThree (props) {
 
         setIsLoading(true);
 
-        let responce = await fetch('http://62.109.9.1:9999/send/', {
+        let responce = await fetch('http://alexhlins1.fvds.ru:9999/send/', {
                             method : 'POST',
                             headers : {
                                 accept : 'application/json',
