@@ -56,7 +56,8 @@ export default function RecoPageThree (props) {
                         });
 
         let reccomends = await responce.json();
-
+        
+        console.log(reccomends.recomendation);
         dispatch(setReco(reccomends.recomendation.filter(item=>(item != ''))));
 
         setIsLoading(false);
