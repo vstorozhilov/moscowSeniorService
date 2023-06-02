@@ -14,8 +14,6 @@ export default function ActivityCategories(props) {
     const [ recs, setRecs ] = useState([]);
     const recommendations = useAppSelector(state=>state.RecommendationReducer);
 
-    console.log(recommendations)
-
     const fetchRecs = async () => {
         const responce = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/categories`);
         const resJSON = await responce.json();
