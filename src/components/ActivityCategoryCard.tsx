@@ -53,7 +53,7 @@ export default function ActivityCategoryCard (params : { activityCategoryId : nu
             </Box>
             <Stack direction='row' spacing={2}>
                 {activityCategory?.tags.map((tag, index)=>{
-                    return <Box className={index ==0 ? 'activityTagsMain' : 'activityTagsOther'}>{tag}</Box>
+                    return <Box key={index} className={index ==0 ? 'activityTagsMain' : 'activityTagsOther'}>{tag}</Box>
                 })}
             </Stack>
             </Stack>

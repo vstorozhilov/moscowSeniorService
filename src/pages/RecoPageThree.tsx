@@ -18,6 +18,7 @@ import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import RecoLogo from '../pages/svg/recoLogo.svg';
 import { answerSlice } from '../stateManager/Answers';
 import CircularProgress from '@mui/material/CircularProgress';
+import { RecommendationSlice } from '../stateManager/Recommendations';
 
 export default function RecoPageThree (props) {
 
@@ -27,6 +28,7 @@ export default function RecoPageThree (props) {
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
     const { changeAnswer } = answerSlice.actions;
+    const { setReco } = RecommendationSlice.actions;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -36,7 +38,7 @@ export default function RecoPageThree (props) {
 
         setIsLoading(true);
 
-        let responce = await fetch('http://alexhlins1.fvds.ru:9999/send/', {
+        let responce = await fetch('https://alexhlins1.fvds.ru:1339/send/', {
                             method : 'POST',
                             headers : {
                                 accept : 'application/json',
@@ -54,6 +56,9 @@ export default function RecoPageThree (props) {
                         });
 
         let reccomends = await responce.json();
+        
+        console.log(reccomends.recomendation);
+        dispatch(setReco(reccomends.recomendation.filter(item=>(item != ''))));
 
         setIsLoading(false);
     }
@@ -110,7 +115,7 @@ export default function RecoPageThree (props) {
         <Button
         disabled={isLoading}
         onClick={async ()=>{
-            // await getRecommends('Активные занятия');
+            await getRecommends('Активные занятия');
             // dispatch(changeAnswer(
             //     {
             //         answer : 'activity',
@@ -132,7 +137,7 @@ export default function RecoPageThree (props) {
         <Button
         disabled={isLoading}
         onClick={async ()=>{
-            // await getRecommends('Cпокойные занятия');
+            await getRecommends('Cпокойные занятия');
             // dispatch(changeAnswer(
             //     {
             //         answer : 'activity',
@@ -154,7 +159,9 @@ export default function RecoPageThree (props) {
 
         <Button
         // disabled={isLoading}
-        onClick={()=>dispatch(selectedAndPrevPageResolver(3))}
+        onClick={async ()=>{
+            dispatch(selectedAndPrevPageResolver(3))
+        }}
         className="actionButton"
         variant="contained"
         startIcon={<ArrowBackIcon/>}

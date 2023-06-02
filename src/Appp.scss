@@ -115,6 +115,27 @@
 .activityCategoryCard {
     box-shadow: none !important;
 }
+  
+.recommendationcard-enter {
+    opacity: 0;
+    height: 0;
+}
+
+.recommendationcard-enter-active {
+    opacity: 1;
+    height : 130px;
+    transition-property: height, opacity !important;
+    transition-duration: 300ms !important;
+    transition-timing-function: ease-in !important;
+}
+
+.recommendationcard-exit {
+    opacity: 1;
+}
+.recommendationcard-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+}
 
 .bookCard {
     background-color: white;

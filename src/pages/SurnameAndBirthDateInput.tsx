@@ -25,7 +25,7 @@ import { UserProfileSlice } from '../stateManager/UserProfile';
   }
   
 export default function SurNameAndBirthDateInput (props) {
-  
+
   const nodeRef = useRef(null);
   const { pageIndex } = props;
   const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
