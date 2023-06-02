@@ -70,7 +70,7 @@ export default function MapPage(props) {
         <Box>
             <YMaps version={ '2.1.79' }>
                 <IconButton
-                onClick={()=>dispatch(selectedAndPrevPageResolver(prevPageIndex))}
+                onClick={()=>dispatch(selectedAndPrevPageResolver(3))}
                 sx={{
                     top : 5,
                     left : 5,
