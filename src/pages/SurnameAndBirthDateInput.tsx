@@ -17,13 +17,14 @@ import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { UserProfileSlice } from '../stateManager/UserProfile';
+import { useNavigate } from 'react-router-dom';
 
-  interface demoUser {
-    "id": number,
-    "label" : string,
-    "year" : string
-  }
-  
+interface demoUser {
+  "id": number,
+  "label" : string,
+  "year" : string
+}
+
 export default function SurNameAndBirthDateInput (props) {
 
   const nodeRef = useRef(null);
@@ -32,10 +33,15 @@ export default function SurNameAndBirthDateInput (props) {
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
   const [demoUsers, setDemoUsers] = useState<demoUser[]>([]);
-  const [selectedUser, setSelectedUser] = useState<demoUser>({});
+  const [selectedUser, setSelectedUser] = useState<demoUser>({
+    id : 0,
+    label : '',
+    year : ''
+  });
+  const navigate = useNavigate();
 
   const { setUserProfile } = UserProfileSlice.actions;
-  
+
   const fetchDemoUsers = async () => {
     let response = await fetch('https://alexhlins1.fvds.ru:1338/users/demo', {
       mode : 'cors'
@@ -53,15 +59,9 @@ export default function SurNameAndBirthDateInput (props) {
     fetchDemoUsers();
   }, [])
 
+  console.log(selectedUser)
 
-  return <CSSTransition
-      timeout={500}
-      nodeRef={nodeRef}
-      classNames={selectedPageIndex > prevPageIndex ? 'page-transition-forward' : 'page-transition-backward'}
-      unmountOnExit
-      in={pageIndex == selectedPageIndex}
-      key={pageIndex}>
-        <Stack ref={nodeRef} className='mainContainer' spacing={2}>
+  return <Stack ref={nodeRef} className='mainContainer' spacing={2}>
             <Stack
                 position='relative'
                 direction='row'
@@ -69,7 +69,12 @@ export default function SurNameAndBirthDateInput (props) {
                 alignItems='center'
             >
                 <IconButton
-                onClick={()=>dispatch(selectedAndPrevPageResolver(0))}
+                onClick={()=>
+                  {
+                    dispatch(selectedAndPrevPageResolver(0));
+                    setTimeout(()=>navigate('/'), 0);
+                  }
+                }
                 sx={{
                     position : 'absolute',
                     left : 0
@@ -85,6 +90,7 @@ export default function SurNameAndBirthDateInput (props) {
                 Выберете персонажа
             </Box>
             <Autocomplete
+            defaultValue={selectedUser}
             onChange={(__, newOption)=>{
               if (newOption == null) setSelectedUser({});
               else setSelectedUser(newOption);
@@ -103,7 +109,8 @@ export default function SurNameAndBirthDateInput (props) {
                 disabled={Object.keys(selectedUser).length == 0}
                 onClick={()=>{
                   dispatch(setUserProfile(selectedUser.id))
-                  dispatch(selectedAndPrevPageResolver(2))
+                  dispatch(selectedAndPrevPageResolver(2));
+                  setTimeout(()=>navigate('/inputsecond'), 0);
                 }}
                 className="actionButton"
                 variant="contained"
@@ -112,5 +119,4 @@ export default function SurNameAndBirthDateInput (props) {
                 </Button>
             </Stack>
         </Stack>
-        </CSSTransition>
 };

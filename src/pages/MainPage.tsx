@@ -20,6 +20,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ActivityCategories from './ActivityCategories';
 import Bookings from './Bookings';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainPage (props) {
 
@@ -28,6 +29,7 @@ export default function MainPage (props) {
   const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
+  const navigate = useNavigate();
 
   const activityCategoriesId = useAppSelector(state=>state.ActivityCategoriesReducer.map(item=>item.id));
 
@@ -41,14 +43,7 @@ export default function MainPage (props) {
       }
     };
 
-  return <CSSTransition
-      timeout={500}
-      nodeRef={nodeRef}
-      classNames={selectedPageIndex > prevPageIndex ? 'page-transition-forward' : 'page-transition-backward'}
-      unmountOnExit
-      in={pageIndex == selectedPageIndex}
-      key={pageIndex}>
-        <Stack ref={nodeRef} className='mainContainer' spacing={2}>
+  return <Stack ref={nodeRef} className='mainContainer' spacing={2}>
             <Stack
                 position='relative'
                 direction='row'
@@ -56,7 +51,10 @@ export default function MainPage (props) {
                 alignItems='center'
             >
                 <IconButton
-                onClick={()=>dispatch(selectedAndPrevPageResolver(2))}
+                onClick={()=>{
+                    dispatch(selectedAndPrevPageResolver(2));
+                    setTimeout(()=>navigate('/inputsecond'), 0);
+                }}
                 sx={{
                     position : 'absolute',
                     left : 0
@@ -131,5 +129,4 @@ export default function MainPage (props) {
                 return <ActivityCategoryCard activityCategoryId={id}/>
             })} */}
         </Stack>
-        </CSSTransition>
 };
