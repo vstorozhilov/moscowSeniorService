@@ -17,6 +17,7 @@ import { useAppSelector,
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import RecoLogo from '../pages/svg/recoLogo.svg';
 import { answerSlice } from '../stateManager/Answers';
+import { useNavigate } from 'react-router-dom';
 
 export default function RecoPageTwo (props) {
 
@@ -26,6 +27,7 @@ export default function RecoPageTwo (props) {
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
     const { changeAnswer } = answerSlice.actions;
+    const navigation = useNavigate();
 
 
     return <CSSTransition
@@ -77,8 +79,9 @@ export default function RecoPageTwo (props) {
                     answer : 'sociality',
                     value : 'Одному'
                 }
-            ))
+            ));
             dispatch(selectedAndPrevPageResolver(10))
+            setTimeout(()=>navigation('/questionthree'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -99,6 +102,7 @@ export default function RecoPageTwo (props) {
                 }
             ))
             dispatch(selectedAndPrevPageResolver(10));
+            setTimeout(()=>navigation('/questionthree'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -112,7 +116,10 @@ export default function RecoPageTwo (props) {
         </Button>
 
         <Button
-        onClick={()=>dispatch(selectedAndPrevPageResolver(8))}
+        onClick={()=>{
+            dispatch(selectedAndPrevPageResolver(8));
+            setTimeout(()=>navigation('/questionone'), 0);
+        }}
         className="actionButton"
         variant="contained"
         startIcon={<ArrowBackIcon/>}

@@ -19,6 +19,7 @@ import RecoLogo from '../pages/svg/recoLogo.svg';
 import { answerSlice } from '../stateManager/Answers';
 import CircularProgress from '@mui/material/CircularProgress';
 import { RecommendationSlice } from '../stateManager/Recommendations';
+import { useNavigate } from 'react-router-dom';
 
 export default function RecoPageThree (props) {
 
@@ -29,6 +30,7 @@ export default function RecoPageThree (props) {
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
     const { changeAnswer } = answerSlice.actions;
     const { setReco } = RecommendationSlice.actions;
+    const navigation = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -122,7 +124,8 @@ export default function RecoPageThree (props) {
             //         value : 'Активные занятия'
             //     }
             // ))
-            dispatch(selectedAndPrevPageResolver(3))
+            dispatch(selectedAndPrevPageResolver(3));
+            setTimeout(()=>navigation('/main'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -144,7 +147,8 @@ export default function RecoPageThree (props) {
             //         value : 'Cпокойные занятия'
             //     }
             // ))
-            dispatch(selectedAndPrevPageResolver(3))
+            dispatch(selectedAndPrevPageResolver(3));
+            setTimeout(()=>navigation('/main'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -160,7 +164,8 @@ export default function RecoPageThree (props) {
         <Button
         // disabled={isLoading}
         onClick={async ()=>{
-            dispatch(selectedAndPrevPageResolver(3))
+            dispatch(selectedAndPrevPageResolver(9));
+            setTimeout(()=>navigation('/questiontwo'), 0);
         }}
         className="actionButton"
         variant="contained"

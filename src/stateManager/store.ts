@@ -10,6 +10,7 @@ import BookingReducer from './Bookings';
 import UserProfileReducer from './UserProfile';
 import AnswerReducer from './Answers';
 import RecommendationReducer from './Recommendations';
+import SelectedCharacterReducer from './SelectedСharacter';
 
 const rootReducer = combineReducers({
     selectedAndPrevPageReducer,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     BookingReducer,
     UserProfileReducer,
     AnswerReducer,
-    RecommendationReducer
+    RecommendationReducer,
+    SelectedCharacterReducer
 })
 
 const store = configureStore({

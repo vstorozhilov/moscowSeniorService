@@ -7,6 +7,7 @@ import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
 import SuccessLogo from '../pages/svg/success.svg';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 
 export default function SuccessBook (props) {
 
@@ -16,6 +17,7 @@ export default function SuccessBook (props) {
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
   const booking = useAppSelector(state=>state.BookingReducer[state.BookingReducer.length - 1]);
+  const navigate = useNavigate();
 
   return <CSSTransition
       timeout={500}
@@ -47,7 +49,10 @@ export default function SuccessBook (props) {
                 }}>{booking.location.address}</Box>
             </Stack>
             <Button
-            onClick={()=>dispatch(selectedAndPrevPageResolver(3))}
+            onClick={()=>{
+                dispatch(selectedAndPrevPageResolver(3));
+                setTimeout(()=>navigate('/main'), 0);
+            }}
             className="actionButton"
             variant="contained"
             endIcon={<ArrowBackIcon/>}

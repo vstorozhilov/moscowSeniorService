@@ -23,7 +23,7 @@ export default function AddressScheduleAndTripTime (props) {
   const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
-  const { userId } = useAppSelector(state=>state.UserProfileReducer);
+  const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
   const [ userSettings, setUserSettings ] = useState({});
   const { createSchedule } = scheduleSlice.actions;
   const schedule = useAppSelector(state=>state.scheduleReducer);

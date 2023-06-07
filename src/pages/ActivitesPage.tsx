@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
 import ActivityCard from '../components/ActivityCard';
+import { useNavigate } from 'react-router-dom';
 
 export default function ActivityPage (props) {
 
@@ -15,6 +16,7 @@ export default function ActivityPage (props) {
   const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
+  const navigation = useNavigate();
 
   const activitiesId = useAppSelector(state=>state.ActivityReducer.map(item=>item.id));
 
@@ -33,7 +35,10 @@ export default function ActivityPage (props) {
                 alignItems='center'
             >
                 <IconButton
-                onClick={()=>dispatch(selectedAndPrevPageResolver(3))}
+                onClick={()=>{
+                    dispatch(selectedAndPrevPageResolver(3));
+                    setTimeout(()=>navigation('/main'), 0)
+                }}
                 sx={{
                     position : 'absolute',
                     left : 0
@@ -45,7 +50,7 @@ export default function ActivityPage (props) {
                 <Box className='mainLabel'>Вам подойдут</Box>
             </Stack>
             {activitiesId.map(id=>{
-                return <ActivityCard activityId={id}/>
+                return <ActivityCard key={id} activityId={id}/>
             })}
         </Stack>
         </CSSTransition>

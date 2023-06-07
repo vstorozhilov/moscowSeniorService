@@ -9,7 +9,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 export default function ActivityCategories(props) {
 
     const dispatch = useAppDispatch();
-    const { userId } = useAppSelector(state=>state.UserProfileReducer);
+    const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
     const { setActivityCategories } = ActivityCategorySlice.actions;
     const [ recs, setRecs ] = useState([]);
     const recommendations = useAppSelector(state=>state.RecommendationReducer);

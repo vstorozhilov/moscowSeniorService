@@ -17,6 +17,7 @@ import { useAppSelector,
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import RecoLogo from '../pages/svg/recoLogo.svg';
 import { answerSlice } from '../stateManager/Answers';
+import { useNavigate } from 'react-router-dom';
 
 export default function RecoPageOne (props) {
 
@@ -26,6 +27,7 @@ export default function RecoPageOne (props) {
     const { changeAnswer } = answerSlice.actions;
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
+    const navigation = useNavigate();
 
 
     return <CSSTransition
@@ -78,7 +80,8 @@ export default function RecoPageOne (props) {
                     value : 'C cердечно-сосудистой системой'
                 }
             ))
-            dispatch(selectedAndPrevPageResolver(9))
+            dispatch(selectedAndPrevPageResolver(9));
+            setTimeout(()=>navigation('/questiontwo'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -98,7 +101,8 @@ export default function RecoPageOne (props) {
                     value : 'С опорно-двигательным аппаратом'
                 }
             ))
-            dispatch(selectedAndPrevPageResolver(9))
+            dispatch(selectedAndPrevPageResolver(9));
+            setTimeout(()=>navigation('/questiontwo'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -118,7 +122,8 @@ export default function RecoPageOne (props) {
                     value : 'Со слухом'
                 }
             ))
-            dispatch(selectedAndPrevPageResolver(9))
+            dispatch(selectedAndPrevPageResolver(9));
+            setTimeout(()=>navigation('/questiontwo'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -138,7 +143,7 @@ export default function RecoPageOne (props) {
                     value : 'Со зрением'
                 }
             ))
-            dispatch(selectedAndPrevPageResolver(9))
+            dispatch(selectedAndPrevPageResolver(9));
         }}
         className="actionButton"
         variant="contained"
@@ -159,7 +164,8 @@ export default function RecoPageOne (props) {
                     value : 'Проблем нет'
                 }
             ))
-            dispatch(selectedAndPrevPageResolver(9))
+            dispatch(selectedAndPrevPageResolver(9));
+            setTimeout(()=>navigation('/questiontwo'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -173,7 +179,10 @@ export default function RecoPageOne (props) {
         </Button>
 
         <Button
-        onClick={()=>dispatch(selectedAndPrevPageResolver(3))}
+        onClick={()=>{
+            dispatch(selectedAndPrevPageResolver(3));
+            setTimeout(()=>navigation('/main'), 0);
+        }}
         className="actionButton"
         variant="contained"
         startIcon={<ArrowBackIcon/>}

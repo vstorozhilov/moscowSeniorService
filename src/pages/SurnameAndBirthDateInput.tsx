@@ -2,20 +2,17 @@ import React, { useRef, useEffect } from 'react';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { Stack } from '@mui/material';
-import { IMaskInput } from 'react-imask';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { CSSTransition } from 'react-transition-group';
 import { useAppSelector,
     useAppDispatch
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { selectedCharacterSlice, selectedСharacterInterface } from '../stateManager/SelectedСharacter';
 import { UserProfileSlice } from '../stateManager/UserProfile';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,25 +29,22 @@ export default function SurNameAndBirthDateInput (props) {
   const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
-  const [demoUsers, setDemoUsers] = useState<demoUser[]>([]);
-  const [selectedUser, setSelectedUser] = useState<demoUser>({
-    id : 0,
-    label : '',
-    year : ''
-  });
-  const navigate = useNavigate();
+  const { selectedCharacterResolver } = selectedCharacterSlice.actions;
+  const selectedCharacter = useAppSelector(state=>state.SelectedCharacterReducer);
 
-  const { setUserProfile } = UserProfileSlice.actions;
+
+  const [demoUsers, setDemoUsers] = useState<selectedСharacterInterface[]>([]);
+  const navigate = useNavigate();
 
   const fetchDemoUsers = async () => {
     let response = await fetch('https://alexhlins1.fvds.ru:1338/users/demo', {
       mode : 'cors'
     });
     let resJSON = await response.json();
-  
+
     setDemoUsers(resJSON.map(item=>({
       id : item.id,
-      label : item.name + ' ' + item.surname + ' ' + (item.coldStart ? '(новый)' : '(известный)'),
+      label : item.name + ' ' + item.surname + ' ' + (item.coldStart ? '(новый)' : '(известный)') + ' ' + item.id,
       year : item.birthdate
     })));
   }
@@ -58,8 +52,6 @@ export default function SurNameAndBirthDateInput (props) {
   useEffect(()=>{
     fetchDemoUsers();
   }, [])
-
-  console.log(selectedUser)
 
   return <Stack ref={nodeRef} className='mainContainer' spacing={2}>
             <Stack
@@ -90,10 +82,10 @@ export default function SurNameAndBirthDateInput (props) {
                 Выберете персонажа
             </Box>
             <Autocomplete
-            defaultValue={selectedUser}
+            value={Object.keys(selectedCharacter).length ? selectedCharacter : null}
             onChange={(__, newOption)=>{
-              if (newOption == null) setSelectedUser({});
-              else setSelectedUser(newOption);
+              if (newOption == null) dispatch(selectedCharacterResolver({}));
+              else dispatch(selectedCharacterResolver(newOption));
             }}
             disablePortal
             options={demoUsers}
@@ -102,13 +94,12 @@ export default function SurNameAndBirthDateInput (props) {
             <TextField
                 disabled
                 className='inputTextField'
-                value={Object.keys(selectedUser).length ?  selectedUser.year : 'Дата рождения'}
+                value={selectedCharacter ?  selectedCharacter.year : 'Дата рождения'}
             />
             <Stack direction='row' justifyContent='flex-end'>
                 <Button
-                disabled={Object.keys(selectedUser).length == 0}
+                disabled={Object.keys(selectedCharacter).length == 0}
                 onClick={()=>{
-                  dispatch(setUserProfile(selectedUser.id))
                   dispatch(selectedAndPrevPageResolver(2));
                   setTimeout(()=>navigate('/inputsecond'), 0);
                 }}

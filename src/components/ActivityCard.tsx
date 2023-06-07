@@ -12,6 +12,7 @@ import busLogo from '../pages/svg/busIcon.svg';
 import personLogo from '../pages/svg/personIcon.svg';
 import carLogo from '../pages/svg/carIcon.svg';
 import { SelectedActivitySlice } from '../stateManager/SelectedActivity';
+import { useNavigate } from 'react-router-dom';
 
 export default function ActivityCard (params : { activityId : number}) {
 
@@ -23,6 +24,7 @@ export default function ActivityCard (params : { activityId : number}) {
     const { setSelectedActivity } = SelectedActivitySlice.actions;
     const regexp = new RegExp("[^0-9]{3} [0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}", 'g');
     const slots = activityInfo?.schedule.match(regexp);
+    const navigation = useNavigate();
 
     return <Card className='activityCard'>
         <CardContent className='visible'>
@@ -63,8 +65,11 @@ export default function ActivityCard (params : { activityId : number}) {
                     className='bookButton'
                     onClick={
                         ()=>{
+                            // const newBooking = {...activityInfo, timeslot : weekday + ' ' + timeSlot};
+                            // dispatch(setBooking(newBooking));
                             dispatch(setSelectedActivity(activityId));
                             dispatch(selectedAndPrevPageResolver(6));
+                            setTimeout(()=>navigation('/book'), 0)
                         }
                     }
                     >Записаться</Button>

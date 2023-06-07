@@ -8,6 +8,7 @@ import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MapInfoCard from '../components/MapInfoCard';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
+import { useNavigate } from 'react-router-dom';
 
 var activityId = -1;
 
@@ -24,6 +25,7 @@ export default function MapPage(props) {
         latitude : item.location.latitude,
         longitude : item.location.longitude,
     })))
+    const navigation = useNavigate();
 
     const Portal =
         ( { children, elementId } ) => {
@@ -70,7 +72,10 @@ export default function MapPage(props) {
         <Box>
             <YMaps version={ '2.1.79' }>
                 <IconButton
-                onClick={()=>dispatch(selectedAndPrevPageResolver(3))}
+                onClick={()=>{
+                    dispatch(selectedAndPrevPageResolver(3));
+                    setTimeout(()=>navigation('/main'), 0);
+                }}
                 sx={{
                     top : 5,
                     left : 5,

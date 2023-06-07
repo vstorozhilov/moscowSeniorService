@@ -35,12 +35,34 @@ const routes = [
     path : '/main',
     element : <ActivityCategoriesPage pageIndex={3}/>
   },
-  // {
-
-  // },
-  // {
-
-  // }
+  {
+    path : '/groupslist',
+    element : <ActivityPage pageIndex={4}/>
+  },
+  {
+    path : '/groupsmap',
+    element : <MapPage pageIndex={5}/>
+  },
+  {
+    path : '/book',
+    element : <BookPage pageIndex={6}/>
+  },
+  {
+    path : '/successbook',
+    element : <SuccessBook pageIndex={7}/>
+  },
+  {
+    path : '/questionone',
+    element : <RecoPageOne pageIndex={8}/>
+  },
+  {
+    path : '/questiontwo',
+    element : <RecoPageTwo pageIndex={9}/>
+  },
+  {
+    path : '/questionthree',
+    element : <RecoPageThree pageIndex={10}/>
+  },
 ];
 
 const rootRoute = [
@@ -66,7 +88,7 @@ function RootPage () {
     width : 'inherit',
   }}>
     <CSSTransition
-      timeout={500}
+      timeout={300}
       classNames={selectedPageIndex > prevPageIndex ? 'page-transition-forward' : 'page-transition-backward'}
       key={location.pathname}
     >

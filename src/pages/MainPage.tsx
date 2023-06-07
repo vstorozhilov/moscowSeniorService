@@ -111,6 +111,7 @@ export default function MainPage (props) {
             </ToggleButtonGroup>
             <Button className='startChat' onClick={()=>{
                 dispatch(selectedAndPrevPageResolver(8));
+                setTimeout(()=>navigate('/questionone'), 0);
             }}>
                 <Stack width='100%' direction='column' alignItems='start'>
                     <Box>Подобрать активность</Box>

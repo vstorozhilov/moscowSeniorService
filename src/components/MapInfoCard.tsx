@@ -6,12 +6,14 @@ import personLogo from '../pages/svg/personIcon.svg';
 import carLogo from '../pages/svg/carIcon.svg';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { SelectedActivitySlice } from '../stateManager/SelectedActivity';
+import { useNavigate } from 'react-router-dom';
 
 export default function MapInfoCard (props : {id : number}) {
 
     const dispatch = useAppDispatch();
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const { setSelectedActivity } = SelectedActivitySlice.actions;
+    const navigation = useNavigate();
 
     const { id } = props;
     const activitiyInfo = useAppSelector(state=>state.ActivityReducer.find(item=>item.id==id))
@@ -51,6 +53,7 @@ export default function MapInfoCard (props : {id : number}) {
                 ()=>{
                     dispatch(setSelectedActivity(id));
                     dispatch(selectedAndPrevPageResolver(6));
+                    setTimeout(()=>navigation('/book'), 0);
                 }
             }
             >Записаться</Button>

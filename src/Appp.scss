@@ -328,36 +328,53 @@
 
 .page-transition-forward-enter {
     transform: translateX(100%);
+    opacity: 0;
 }
 
 .page-transition-forward-enter-active {
     transform: translateX(0%);
-    transition: transform 300ms ease-in;
+    opacity: 1;
+    transition-property: transform, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
+    // transition: opacity 300ms ease-in;
 }
 
 .page-transition-forward-exit {
     transform: translateX(0%);
+    opacity: 1;
 }
 
 .page-transition-forward-exit-active {
     transform: translateX(-100%);
-    transition: transform 300ms ease-in;
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
 }
 
 .page-transition-backward-enter {
     transform: translateX(-100%);
+    opacity: 0;
 }
 
 .page-transition-backward-enter-active {
     transform: translateX(0%);
-    transition: transform 300ms ease-in;
+    opacity: 1;
+    transition-property: transform, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
 }
 
 .page-transition-backward-exit {
     transform: translateX(0%);
+    opacity: 1;
 }
 
 .page-transition-backward-exit-active {
     transform: translateX(100%);
-    transition: transform 300ms ease-in;
+    opacity: 0;
+    transition-property: transform, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
 }
