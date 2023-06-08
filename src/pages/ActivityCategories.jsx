@@ -27,7 +27,7 @@ export default function ActivityCategories(props) {
     }
 
     useEffect(()=>{
-        fetchRecs();
+        setTimeout(()=>fetchRecs(), 0);
         setTimeout(()=>setRecs(recommendations), 500)
     }, []);
 
@@ -36,21 +36,17 @@ export default function ActivityCategories(props) {
     return <>
         <TransitionGroup
             component={null}
-            appear={true}
         >
-        {recs.map((item, index)=>(
-            <CSSTransition
-            timeout={300 + index * 150}
-            classNames='recommendationcard'
-            key={item}
+        {activityCategoriesId.map((id, index)=>{
+            return  <CSSTransition
+            timeout={500 + index * 200}
+            classNames='activityCategoryCard'
+            key={id}
             unmountOnExit
             >
-                <RecommendationCard title={item} index={index} />
+                <ActivityCategoryCard key={id} activityCategoryId={id} index={index}/>
             </CSSTransition>
-        ))}
-        </TransitionGroup>
-        {activityCategoriesId.map(id=>{
-            return <ActivityCategoryCard key={id} activityCategoryId={id}/>
         })}
+        </TransitionGroup>
     </>
 }

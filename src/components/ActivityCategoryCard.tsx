@@ -12,9 +12,9 @@ import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { ActivitySlice } from '../stateManager/Activities';
 import { useNavigate } from 'react-router-dom';
 
-export default function ActivityCategoryCard (params : { activityCategoryId : number}) {
+export default function ActivityCategoryCard (params : { activityCategoryId : number, index : number}) {
 
-    const { activityCategoryId } = params;
+    const { activityCategoryId, index } = params;
     const dispatch = useAppDispatch();
     const activityCategory = useAppSelector(state=>state.ActivityCategoriesReducer.find(item=>item.id==activityCategoryId));
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
@@ -36,7 +36,9 @@ export default function ActivityCategoryCard (params : { activityCategoryId : nu
 
     const [isExpanded, setIsExpanded] = useState(false);
 
-    return <Card className='activityCategoryCard'>
+    return <Card className='activityCategoryCard' sx={{
+        transitionDelay: `${200 * index}ms !important`
+    }}>
         <CardContent className='visible'>
             <Stack spacing={1.5}>
             <Stack direction='row' justifyContent='space-between' alignItems='center'>

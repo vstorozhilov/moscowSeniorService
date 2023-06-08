@@ -65,6 +65,17 @@ export default function MainPage (props) {
                 </IconButton>
                 <Box className='mainLabel'>Главная</Box>
             </Stack>
+            <Button className='startChat' onClick={()=>{
+                dispatch(selectedAndPrevPageResolver(8));
+                setTimeout(()=>navigate('/questionone'), 0);
+            }}>
+                <Stack width='100%' direction='column' alignItems='start'>
+                    <Box>Подобрать активность</Box>
+                    <Box sx={{
+                        fontSize : 16,
+                        fontWeight : 400}}>Выбери новую активность</Box>
+                </Stack>
+            </Button>
             <ToggleButtonGroup
                 className='toggleGroupButton'
                 value={tab}
@@ -109,17 +120,6 @@ export default function MainPage (props) {
                     </Stack>
                 </ToggleButton>
             </ToggleButtonGroup>
-            <Button className='startChat' onClick={()=>{
-                dispatch(selectedAndPrevPageResolver(8));
-                setTimeout(()=>navigate('/questionone'), 0);
-            }}>
-                <Stack width='100%' direction='column' alignItems='start'>
-                    <Box>Подобрать активность</Box>
-                    <Box sx={{
-                        fontSize : 16,
-                        fontWeight : 400}}>Выбери новую активность</Box>
-                </Stack>
-            </Button>
             {tab == 'activityCategories' ? <ActivityCategories/> : null}
             {tab == 'bookings' ? <Bookings/> : null}
             {/* {activityCategoriesId.map(id=>{

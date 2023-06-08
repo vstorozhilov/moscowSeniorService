@@ -88,7 +88,7 @@ function RootPage () {
     width : 'inherit',
   }}>
     <CSSTransition
-      timeout={300}
+      timeout={500}
       classNames={selectedPageIndex > prevPageIndex ? 'page-transition-forward' : 'page-transition-backward'}
       key={location.pathname}
     >
