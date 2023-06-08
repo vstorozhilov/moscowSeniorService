@@ -11,6 +11,8 @@ import UserProfileReducer from './UserProfile';
 import AnswerReducer from './Answers';
 import RecommendationReducer from './Recommendations';
 import SelectedCharacterReducer from './SelectedСharacter';
+import DisplayNUmberReducer from './displayOnboardingNumber';
+import MainTabReducer from './mainTab';
 
 const rootReducer = combineReducers({
     selectedAndPrevPageReducer,
@@ -24,7 +26,9 @@ const rootReducer = combineReducers({
     UserProfileReducer,
     AnswerReducer,
     RecommendationReducer,
-    SelectedCharacterReducer
+    SelectedCharacterReducer,
+    DisplayNUmberReducer,
+    MainTabReducer
 })
 
 const store = configureStore({

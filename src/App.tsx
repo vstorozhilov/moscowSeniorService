@@ -16,6 +16,7 @@ import { useAppSelector } from './stateManager/hooks';
 import RecoPageOne from './pages/RecoPageOne';
 import RecoPageTwo from './pages/RecoPageTwo';
 import RecoPageThree from './pages/RecoPageThree';
+import AdminPage from './pages/AdminPage';
 import { createBrowserRouter, RouterProvider, useLocation, useOutlet } from 'react-router-dom';
 
 const routes = [
@@ -62,6 +63,10 @@ const routes = [
   {
     path : '/questionthree',
     element : <RecoPageThree pageIndex={10}/>
+  },
+  {
+    path : '/admin',
+    element : <AdminPage pageIndex={10}/>
   },
 ];
 

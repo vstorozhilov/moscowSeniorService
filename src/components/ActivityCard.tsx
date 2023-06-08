@@ -14,9 +14,9 @@ import carLogo from '../pages/svg/carIcon.svg';
 import { SelectedActivitySlice } from '../stateManager/SelectedActivity';
 import { useNavigate } from 'react-router-dom';
 
-export default function ActivityCard (params : { activityId : number}) {
+export default function ActivityCard (params : { activityId : number, index : number}) {
 
-    const { activityId } = params;
+    const { activityId, index } = params;
 
     const dispatch = useAppDispatch();
     const activityInfo = useAppSelector(state=>state.ActivityReducer.find(item=>item.id==activityId));
@@ -26,14 +26,17 @@ export default function ActivityCard (params : { activityId : number}) {
     const slots = activityInfo?.schedule.match(regexp);
     const navigation = useNavigate();
 
-    return <Card className='activityCard'>
+    return <Card className='activityCard' sx={{
+        transitionDelay : `${200 * index}ms !important`
+    }}>
         <CardContent className='visible'>
             <Stack spacing={1}>
                 <Stack direction='row' justifyContent='space-between' alignItems='start'>
-                    <Box sx={{width : 100}}>{activityInfo?.title}</Box>
+                    <Box sx={{width : 100, fontWeight : 700}}>{activityInfo?.title}</Box>
                     <Stack sx={{fontSize : 14, fontWeight : 400}} direction='row' spacing={1} alignItems='center'>
                         { activityInfo?.location.isNear ? <Box className="nearActivity">{"в двух шагах"}</Box> : null}
-                        <Box className="distanceToActivity">{activityInfo?.location.distance}</Box>
+                        <Box className="distanceToActivity">id: {activityInfo?.id}</Box>
+                        <Box className="distanceToActivity">{activityInfo?.location.distance} м</Box>
                     </Stack>
                 </Stack>
                 <Stack direction='row' justifyContent='space-between'>
@@ -45,7 +48,7 @@ export default function ActivityCard (params : { activityId : number}) {
                     <Stack direction='row' spacing={1} sx={{fontSize : 12}} alignItems='start'>
                         <Stack direction='row'spacing={0.5} alignItems='center'>
                             <img src={carLogo}/>
-                            <Box>{activityInfo?.location.estimatedTime * 0.6} мин</Box>
+                            <Box>{Math.floor(activityInfo?.location.estimatedTime * 0.6)} мин</Box>
                         </Stack>
                         <Stack direction='row'spacing={0.5} alignItems='center'>
                             <img src={busLogo}/>
@@ -53,7 +56,7 @@ export default function ActivityCard (params : { activityId : number}) {
                         </Stack>
                         <Stack direction='row'spacing={0.5} alignItems='center'>
                             <img src={personLogo}/>
-                            <Box>{activityInfo?.location.estimatedTime * 1.3} мин</Box>
+                            <Box>{Math.floor(activityInfo?.location.estimatedTime * 1.3)} мин</Box>
                         </Stack>
                     </Stack>
                 </Stack>

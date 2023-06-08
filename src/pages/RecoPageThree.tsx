@@ -13,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { RecommendationSlice } from '../stateManager/Recommendations';
 import { ActivityCategorySlice } from '../stateManager/ActivityCategories';
 import { useNavigate } from 'react-router-dom';
+import { mainTabSlice } from '../stateManager/mainTab';
 
 export default function RecoPageThree (props) {
 
@@ -26,6 +27,7 @@ export default function RecoPageThree (props) {
     const { setActivityCategories } = ActivityCategorySlice.actions;
     const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
     const navigation = useNavigate();
+    const { setMainTab } = mainTabSlice.actions;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -67,7 +69,7 @@ export default function RecoPageThree (props) {
 
         console.log(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()));
         dispatch(setActivityCategories([]));
-
+        dispatch(setMainTab('activityCategories'));
         setIsLoading(false);
     }
 
@@ -79,11 +81,21 @@ export default function RecoPageThree (props) {
         unmountOnExit
         in={pageIndex == selectedPageIndex}
         key={pageIndex}>
+        <>
+        {isLoading && <Box sx={{
+            position : 'absolute',
+            background : 'rgba(0, 0, 0, 0.6)',
+            width : '100%',
+            height : '100%',
+            zIndex : 10
+        }}>
+        </Box>}
         <Box ref={nodeRef} sx={{
             position : 'absolute',
             width : 'inherit',
             height : 'inherit',
-            overflow : 'hidden'
+            overflow : 'hidden',
+            background : 'rgba(0, 0, 0, 0.8)'
         }}>
             <Box sx={{
             position : 'relative',
@@ -102,11 +114,14 @@ export default function RecoPageThree (props) {
                 zIndex : 3,
             }}
         />
-        {isLoading ? <CircularProgress sx={{
+        {isLoading ? <CircularProgress
+        size={80}
+        sx={{
             color : 'white',
             position : 'absolute',
-            top : '70vh',
-            left : '45vw'
+            top : '50vh',
+            left : '40vw',
+            zIndex : 15
         }}/> : null}
         <Box sx={{
             position : 'absolute',
@@ -178,5 +193,7 @@ export default function RecoPageThree (props) {
             <Box>Назад</Box>
         </Button>
         </Box>
-    </Box></CSSTransition>
+    </Box>
+    </>
+    </CSSTransition>
 }
