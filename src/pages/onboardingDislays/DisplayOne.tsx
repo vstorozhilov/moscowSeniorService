@@ -8,7 +8,7 @@ export default function DisplayOne() {
     direction='column'
     justifyContent='space-between'
     alignItems='start'
-    paddingTop={19}
+    paddingTop={21}
     paddingBottom={2}
     paddingRight={2}
     paddingLeft={2}

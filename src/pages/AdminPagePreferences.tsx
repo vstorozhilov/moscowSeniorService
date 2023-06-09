@@ -19,7 +19,7 @@ export default function AdminPagePreferences(props) {
   const [prefTwo, setPrefTwo] = useState(0);
   const [prefThree, setPrefThree] = useState(0);
   const [isDisabled, setIsDisabled] = useState(true);
-  
+
   const fetchPrefs = async () => {
     let responce = await fetch('https://alexhlins1.fvds.ru:1338/admin/preferences');
     let resJSON = await responce.json();
@@ -97,7 +97,7 @@ export default function AdminPagePreferences(props) {
                         height : 30,
                         width : 30,
                         borderRadius : '50%',
-                        transform : 'translateY(10px) scale(1)'
+                        transform : 'translateY(10px) scale(1) !important'
                     },
                     '& .MuiSlider-valueLabelOpen::before' : {
                         display : 'none'
@@ -135,7 +135,7 @@ export default function AdminPagePreferences(props) {
                         height : 30,
                         width : 30,
                         borderRadius : '50%',
-                        transform : 'translateY(10px) scale(1)'
+                        transform : 'translateY(10px) scale(1) !important'
                     },
                     '& .MuiSlider-valueLabelOpen::before' : {
                         display : 'none'
@@ -172,7 +172,7 @@ export default function AdminPagePreferences(props) {
                         height : 30,
                         width : 30,
                         borderRadius : '50%',
-                        transform : 'translateY(10px) scale(1)'
+                        transform : 'translateY(10px) scale(1) !important'
                     },
                     '& .MuiSlider-valueLabelOpen::before' : {
                         display : 'none'
@@ -188,6 +188,7 @@ export default function AdminPagePreferences(props) {
                 <Button
                     disabled={isDisabled}
                     onClick={()=>{
+                        console.log(prefOne, prefTwo, prefThree);
                         fetch('https://alexhlins1.fvds.ru:1338/admin/preferences',
                             {
                                 method : 'POST',

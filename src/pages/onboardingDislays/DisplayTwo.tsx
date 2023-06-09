@@ -8,7 +8,7 @@ export default function DisplayTwo() {
     direction='column'
     justifyContent='space-between'
     alignItems='start'
-    paddingTop={31}
+    paddingTop={33}
     paddingBottom={2}
     paddingRight={2}
     paddingLeft={2}
