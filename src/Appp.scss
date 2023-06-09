@@ -115,7 +115,71 @@
 .activityCategoryCard {
     box-shadow: none !important;
 }
-  
+
+.activityCategoryCard-appear {
+    opacity: 0;
+    scale: 0 1;
+    translate: 0 100%;
+}
+
+.activityCategoryCard-appear-active {
+    opacity: 1;
+    scale: 1 1;
+    translate: 0 0;
+    transition:
+        opacity 500ms cubic-bezier(0.46, 0, 0, 1.01),
+        scale 500ms cubic-bezier(0.58, 0.02, 0, 0.96),
+        translate 500ms ease-out !important;
+}
+
+.activityCategoryCard-enter {
+    opacity: 0;
+    scale: 0 1;
+    translate: 0 100%;
+}
+
+.activityCategoryCard-enter-active {
+    opacity: 1;
+    scale: 1 1;
+    translate: 0 0;
+    transition:
+        opacity 500ms cubic-bezier(0.46, 0, 0, 1.01),
+        scale 500ms cubic-bezier(0.58, 0.02, 0, 0.96),
+        translate 500ms ease-out !important;
+}
+
+.activityCard-appear {
+    opacity: 0;
+    scale: 0 1;
+    translate: 0 100%;
+}
+
+.activityCard-appear-active {
+    opacity: 1;
+    scale: 1 1;
+    translate: 0 0;
+    transition:
+        opacity 500ms cubic-bezier(0.46, 0, 0, 1.01),
+        scale 500ms cubic-bezier(0.58, 0.02, 0, 0.96),
+        translate 500ms ease-out !important;
+}
+
+.activityCard-enter {
+    opacity: 0;
+    scale: 0 1;
+    translate: 0 100%;
+}
+
+.activityCard-enter-active {
+    opacity: 1;
+    scale: 1 1;
+    translate: 0 0;
+    transition:
+        opacity 500ms cubic-bezier(0.46, 0, 0, 1.01),
+        scale 500ms cubic-bezier(0.58, 0.02, 0, 0.96),
+        translate 500ms ease-out !important;
+}
+
 .recommendationcard-enter {
     opacity: 0;
     height: 0;
@@ -129,13 +193,13 @@
     transition-timing-function: ease-in !important;
 }
 
-.recommendationcard-exit {
-    opacity: 1;
-}
-.recommendationcard-exit-active {
-    opacity: 0;
-    transition: opacity 500ms ease-in;
-}
+// .recommendationcard-exit {
+//     opacity: 1;
+// }
+// .recommendationcard-exit-active {
+//     opacity: 0;
+//     transition: opacity 500ms ease-in;
+// }
 
 .bookCard {
     background-color: white;
@@ -313,7 +377,7 @@
 
 .driver-card {
     width: 250px;
-    height: 200px;
+    height: 300px;
     overflow-y: scroll;
 }
 
@@ -328,36 +392,85 @@
 
 .page-transition-forward-enter {
     transform: translateX(100%);
+    opacity: 0;
 }
 
 .page-transition-forward-enter-active {
     transform: translateX(0%);
-    transition: transform 300ms ease-in;
+    opacity: 1;
+    transition: transform 500ms cubic-bezier(0.79, 0.01, 0.29, 0.98),
+    opacity 500ms cubic-bezier(0.65, 0.01, 0.41, 0.98);
+    // transition-property: transform, opacity;
+    // transition-duration: 500ms;
+    // transition-timing-function: cubic-bezier(0.79, 0.01, 0.29, 0.98) cubic-bezier(0.65, 0.01, 0.41, 0.98);
+    // transition: opacity 300ms ease-in;
 }
 
 .page-transition-forward-exit {
     transform: translateX(0%);
+    opacity: 1;
 }
 
 .page-transition-forward-exit-active {
     transform: translateX(-100%);
-    transition: transform 300ms ease-in;
+    opacity: 0;
+    transition: transform 500ms cubic-bezier(0.79, 0.01, 0.29, 0.98),
+    opacity 500ms cubic-bezier(0.65, 0.01, 0.41, 0.98);
+    // transition-property: transform, opacity;
+    // transition-duration: 500ms;
+    // transition-timing-function: cubic-bezier(0.79, 0.01, 0.29, 0.98) cubic-bezier(0.98, 0.01, 1, 1);
 }
 
 .page-transition-backward-enter {
     transform: translateX(-100%);
+    opacity: 0;
 }
 
 .page-transition-backward-enter-active {
     transform: translateX(0%);
-    transition: transform 300ms ease-in;
+    opacity: 1;
+    transition: transform 500ms cubic-bezier(0.79, 0.01, 0.29, 0.98),
+    opacity 500ms cubic-bezier(0.65, 0.01, 0.41, 0.98);
+    // transition-property: transform, opacity;
+    // transition-duration: 500ms;
+    // transition-timing-function: cubic-bezier(0.79, 0.01, 0.29, 0.98) cubic-bezier(0.98, 0.01, 1, 1);
 }
 
 .page-transition-backward-exit {
     transform: translateX(0%);
+    opacity: 1;
 }
 
 .page-transition-backward-exit-active {
     transform: translateX(100%);
-    transition: transform 300ms ease-in;
+    opacity: 0;
+    transition: transform 500ms cubic-bezier(0.79, 0.01, 0.29, 0.98),
+    opacity 500ms cubic-bezier(0.65, 0.01, 0.41, 0.98);
+}
+
+.onboardingDisplay-appear {
+    opacity : 0
+}
+
+.onboardingDisplay-appear-active {
+    opacity : 1;
+    transition: opacity 500ms ease-in;
+}
+
+// .onboardingDisplay-enter {
+//     opacity : 0
+// }
+
+// .onboardingDisplay-enter-active {
+//     opacity : 1;
+//     transition: opacity 500ms ease-in;
+// }
+
+.onboardingDisplay-exit {
+    opacity : 1
+}
+
+.onboardingDisplay-exit-active {
+    opacity : 0;
+    transition: opacity 200ms ease-out;
 }

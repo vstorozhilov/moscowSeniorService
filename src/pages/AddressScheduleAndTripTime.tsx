@@ -14,6 +14,7 @@ import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import MaxTripTimeSelector from '../components/MaxTripTimeSelector';
 import ScheduleConstructor from '../components/ScheduleConstructor';
 import { scheduleSlice } from '../stateManager/ScheduleConstructor';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddressScheduleAndTripTime (props) {
 
@@ -22,11 +23,12 @@ export default function AddressScheduleAndTripTime (props) {
   const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
-  const { userId } = useAppSelector(state=>state.UserProfileReducer);
+  const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
   const [ userSettings, setUserSettings ] = useState({});
   const { createSchedule } = scheduleSlice.actions;
   const schedule = useAppSelector(state=>state.scheduleReducer);
   const { maxTripTime } = useAppSelector(state=>state.maxTripTimeReducer);
+  const navigate = useNavigate();
 
   const fetchUserSettings = async () => {
     const response = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/settings`);
@@ -40,14 +42,7 @@ export default function AddressScheduleAndTripTime (props) {
     fetchUserSettings();
   }, []);
 
-  return <CSSTransition
-      timeout={500}
-      nodeRef={nodeRef}
-      classNames={selectedPageIndex > prevPageIndex ? 'page-transition-forward' : 'page-transition-backward'}
-      unmountOnExit
-      in={pageIndex == selectedPageIndex}
-      key={pageIndex}>
-        <Stack ref={nodeRef} className='mainContainer' spacing={2}>
+  return <Stack ref={nodeRef} className='mainContainer' spacing={2}>
             <Stack
                 position='relative'
                 direction='row'
@@ -55,7 +50,10 @@ export default function AddressScheduleAndTripTime (props) {
                 alignItems='center'
             >
                 <IconButton
-                onClick={()=>dispatch(selectedAndPrevPageResolver(1))}
+                onClick={()=>{
+                  dispatch(selectedAndPrevPageResolver(1));
+                  setTimeout(()=>navigate('/inputfirst'), 0);
+                }}
                 sx={{
                     position : 'absolute',
                     left : 0
@@ -84,20 +82,12 @@ export default function AddressScheduleAndTripTime (props) {
                 variant="contained"
                 endIcon={<ArrowForwardIcon/>}
                   onClick={async ()=>{
-                    // const newUserSettings = { ...userSettings }
-                    // newUserSettings.schedule = schedule;
-                    // newUserSettings.travelTime = maxTripTime;
-                    // console.log(newUserSettings);
-                    // await fetch(`http://alexhlins1.fvds.ru:1337/users/${userId}/settings`, {
-                    //   method : 'PUT',
-                    //   body : JSON.stringify({})
-                    // });
-                    dispatch(selectedAndPrevPageResolver(3))
+                    dispatch(selectedAndPrevPageResolver(3));
+                    setTimeout(()=>navigate('/main'), 0);
                   }
                 }>
                   <Box>Вперед</Box>
                 </Button>
             </Stack>
         </Stack>
-        </CSSTransition>
 };

@@ -2,14 +2,6 @@ import React, { useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import FormControl from '@mui/material/FormControl';
-import Text from './svg/text.svg';
-import GrandmomOne from './svg/hellopage_grandmom_one.svg';
-import GrandmomTwo from './svg/hellopage_grandmom_two.svg';
-import GrandDad from './svg/hellopage_granddad.svg';
-import PlateOne from './svg/hellopage_plate_one.svg';
-import PlateTwo from './svg/hellopage_plate_two.svg';
-import PlateThree from './svg/hellopage_plate_three.svg';
 import { CSSTransition } from 'react-transition-group';
 import { useAppSelector,
     useAppDispatch
@@ -19,6 +11,9 @@ import RecoLogo from '../pages/svg/recoLogo.svg';
 import { answerSlice } from '../stateManager/Answers';
 import CircularProgress from '@mui/material/CircularProgress';
 import { RecommendationSlice } from '../stateManager/Recommendations';
+import { ActivityCategorySlice } from '../stateManager/ActivityCategories';
+import { useNavigate } from 'react-router-dom';
+import { mainTabSlice } from '../stateManager/mainTab';
 
 export default function RecoPageThree (props) {
 
@@ -29,6 +24,10 @@ export default function RecoPageThree (props) {
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
     const { changeAnswer } = answerSlice.actions;
     const { setReco } = RecommendationSlice.actions;
+    const { setActivityCategories } = ActivityCategorySlice.actions;
+    const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
+    const navigation = useNavigate();
+    const { setMainTab } = mainTabSlice.actions;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -56,10 +55,21 @@ export default function RecoPageThree (props) {
                         });
 
         let reccomends = await responce.json();
-        
-        console.log(reccomends.recomendation);
-        dispatch(setReco(reccomends.recomendation.filter(item=>(item != ''))));
 
+        responce = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/categories`,
+            {
+                method : 'POST',
+                headers : {
+                    accept : 'application/json',
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()))
+            },
+        );
+
+        console.log(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()));
+        dispatch(setActivityCategories([]));
+        dispatch(setMainTab('activityCategories'));
         setIsLoading(false);
     }
 
@@ -71,11 +81,21 @@ export default function RecoPageThree (props) {
         unmountOnExit
         in={pageIndex == selectedPageIndex}
         key={pageIndex}>
+        <>
+        {isLoading && <Box sx={{
+            position : 'absolute',
+            background : 'rgba(0, 0, 0, 0.6)',
+            width : '100%',
+            height : '100%',
+            zIndex : 10
+        }}>
+        </Box>}
         <Box ref={nodeRef} sx={{
             position : 'absolute',
             width : 'inherit',
             height : 'inherit',
-            overflow : 'hidden'
+            overflow : 'hidden',
+            background : 'rgba(0, 0, 0, 0.8)'
         }}>
             <Box sx={{
             position : 'relative',
@@ -92,14 +112,16 @@ export default function RecoPageThree (props) {
                 left : 140,
                 transform : 'rotate(-4deg)',
                 zIndex : 3,
-                // backdropFilter: 'blur(10px)'
             }}
         />
-        {isLoading ? <CircularProgress sx={{
+        {isLoading ? <CircularProgress
+        size={80}
+        sx={{
             color : 'white',
             position : 'absolute',
-            top : '70vh',
-            left : '45vw'
+            top : '50vh',
+            left : '40vw',
+            zIndex : 15
         }}/> : null}
         <Box sx={{
             position : 'absolute',
@@ -116,13 +138,8 @@ export default function RecoPageThree (props) {
         disabled={isLoading}
         onClick={async ()=>{
             await getRecommends('Активные занятия');
-            // dispatch(changeAnswer(
-            //     {
-            //         answer : 'activity',
-            //         value : 'Активные занятия'
-            //     }
-            // ))
-            dispatch(selectedAndPrevPageResolver(3))
+            dispatch(selectedAndPrevPageResolver(3));
+            setTimeout(()=>navigation('/main'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -138,13 +155,8 @@ export default function RecoPageThree (props) {
         disabled={isLoading}
         onClick={async ()=>{
             await getRecommends('Cпокойные занятия');
-            // dispatch(changeAnswer(
-            //     {
-            //         answer : 'activity',
-            //         value : 'Cпокойные занятия'
-            //     }
-            // ))
-            dispatch(selectedAndPrevPageResolver(3))
+            dispatch(selectedAndPrevPageResolver(3));
+            setTimeout(()=>navigation('/main'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -160,7 +172,8 @@ export default function RecoPageThree (props) {
         <Button
         // disabled={isLoading}
         onClick={async ()=>{
-            dispatch(selectedAndPrevPageResolver(3))
+            dispatch(selectedAndPrevPageResolver(9));
+            setTimeout(()=>navigation('/questiontwo'), 0);
         }}
         className="actionButton"
         variant="contained"
@@ -174,5 +187,7 @@ export default function RecoPageThree (props) {
             <Box>Назад</Box>
         </Button>
         </Box>
-    </Box></CSSTransition>
+    </Box>
+    </>
+    </CSSTransition>
 }

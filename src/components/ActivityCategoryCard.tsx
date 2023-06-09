@@ -10,29 +10,35 @@ import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
 import { ActivityCategorySlice } from '../stateManager/ActivityCategories';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { ActivitySlice } from '../stateManager/Activities';
+import { useNavigate } from 'react-router-dom';
 
-export default function ActivityCategoryCard (params : { activityCategoryId : number}) {
+export default function ActivityCategoryCard (params : { activityCategoryId : number, index : number}) {
 
-    const { activityCategoryId } = params;
+    const { activityCategoryId, index } = params;
     const dispatch = useAppDispatch();
     const activityCategory = useAppSelector(state=>state.ActivityCategoriesReducer.find(item=>item.id==activityCategoryId));
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
-    const { userId } = useAppSelector(state=>state.UserProfileReducer);
+    const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
     const { setActivities } = ActivitySlice.actions;
+    const navigate = useNavigate();
 
     const fetchGroups = async () => {
-        const response = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/groups?category=${activityCategoryId}`);
+        console.log(userId, activityCategoryId);
+        const response = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/groups?category=${activityCategory.title}`);
         const resJSON = await response.json();
         const newRes = resJSON.map(item=>{
             item.location.estimatedTime = Math.floor(Math.random() * 100);
             return item;
         })
+        console.log(newRes);
         dispatch(setActivities(newRes));
     }
 
     const [isExpanded, setIsExpanded] = useState(false);
 
-    return <Card className='activityCategoryCard'>
+    return <Card className='activityCategoryCard' sx={{
+        transitionDelay: `${200 * index}ms !important`
+    }}>
         <CardContent className='visible'>
             <Stack spacing={1.5}>
             <Stack direction='row' justifyContent='space-between' alignItems='center'>
@@ -70,14 +76,16 @@ export default function ActivityCategoryCard (params : { activityCategoryId : nu
                 className="activityCategoryActionButtonList"
                 onClick={()=>{
                     fetchGroups();
-                    dispatch(selectedAndPrevPageResolver(4))
+                    dispatch(selectedAndPrevPageResolver(4));
+                    setTimeout(()=>navigate('/groupslist'), 0);
                 }}
                 >Выбрать в списке</Button>
                 <Button
                 className="activityCategoryActionButtonMap"
                 onClick={()=>{
                     fetchGroups();
-                    dispatch(selectedAndPrevPageResolver(5))
+                    dispatch(selectedAndPrevPageResolver(5));
+                    setTimeout(()=>navigate('/groupsmap'), 0);
                 }}
                 >Выбрать на карте</Button>
             </CardActions>

@@ -8,6 +8,8 @@ import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MapInfoCard from '../components/MapInfoCard';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
+import { useNavigate } from 'react-router-dom';
+import MapMarker from './svg/mapMarker.svg'
 
 var activityId = -1;
 
@@ -24,6 +26,9 @@ export default function MapPage(props) {
         latitude : item.location.latitude,
         longitude : item.location.longitude,
     })))
+    const navigation = useNavigate();
+
+    // const layout = 
 
     const Portal =
         ( { children, elementId } ) => {
@@ -70,7 +75,10 @@ export default function MapPage(props) {
         <Box>
             <YMaps version={ '2.1.79' }>
                 <IconButton
-                onClick={()=>dispatch(selectedAndPrevPageResolver(3))}
+                onClick={()=>{
+                    dispatch(selectedAndPrevPageResolver(3));
+                    setTimeout(()=>navigation('/main'), 0);
+                }}
                 sx={{
                     top : 5,
                     left : 5,
@@ -85,7 +93,7 @@ export default function MapPage(props) {
                     height='100vh'
                     defaultState={{
                         center: [55.75, 37.57],
-                        zoom : 13,
+                        zoom : 10,
                         controls : ["zoomControl"],
                     }}
                     modules={["control.ZoomControl", 'geoObject.addon.balloon']}
@@ -94,7 +102,9 @@ export default function MapPage(props) {
                         <Placemark key={item.id} geometry={ [parseFloat(item.latitude), parseFloat(item.longitude)] }
                         options={
                             {
-                            iconColor: 'green',
+                                iconLayout: 'default#image',
+                                iconImageHref: MapMarker,
+                                iconImageSize: [50, 50],
                             }}
                         properties={
                             {
@@ -104,7 +114,7 @@ export default function MapPage(props) {
                         setTimeout(() => {
                             activityId = item.id;
                             setActivePortal(true);
-                        }, 0)
+                        }, 100)
                         } } />
                     ))}
                 </Map>

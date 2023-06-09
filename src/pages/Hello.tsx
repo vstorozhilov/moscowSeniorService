@@ -29,6 +29,7 @@ import { useAppSelector,
     useAppDispatch
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
+import { useNavigate } from 'react-router-dom';
 
 export default function Hello (props) {
 
@@ -37,16 +38,12 @@ export default function Hello (props) {
     const dispatch = useAppDispatch();
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
+    const navigate = useNavigate();
+
+    console.log(selectedPageIndex, pageIndex)
 
 
-    return <CSSTransition
-        timeout={500}
-        nodeRef={nodeRef}
-        classNames={selectedPageIndex > prevPageIndex ? 'page-transition-forward' : 'page-transition-backward'}
-        unmountOnExit
-        in={pageIndex == selectedPageIndex}
-        key={pageIndex}>
-    <Box ref={nodeRef} sx={{
+    return <Box ref={nodeRef} sx={{
             position : 'absolute',
             width : 'inherit',
             height : 'inherit',
@@ -123,7 +120,10 @@ export default function Hello (props) {
             }}
         />
         <Button
-        onClick={()=>dispatch(selectedAndPrevPageResolver(1))}
+        onClick={()=>{
+            dispatch(selectedAndPrevPageResolver(1));
+            setTimeout(()=>navigate('/inputfirst'), 0);
+        }}
         className="actionButton"
         variant="contained"
         endIcon={<ArrowForwardIcon/>}
@@ -136,5 +136,5 @@ export default function Hello (props) {
             <Box>Вперед</Box>
         </Button>
         </Box>
-    </Box></CSSTransition>
+    </Box>
 }
