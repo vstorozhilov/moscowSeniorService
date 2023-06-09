@@ -58,7 +58,7 @@ export default function AddressScheduleAndTripTime (props) {
     fetchUserSettings();
   }, []);
 
-  return <Stack ref={nodeRef} className='mainContainer' spacing={2}>
+  return <Stack ref={nodeRef} className='mainContainer' spacing={4}>
             <Stack
                 direction='row'
                 justifyContent='space-between'
@@ -73,14 +73,14 @@ export default function AddressScheduleAndTripTime (props) {
                         color : 'black'
                     }}/>
                 </IconButton>
-                <Box className='mainLabel'>Настройки профиля</Box>
+                <Box className='mainLabel'>Настройки</Box>
                 <IconButton onClick={handleClick}>
                     <MenuIcon sx={{
                         color : 'black'
                     }} />
                 </IconButton>
             </Stack>
-            <Box height='15vh'/>
+            {/* <Box height='2vh'/> */}
             <Box className='hintLabel'>
                 Заполните данные
             </Box>

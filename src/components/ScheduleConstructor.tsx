@@ -4,6 +4,8 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { Box } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
 import { scheduleSlice } from '../stateManager/ScheduleConstructor';
+import { Stack } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
 
 
 export default function ScheduleConstructor () {
@@ -32,50 +34,44 @@ export default function ScheduleConstructor () {
         }));
       };
 
-    return <><Box>Укажите удобное время в желаемые дни недели</Box>
-    <ToggleButtonGroup
-      className='toggleGroupButton'
-      value={weekday}
-      exclusive
-      onChange={handleWeekday}
-    >
-      <ToggleButton value={0}>
-        Пн
-      </ToggleButton>
-      <ToggleButton value={1}>
-        Вт
-      </ToggleButton>
-      <ToggleButton value={2}>
-        Ср
-      </ToggleButton>
-      <ToggleButton value={3}>
-        Чт
-      </ToggleButton>
-      <ToggleButton value={4}>
-        Пт
-      </ToggleButton>
-      <ToggleButton value={5}>
-        Сб
-      </ToggleButton>
-      <ToggleButton value={6}>
-        Вс
-      </ToggleButton>
-    </ToggleButtonGroup>
-    <Box>Укажите удобное время в желаемые дни недели</Box>
-    <ToggleButtonGroup
-      className='toggleGroupButton'
-      value={Object.keys(dayTimes[weekday]).filter(key=>dayTimes[weekday][key]==true)}
-      onChange={handleDaytime}
-    >
-      <ToggleButton value='morning'>
-        Утро
-      </ToggleButton>
-      <ToggleButton value='noon'>
-        День
-      </ToggleButton>
-      <ToggleButton value='evening'>
-        Вечер
-      </ToggleButton>
-    </ToggleButtonGroup>
+    return <><Box sx={{
+      fontWeight : 600,
+      fontSize : 16
+    }}
+    >Выберете удобное время для занятий</Box>
+    <Stack direction='column'
+    alignItems='center'
+    spacing={-0.5}>
+      <Stack direction='row'
+        justifyContent='space-around'
+        alignItems='center'
+        spacing={6}>
+          <Box></Box>
+          <Box>Утро</Box>
+          <Box>День</Box>
+          <Box>Вечер</Box>
+        </Stack>
+      {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((item, index)=>
+        <Stack
+          direction='row'
+          alignItems='center'
+          spacing={4}
+          ><Box>{item}</Box>
+          {['morning', 'noon', 'evening'].map(item=>(
+            <Checkbox
+            onChange={()=>{
+              dispatch(changeSchedule({
+                index,
+                item
+            }));
+            }}
+            size='large'
+            sx={{
+              color : 'black',
+            }}
+          />))}
+        </Stack>)
+        }
+    </Stack>
     </>
 }

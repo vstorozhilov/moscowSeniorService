@@ -71,9 +71,12 @@ export default function SurNameAndBirthDateInput (props) {
     fetchDemoUsers();
   }, [])
 
-  return <Stack ref={nodeRef} className='mainContainer' spacing={2}>
+  return <Stack
+          ref={nodeRef}
+          className='mainContainer'
+          height='100%'
+          spacing={3}>
             <Stack
-                // position='relative'
                 direction='row'
                 justifyContent='space-between'
                 alignItems='center'
@@ -85,18 +88,22 @@ export default function SurNameAndBirthDateInput (props) {
                     setTimeout(()=>navigate('/'), 0);
                   }
                 }>
-                    <ArrowBackIcon sx={{
+                    <ArrowBackIcon
+                    fontSize='large'
+                    sx={{
                         color : 'black'
                     }}/>
                 </IconButton>
                 <Box className='mainLabel'>Вход</Box>
                 <IconButton onClick={handleClick}>
-                    <MenuIcon sx={{
+                    <MenuIcon
+                    fontSize='large'
+                    sx={{
                         color : 'black'
                     }} />
                 </IconButton>
             </Stack>
-            <Box height='15vh'/>
+            <Box height='2vh'/>
             <Box className='hintLabel'>
                 Выберете персонажа
             </Box>
@@ -128,7 +135,12 @@ export default function SurNameAndBirthDateInput (props) {
                 className='inputTextField'
                 value={selectedCharacter ?  selectedCharacter.year : 'Дата рождения'}
             />
-            <Stack direction='row' justifyContent='flex-end'>
+            <Stack
+            direction='row'
+            justifyContent='flex-end'
+            height='100%'
+            flexWrap='wrap'
+            alignContent='flex-end'>
                 <Button
                 disabled={Object.keys(selectedCharacter).length == 0}
                 onClick={()=>{

@@ -39,7 +39,7 @@ export default function Hello (props) {
             height : 'inherit',
             overflowY : 'scroll',
             overflowX : 'hidden',
-            background: 'linear-gradient(70deg, #cd3931, #ccb280)',
+            background: 'linear-gradient(70deg, #2d6bd1, #e5edf9)',
             }}>
         <img style={{
             position: 'absolute',
@@ -51,7 +51,7 @@ export default function Hello (props) {
         <img  src={GrandmomOne}
         style={{
             position: 'absolute',
-            top : 30,
+            top : 10,
             right : -60,
             transform : 'rotate(10deg)'
         }}/>
@@ -59,14 +59,16 @@ export default function Hello (props) {
         style={{
             position: 'absolute',
             top : 80,
-            left : 20
+            left : 10
         }}
         src={Text}/>
         <Box sx={{
             paddingTop : 2,
             paddingLeft : 2,
             color : 'white',
-            fontSize : 16
+            fontSize : 16,
+            fontFamily : 'RF Dewi',
+            fontWeight : 700
         }}
         >Мобильная версия<br></br>вэб-сайта</Box>
         <img src={PlateOne}
@@ -83,19 +85,18 @@ export default function Hello (props) {
         <img
         style={{
             position: 'absolute',
-            top : 270,
+            top : 260,
             left : 30,
             transform : 'rotate(3deg)',
             zIndex : 2,
             backdropFilter: 'blur(10px)'
-            // transform : 'rotate(-30deg)'
         }}
         src={PlateTwo}/>
         <img src={PlateThree}
             style={{
                 position: 'absolute',
-                top : 240,
-                left : -10,
+                top : 180,
+                left : -30,
                 transform : 'rotate(-3deg)',
                 zIndex : 1
                 // transform : 'rotate(-30deg)'
@@ -105,7 +106,7 @@ export default function Hello (props) {
             style={{
                 position: 'absolute',
                 top : 530,
-                left : 170,
+                right : 10,
                 transform : 'rotate(10deg)',
                 zIndex : 5
             }}
@@ -115,14 +116,18 @@ export default function Hello (props) {
             dispatch(selectedAndPrevPageResolver(1));
             setTimeout(()=>navigate('/inputfirst'), 0);
         }}
+        size='large'
         className="actionButton"
         variant="contained"
         endIcon={<ArrowForwardIcon/>}
         sx={{
             zIndex: 6,
             position: 'absolute',
-            top : 600,
-            right : 10
+            fontSize : 24,
+            top : 640,
+            right : 10,
+            width : 130,
+            height : 60
         }}>
             <Box>Вперед</Box>
         </Button>

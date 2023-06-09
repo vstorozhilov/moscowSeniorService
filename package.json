@@ -2,7 +2,7 @@
   "name": "moscow_senior_hobbies",
   "version": "1.0.0",
   "scripts": {
-    "start": "vite --port 3000 --open --force",
+    "start": "vite --port 3000 --host 192.168.0.162 --open --force",
     "dev": "vite --port 3000 --open",
     "build": "vite build",
     "serve": "vite preview"

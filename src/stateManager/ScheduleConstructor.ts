@@ -50,18 +50,11 @@ export const scheduleSlice = createSlice({
   reducers: {
     changeSchedule: (prevSchedule, action : PayloadAction<{
         weekday : number,
-        dayTimes : string[]
+        dayTime : string
     }>) => {
+      const {weekday, dayTime} = action.payload;
       const newSchedule = [...prevSchedule];
-      const {weekday, dayTimes} = action.payload;
-
-      newSchedule[weekday] = {
-        morning : false,
-        noon : false,
-        evening : false
-      }
-
-      dayTimes.forEach(daytime=>{newSchedule[weekday][daytime] = true});
+      newSchedule[weekday][dayTime] = !newSchedule[weekday][dayTime]
       return newSchedule;
     },
     createSchedule : (prevSchedule, action : PayloadAction<dayTimes[]>) => {

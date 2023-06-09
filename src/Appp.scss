@@ -12,8 +12,29 @@
     font-weight: 500;
   }
 
+  @font-face {
+    font-family: "RF Dewi";
+    src: url(./fonts/RFDewi-Regular.ttf);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "RF Dewi";
+    src: url(./fonts/RFDewi-Semibold.ttf);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  @font-face {
+    font-family: "RF Dewi";
+    src: url(./fonts/RFDewi-Bold.ttf);
+    font-style: normal;
+    font-weight: 700;
+  }
+
 * {
-    font-family: 'GT Eesti Pro Text';
+    font-family: 'RF Dewi';
     box-sizing: border-box;
     letter-spacing: -0.02em;
 }
@@ -26,16 +47,15 @@
 }
 
 .hintLabel {
-    font-family: 'GT Eesti Pro Text';
-    font-weight: 400;
-    font-size: 12px;
+    font-weight: 600;
+    font-size: 24px;
     line-height: 20px;
-    color: #8C8C8C;
+    color: #0D54CA;
 }
 
 .mainLabel {
-    font-family: 'GT Eesti Pro Text';
-    font-weight: 500;
+    // font-family: 'GT Eesti Pro Text';
+    font-weight: 600;
     font-size: 24px;
     line-height: 20px;
 }
@@ -54,47 +74,52 @@
 }
 
 .MuiAutocomplete-option {
-    font-family: 'GT Eesti Pro Text';
+    // font-family: 'GT Eesti Pro Text';
     font-weight: 400;
+    font-size: 16px;
 }
 
 .MuiAutocomplete-popperDisablePortal {
-    border: solid 1px #B3B3B3;
+    border: solid 1px #000000;
     box-shadow: none;
 }
 
 .inputTextField .MuiFormLabel-root, .inputTextField .MuiFormLabel-root.Mui-focused {
-    font-family: 'GT Eesti Pro Text';
     font-weight: 400;
-    color: #8C8C8C;
+    color: #0D54CA;
+}
+
+input {
+    font-family: RF Dewi !important;
+    font-weight: 400 !important;
+    color: black !important;
 }
 
 .actionButton.MuiButtonBase-root,  .actionButton.MuiButtonBase-root:hover{
-    background-color: #F7F5ED;
-    border: 2px solid #C5B577;
+    background-color: black;
     box-shadow: none;
     border-radius: 16px;
-    font-family: 'GT Eesti Pro Text';
+    font-family: 'RF Dewi';
     font-weight: 400;
-    color: black;
+    color: white;
     text-transform: none;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .toggleGroupButton button {
     line-height: 20px !important;
     padding:  6px 10px !important;
     text-transform: none !important;
-    color : #C5B577;
-    border: solid 1px #C5B577 !important;
+    color : black;
+    border: solid 1px black !important;
     border-radius: 20px !important;
-    font-family: 'GT Eesti Pro Text';
+    // font-family: 'GT Eesti Pro Text';
     font-weight: 400;
     font-size: 24px;
 }
 
 .toggleGroupButton button.Mui-selected {
-    background-color: #CC2222 !important;
+    background-color: #0D54CA !important;
     color : white !important;
 }
 
