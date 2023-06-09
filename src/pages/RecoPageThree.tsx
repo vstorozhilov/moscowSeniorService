@@ -138,12 +138,6 @@ export default function RecoPageThree (props) {
         disabled={isLoading}
         onClick={async ()=>{
             await getRecommends('Активные занятия');
-            // dispatch(changeAnswer(
-            //     {
-            //         answer : 'activity',
-            //         value : 'Активные занятия'
-            //     }
-            // ))
             dispatch(selectedAndPrevPageResolver(3));
             setTimeout(()=>navigation('/main'), 0);
         }}

@@ -3,18 +3,9 @@ import Box from '@mui/material/Box';
 import { Stack } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import ActivityCategoryCard from '../components/ActivityCategoryCard';
-import { ActivityCategorySlice } from '../stateManager/ActivityCategories';
 import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -26,6 +17,10 @@ import DisplayTwo from './onboardingDislays/DisplayTwo';
 import DisplayThree from './onboardingDislays/DisplayThree';
 import { displayNumberSlice } from '../stateManager/displayOnboardingNumber';
 import { mainTabSlice } from '../stateManager/mainTab';
+import LogoutIcon from '@mui/icons-material/Logout';
+import MenuIcon from '@mui/icons-material/Menu';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const onboardingDisplays = [
     DisplayOne,
@@ -36,6 +31,18 @@ const onboardingDisplays = [
 export default function MainPage (props) {
 
   const displayNumber = useAppSelector(state=>state.DisplayNUmberReducer);
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(prev=>{
+        if (prev == null) return event.currentTarget;
+        else return null;
+    });
+  };
+  const open = Boolean(anchorEl);
 
   const nodeRef = useRef(null);
   const dispatch = useAppDispatch();
@@ -62,7 +69,7 @@ export default function MainPage (props) {
         >
             {onboardingDisplays.filter((_, index)=>index==displayNumber).map(Item=>
                 <CSSTransition
-                timeout={200}
+                timeout={500}
                 classNames='onboardingDisplay'
                 key={displayNumber}
                 unmountOnExit
@@ -75,23 +82,25 @@ export default function MainPage (props) {
             <Stack
                 position='relative'
                 direction='row'
-                justifyContent='center'
+                justifyContent='space-between'
                 alignItems='center'
             >
                 <IconButton
                 onClick={()=>{
-                    dispatch(selectedAndPrevPageResolver(2));
-                    setTimeout(()=>navigate('/inputsecond'), 0);
-                }}
-                sx={{
-                    position : 'absolute',
-                    left : 0
+                    dispatch(selectedAndPrevPageResolver(1));
+                    setTimeout(()=>navigate('/inputfirst'), 0);
                 }}>
-                    <ArrowBackIcon sx={{
-                        color : 'black'
+                    <LogoutIcon sx={{
+                        color : 'black',
+                        transform : 'rotate(180deg)'
                     }}/>
                 </IconButton>
                 <Box className='mainLabel'>Главная</Box>
+                <IconButton onClick={handleClick}>
+                    <MenuIcon sx={{
+                        color : 'black'
+                    }} />
+                </IconButton>
             </Stack>
             <Button className='startChat'
             sx={{
@@ -185,6 +194,24 @@ export default function MainPage (props) {
                     </Stack>
                 </ToggleButton>
             </ToggleButtonGroup>
+            <Menu
+                anchorEl={anchorEl}
+                open={open}
+                // MenuListProps={{
+                // 'aria-labelledby': 'basic-button',
+                // }}
+            >
+                <MenuItem onClick={()=>{
+                    handleClose();
+                    dispatch(selectedAndPrevPageResolver(11));
+                    setTimeout(()=>navigate('/adminmain'), 0);
+                }}>Админка</MenuItem>
+                <MenuItem onClick={()=>{
+                    handleClose();
+                    dispatch(selectedAndPrevPageResolver(2));
+                    setTimeout(()=>navigate('/inputsecond'), 0);
+                }}>Настройки профиля</MenuItem>
+            </Menu>
             {tab == 'activityCategories' ? <ActivityCategories/> : null}
             {tab == 'bookings' ? <Bookings/> : null}
             {/* {activityCategoriesId.map(id=>{

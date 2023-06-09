@@ -15,6 +15,7 @@ import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { selectedCharacterSlice, selectedСharacterInterface } from '../stateManager/SelectedСharacter';
 import { UserProfileSlice } from '../stateManager/UserProfile';
 import { useNavigate } from 'react-router-dom';
+import { displayNumberSlice } from '../stateManager/displayOnboardingNumber';
 
 interface demoUser {
   "id": number,
@@ -31,6 +32,7 @@ export default function SurNameAndBirthDateInput (props) {
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
   const { selectedCharacterResolver } = selectedCharacterSlice.actions;
   const selectedCharacter = useAppSelector(state=>state.SelectedCharacterReducer);
+  const { setDisplayNumber } = displayNumberSlice.actions;
 
 
   const [demoUsers, setDemoUsers] = useState<selectedСharacterInterface[]>([]);
@@ -100,8 +102,17 @@ export default function SurNameAndBirthDateInput (props) {
                 <Button
                 disabled={Object.keys(selectedCharacter).length == 0}
                 onClick={()=>{
-                  dispatch(selectedAndPrevPageResolver(2));
-                  setTimeout(()=>navigate('/inputsecond'), 0);
+                  console.log(selectedCharacter);
+                  if (selectedCharacter.label?.includes('(новый)')) {
+                    dispatch(setDisplayNumber(0));
+                    dispatch(selectedAndPrevPageResolver(2));
+                    setTimeout(()=>navigate('/inputsecond'), 0);
+                  }
+                  else {
+                    dispatch(setDisplayNumber(3));
+                    dispatch(selectedAndPrevPageResolver(3));
+                    setTimeout(()=>navigate('/main'), 0);
+                  }
                 }}
                 className="actionButton"
                 variant="contained"

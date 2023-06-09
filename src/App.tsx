@@ -16,7 +16,9 @@ import { useAppSelector } from './stateManager/hooks';
 import RecoPageOne from './pages/RecoPageOne';
 import RecoPageTwo from './pages/RecoPageTwo';
 import RecoPageThree from './pages/RecoPageThree';
-import AdminPage from './pages/AdminPage';
+import AdminPagePreferences from './pages/AdminPagePreferences';
+import AdminPageMain from './pages/AdminPageMain';
+import AdminPagePiecharts from './pages/AdminPagePiecharts';
 import { createBrowserRouter, RouterProvider, useLocation, useOutlet } from 'react-router-dom';
 
 const routes = [
@@ -65,8 +67,16 @@ const routes = [
     element : <RecoPageThree pageIndex={10}/>
   },
   {
-    path : '/admin',
-    element : <AdminPage pageIndex={10}/>
+    path : '/adminmain',
+    element : <AdminPageMain pageIndex={11}/>
+  },
+  {
+    path : '/adminpreferences',
+    element : <AdminPagePreferences pageIndex={12}/>
+  },
+  {
+    path : '/adminpiecharts',
+    element : <AdminPagePiecharts pageIndex={13}/>
   },
 ];
 

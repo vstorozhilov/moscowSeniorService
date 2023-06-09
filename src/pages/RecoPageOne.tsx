@@ -58,7 +58,6 @@ export default function RecoPageOne (props) {
                 left : 140,
                 transform : 'rotate(-4deg)',
                 zIndex : 3,
-                // backdropFilter: 'blur(10px)'
             }}
         />
         <Box sx={{
@@ -144,6 +143,7 @@ export default function RecoPageOne (props) {
                 }
             ))
             dispatch(selectedAndPrevPageResolver(9));
+            setTimeout(()=>navigation('/questiontwo'), 0);
         }}
         className="actionButton"
         variant="contained"
