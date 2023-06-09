@@ -9,12 +9,14 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MapInfoCard from '../components/MapInfoCard';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { useNavigate } from 'react-router-dom';
-import MapMarker from './svg/mapMarker.svg'
+import MapMarker from './svg/mapMarker.svg';
+import HomeMarker from './svg/home.svg';
 
 var activityId = -1;
 
 export default function MapPage(props) {
     
+    const userInfo = useAppSelector(state=>state.SelectedCharacterReducer)
     const nodeRef = useRef(null);
     const { pageIndex } = props;
     const dispatch = useAppDispatch();
@@ -27,6 +29,20 @@ export default function MapPage(props) {
         longitude : item.location.longitude,
     })))
     const navigation = useNavigate();
+    const [ userSettings, setUserSettings ] = useState({});
+
+    const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
+
+    const fetchUserSettings = async () => {
+        const response = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/settings`);
+        const resJSON = await response.json();
+
+        setUserSettings(resJSON);
+    }
+
+    useEffect(()=>{
+        fetchUserSettings();
+    }, []);
 
     // const layout = 
 
@@ -92,8 +108,11 @@ export default function MapPage(props) {
                     width='100%'
                     height='100vh'
                     defaultState={{
-                        center: [55.75, 37.57],
-                        zoom : 10,
+                        center: Object.keys(userSettings).length ? [
+                            parseFloat(userSettings.location.latitude),
+                            parseFloat(userSettings.location.longitude)
+                        ] : [55.75, 37.57],
+                        zoom : 15,
                         controls : ["zoomControl"],
                     }}
                     modules={["control.ZoomControl", 'geoObject.addon.balloon']}
@@ -117,6 +136,23 @@ export default function MapPage(props) {
                         }, 100)
                         } } />
                     ))}
+                    {Object.keys(userSettings).length &&
+                        <Placemark key={userSettings.id} geometry={
+                            [
+                                parseFloat(userSettings.location.latitude),
+                                parseFloat(userSettings.location.longitude)
+                            ] }
+                        properties={
+                            {
+                                balloonContent: userSettings.location.address,
+                            }}
+                        options={
+                            {
+                                iconLayout: 'default#image',
+                                iconImageHref: HomeMarker,
+                                iconImageSize: [50, 50],
+                            }}/>
+                    }
                 </Map>
                 {
                     activePortal && <Portal elementId={'driver-2'}>

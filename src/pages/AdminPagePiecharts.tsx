@@ -155,7 +155,7 @@ export default function AdminPagePiecharts(props) {
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>Оффлайн {offline.length ? offline[0].percentage : 0} %</Box></Stack>
+                }}/><Box>Оффлайн {offlineTotal * (offline.length ? offline[0].percentage : 0)} ({offline.length ? offline[0].percentage : 0}%)</Box></Stack>
                 <Stack 
                 direction='row'
                 spacing={2}
@@ -164,8 +164,8 @@ export default function AdminPagePiecharts(props) {
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>Онлайн {offline.length ? offline[1].percentage : 0} %</Box></Stack>
-                <Stack 
+                }}/><Box>Онлайн {offlineTotal * (offline.length ? offline[1].percentage : 0)} ({offline.length ? offline[1].percentage : 0}%)</Box></Stack>
+                {/* <Stack 
                 direction='row'
                 spacing={2}
                 alignItems='center'><Box sx={{
@@ -174,7 +174,7 @@ export default function AdminPagePiecharts(props) {
                     height : 20,
                     borderRadius : '50%',
                     border : '1px solid #C5B577'
-                }}/><Box>Всего {offlineTotal}</Box></Stack>
+                }}/><Box>Всего {offlineTotal}</Box></Stack> */}
             </Stack>
 
             <Box sx={{
@@ -212,7 +212,7 @@ export default function AdminPagePiecharts(props) {
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>Групповые {group.length ? group[0].percentage : 0} %</Box></Stack>
+                }}/><Box>Групповые {groupTotal * (group.length ? group[0].percentage : 0)} ({group.length ? group[0].percentage : 0}%)</Box></Stack>
                 <Stack 
                 direction='row'
                 spacing={2}
@@ -221,8 +221,8 @@ export default function AdminPagePiecharts(props) {
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>Индивидуальные {group.length ? group[1].percentage : 0} %</Box></Stack>
-                <Stack 
+                }}/><Box>Индивидуальные {groupTotal * (group.length ? group[1].percentage : 0)} ({group.length ? group[1].percentage : 0}%)</Box></Stack>
+                {/* <Stack 
                 direction='row'
                 spacing={2}
                 alignItems='center'><Box sx={{
@@ -231,7 +231,7 @@ export default function AdminPagePiecharts(props) {
                     height : 20,
                     borderRadius : '50%',
                     border : '1px solid #C5B577'
-                }}/><Box>Всего {groupTotal}</Box></Stack>   
+                }}/><Box>Всего {groupTotal}</Box></Stack>    */}
             </Stack>
 
             <Box sx={{
@@ -270,7 +270,7 @@ export default function AdminPagePiecharts(props) {
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>На улице {outdoor.length ? outdoor[0].percentage : 0} %</Box></Stack>
+                }}/><Box>На улице {outdoorTotal * (outdoor.length ? outdoor[0].percentage : 0)} ({outdoor.length ? outdoor[0].percentage : 0}%)</Box></Stack>
                 <Stack 
                 direction='row'
                 spacing={2}
@@ -279,8 +279,8 @@ export default function AdminPagePiecharts(props) {
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>В помещении {outdoor.length ? outdoor[1].percentage : 0} %</Box></Stack>
-                <Stack 
+                }}/><Box>В помещении {outdoorTotal * (outdoor.length ? outdoor[1].percentage : 0)} ({outdoor.length ? outdoor[1].percentage : 0}%)</Box></Stack>
+                {/* <Stack 
                 direction='row'
                 spacing={2}
                 alignItems='center'><Box sx={{
@@ -289,7 +289,7 @@ export default function AdminPagePiecharts(props) {
                     height : 20,
                     borderRadius : '50%',
                     border : '1px solid #C5B577'
-                }}/><Box>Всего {outdoorTotal}</Box></Stack> 
+                }}/><Box>Всего {outdoorTotal}</Box></Stack>  */}
             </Stack>
             
         </Stack>

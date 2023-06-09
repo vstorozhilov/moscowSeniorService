@@ -16,6 +16,9 @@ import { selectedCharacterSlice, selectedСharacterInterface } from '../stateMan
 import { UserProfileSlice } from '../stateManager/UserProfile';
 import { useNavigate } from 'react-router-dom';
 import { displayNumberSlice } from '../stateManager/displayOnboardingNumber';
+import MenuIcon from '@mui/icons-material/Menu';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 interface demoUser {
   "id": number,
@@ -51,15 +54,28 @@ export default function SurNameAndBirthDateInput (props) {
     })));
   }
 
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log('clicked')
+    setAnchorEl(prev=>{
+        if (prev == null) return event.currentTarget;
+        else return null;
+    });
+  };
+  const open = Boolean(anchorEl);
+
   useEffect(()=>{
     fetchDemoUsers();
   }, [])
 
   return <Stack ref={nodeRef} className='mainContainer' spacing={2}>
             <Stack
-                position='relative'
+                // position='relative'
                 direction='row'
-                justifyContent='center'
+                justifyContent='space-between'
                 alignItems='center'
             >
                 <IconButton
@@ -68,21 +84,35 @@ export default function SurNameAndBirthDateInput (props) {
                     dispatch(selectedAndPrevPageResolver(0));
                     setTimeout(()=>navigate('/'), 0);
                   }
-                }
-                sx={{
-                    position : 'absolute',
-                    left : 0
-                }}>
+                }>
                     <ArrowBackIcon sx={{
                         color : 'black'
                     }}/>
                 </IconButton>
                 <Box className='mainLabel'>Вход</Box>
+                <IconButton onClick={handleClick}>
+                    <MenuIcon sx={{
+                        color : 'black'
+                    }} />
+                </IconButton>
             </Stack>
             <Box height='15vh'/>
             <Box className='hintLabel'>
                 Выберете персонажа
             </Box>
+            <Menu
+                anchorEl={anchorEl}
+                open={open}
+                // MenuListProps={{
+                // 'aria-labelledby': 'basic-button',
+                // }}
+            >
+                <MenuItem onClick={()=>{
+                    handleClose();
+                    dispatch(selectedAndPrevPageResolver(11));
+                    setTimeout(()=>navigate('/adminmain'), 0);
+                }}>Админка</MenuItem>
+            </Menu>
             <Autocomplete
             value={Object.keys(selectedCharacter).length ? selectedCharacter : null}
             onChange={(__, newOption)=>{

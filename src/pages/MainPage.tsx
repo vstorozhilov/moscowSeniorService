@@ -164,6 +164,7 @@ export default function MainPage (props) {
                     className='activityCategoriesBookingsTab'
                     value={'bookings'}
                     sx={{
+                        backgroundColor : 'white',
                         zIndex : displayNumber == 2 ? 1 : 0
                     }}
                     onClick={

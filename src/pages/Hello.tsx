@@ -1,22 +1,7 @@
 import React, { useRef } from 'react';
-import { SvgIcon } from '@mui/material';
-import { useState } from 'react';
 import Box from '@mui/material/Box';
-import { Stack } from '@mui/material';
-import { IMaskInput } from 'react-imask';
-import IconButton from '@mui/material/IconButton';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import InputAdornment from '@mui/material/InputAdornment';
-import { NumericFormat, NumericFormatProps } from 'react-number-format';
-import Input from '@mui/material/Input';
 import Button from '@mui/material/Button';
-import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import FormControl from '@mui/material/FormControl';
 import Text from './svg/text.svg';
 import GrandmomOne from './svg/hellopage_grandmom_one.svg';
 import GrandmomTwo from './svg/hellopage_grandmom_two.svg';
@@ -24,7 +9,6 @@ import GrandDad from './svg/hellopage_granddad.svg';
 import PlateOne from './svg/hellopage_plate_one.svg';
 import PlateTwo from './svg/hellopage_plate_two.svg';
 import PlateThree from './svg/hellopage_plate_three.svg';
-import { CSSTransition } from 'react-transition-group';
 import { useAppSelector,
     useAppDispatch
   } from '../stateManager/hooks';
@@ -78,6 +62,13 @@ export default function Hello (props) {
             left : 20
         }}
         src={Text}/>
+        <Box sx={{
+            paddingTop : 2,
+            paddingLeft : 2,
+            color : 'white',
+            fontSize : 16
+        }}
+        >Мобильная версия<br></br>вэб-сайта</Box>
         <img src={PlateOne}
         style={{
             position: 'absolute',

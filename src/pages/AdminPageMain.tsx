@@ -15,6 +15,7 @@ export default function AdminPageMain(props) {
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
   const navigate = useNavigate();
+  const { selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer)
 
   const tab = useAppSelector(state=>state.MainTabReducer);
 
@@ -35,8 +36,19 @@ export default function AdminPageMain(props) {
             >
                 <IconButton
                 onClick={()=>{
-                    dispatch(selectedAndPrevPageResolver(3));
-                    setTimeout(()=>navigate('/main'), 0);
+
+                    if (prevPageIndex == 2) dispatch(selectedAndPrevPageResolver(2));
+                    else if (prevPageIndex == 3) dispatch(selectedAndPrevPageResolver(3));
+                    else {
+                        dispatch(selectedAndPrevPageResolver(1));
+                    }
+                    setTimeout(()=>{
+                        if (prevPageIndex == 2) navigate('/inputsecond');
+                        else if (prevPageIndex == 3) navigate('/main');
+                        else {
+                            navigate('/inputfirst');
+                        }
+                    }, 0);
                 }}
                 sx={{
                     position : 'absolute',
