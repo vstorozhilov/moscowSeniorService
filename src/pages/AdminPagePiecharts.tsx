@@ -18,6 +18,9 @@ export default function AdminPagePiecharts(props) {
   const [offline, setOffline] = useState([]);
   const [group, setGroup] = useState([]);
   const [outdoor, setOutdoor] = useState([]);
+  const [offlineTotal, setOfflineTotal] = useState(0);
+  const [groupTotal, setGroupTotal] = useState(0);
+  const [outdoorTotal, setOutdoorTotal] = useState(0);
 
   const fetchStats = async () => {
     let responce = await fetch('https://alexhlins1.fvds.ru:1338/admin/stats');
@@ -59,6 +62,9 @@ export default function AdminPagePiecharts(props) {
     setGroup(group);
     setOffline(offline);
     setOutdoor(outdoor);
+    setGroupTotal(Math.floor(resJSON['group']['quantity'] / resJSON['group']['percentage']));
+    setOfflineTotal(Math.floor(resJSON['offline']['quantity'] / resJSON['offline']['percentage']));
+    setOutdoorTotal(Math.floor(resJSON['outdoor']['quantity'] / resJSON['outdoor']['percentage']));
   }
 
   useEffect(()=>{
@@ -159,6 +165,16 @@ export default function AdminPagePiecharts(props) {
                     height : 20,
                     borderRadius : '50%'
                 }}/><Box>Онлайн {offline.length ? offline[1].percentage : 0} %</Box></Stack>
+                <Stack 
+                direction='row'
+                spacing={2}
+                alignItems='center'><Box sx={{
+                    backgroundColor : '#F7F5ED',
+                    width : 20,
+                    height : 20,
+                    borderRadius : '50%',
+                    border : '1px solid #C5B577'
+                }}/><Box>Всего {offlineTotal}</Box></Stack>
             </Stack>
 
             <Box sx={{
@@ -206,6 +222,16 @@ export default function AdminPagePiecharts(props) {
                     height : 20,
                     borderRadius : '50%'
                 }}/><Box>Индивидуальные {group.length ? group[1].percentage : 0} %</Box></Stack>
+                <Stack 
+                direction='row'
+                spacing={2}
+                alignItems='center'><Box sx={{
+                    backgroundColor : '#F7F5ED',
+                    width : 20,
+                    height : 20,
+                    borderRadius : '50%',
+                    border : '1px solid #C5B577'
+                }}/><Box>Всего {groupTotal}</Box></Stack>   
             </Stack>
 
             <Box sx={{
@@ -254,6 +280,16 @@ export default function AdminPagePiecharts(props) {
                     height : 20,
                     borderRadius : '50%'
                 }}/><Box>В помещении {outdoor.length ? outdoor[1].percentage : 0} %</Box></Stack>
+                <Stack 
+                direction='row'
+                spacing={2}
+                alignItems='center'><Box sx={{
+                    backgroundColor : '#F7F5ED',
+                    width : 20,
+                    height : 20,
+                    borderRadius : '50%',
+                    border : '1px solid #C5B577'
+                }}/><Box>Всего {outdoorTotal}</Box></Stack> 
             </Stack>
             
         </Stack>
