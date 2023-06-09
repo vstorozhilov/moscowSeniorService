@@ -114,7 +114,7 @@ export default function MapPage(props) {
                         setTimeout(() => {
                             activityId = item.id;
                             setActivePortal(true);
-                        }, 0)
+                        }, 100)
                         } } />
                     ))}
                 </Map>
