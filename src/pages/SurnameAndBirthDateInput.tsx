@@ -47,10 +47,14 @@ export default function SurNameAndBirthDateInput (props) {
     });
     let resJSON = await response.json();
 
+    console.log(resJSON);
+
     setDemoUsers(resJSON.map(item=>({
       id : item.id,
       label : item.name + ' ' + item.surname + ' ' + (item.coldStart ? '(новый)' : '(известный)') + ' ' + item.id,
-      year : item.birthdate
+      year : item.birthdate,
+      age : item.age,
+      gender : item.gender
     })));
   }
 

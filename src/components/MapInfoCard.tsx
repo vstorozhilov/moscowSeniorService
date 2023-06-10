@@ -33,15 +33,15 @@ export default function MapInfoCard (props : {id : number}) {
         <Stack direction='row' spacing={2}>
             <Stack direction='row'spacing={0.5} alignItems='center'>
                 <img src={carLogo}/>
-                <Box>{Math.floor(activitiyInfo?.location.estimatedTime * 0.6)} мин</Box>
-            </Stack>
-            <Stack direction='row'spacing={0.5} alignItems='center'>
-                <img src={busLogo}/>
                 <Box>{Math.floor(activitiyInfo?.location.estimatedTime)} мин</Box>
             </Stack>
             <Stack direction='row'spacing={0.5} alignItems='center'>
+                <img src={busLogo}/>
+                <Box>{Math.floor(activitiyInfo?.location.estimatedTime * 1.5)} мин</Box>
+            </Stack>
+            <Stack direction='row'spacing={0.5} alignItems='center'>
                 <img src={personLogo}/>
-                <Box>{Math.floor(activitiyInfo?.location.estimatedTime * 1.3)} мин</Box>
+                <Box>{Math.floor(activitiyInfo?.location.estimatedTime * 2)} мин</Box>
             </Stack>
         </Stack>
         <Stack direction='column'>

@@ -522,15 +522,6 @@ input {
     transition: opacity 500ms ease-in;
 }
 
-// .onboardingDisplay-enter {
-//     opacity : 0
-// }
-
-// .onboardingDisplay-enter-active {
-//     opacity : 1;
-//     transition: opacity 500ms ease-in;
-// }
-
 .onboardingDisplay-exit {
     opacity : 1
 }
@@ -538,4 +529,40 @@ input {
 .onboardingDisplay-exit-active {
     opacity : 0;
     transition: opacity 200ms ease-out;
+}
+
+
+
+.answersGigachat-appear {
+    opacity : 0;
+    transform : translateX(100%);
+}
+
+.answersGigachat-appear-active {
+    opacity : 1;
+    transform : translateX(0);
+    transition:
+    opacity 300ms ease-in 200ms,
+    transform 300ms ease-in 200ms;
+}
+
+.answersGigachat-enter {
+    opacity : 0;
+    transform : translateX(100%);
+}
+
+.answersGigachat-enter-active {
+    opacity : 1;
+    transform : translateX(0);
+    transition: opacity 300ms ease-in,
+    transform 300ms ease-in 200ms;
+}
+
+.answersGigachat-exit {
+    opacity : 1
+}
+
+.answersGigachat-exit-active {
+    opacity : 0;
+    transition: opacity 300ms ease-out;
 }

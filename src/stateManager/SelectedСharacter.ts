@@ -3,7 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface selectedСharacterInterface {
   "id"?: number,
   "label"? : string,
-  "year"? : string
+  "year"? : string,
+  "age"? : number,
+  "gender"? : number
 }
 
 const initialState: selectedСharacterInterface = {};

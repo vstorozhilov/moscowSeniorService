@@ -20,6 +20,7 @@ import AdminPagePreferences from './pages/AdminPagePreferences';
 import AdminPageMain from './pages/AdminPageMain';
 import AdminPagePiecharts from './pages/AdminPagePiecharts';
 import { createBrowserRouter, RouterProvider, useLocation, useOutlet } from 'react-router-dom';
+import RecoSecondCategory from './pages/RecoSecondCategory';
 
 const routes = [
   {
@@ -78,6 +79,10 @@ const routes = [
     path : '/adminpiecharts',
     element : <AdminPagePiecharts pageIndex={13}/>
   },
+  {
+    path : '/secondrecogroup',
+    element : <RecoSecondCategory pageIndex={14}/>
+  }
 ];
 
 const rootRoute = [

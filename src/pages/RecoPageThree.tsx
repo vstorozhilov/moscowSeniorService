@@ -16,6 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import { mainTabSlice } from '../stateManager/mainTab';
 import { Stack } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { historySlice } from '../stateManager/HistoryGPT';
+import { GigachatQuestionSlice } from '../stateManager/gigachatQuestions';
 
 export default function RecoPageThree (props) {
 
@@ -32,16 +34,62 @@ export default function RecoPageThree (props) {
     const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
     const navigation = useNavigate();
     const { setMainTab } = mainTabSlice.actions;
+    const { setHistory } = historySlice.actions;
+    const { setGigachatQuestion } = GigachatQuestionSlice.actions;
+    const { age, gender} = useAppSelector(state=>state.SelectedCharacterReducer);
 
     const [isLoading, setIsLoading] = useState(false);
 
     const answers = useAppSelector(state=>state.AnswerReducer);
 
-    const getRecommends = async (activity) => {
+    
+    console.log(history);
+
+    // const getRecommends = async (activity) => {
+
+    //     setIsLoading(true);
+
+    //     let responce = await fetch('https://alexhlins1.fvds.ru:1339/send/', {
+    //                         method : 'POST',
+    //                         headers : {
+    //                             accept : 'application/json',
+    //                             'Content-Type' : 'application/json'
+    //                         },
+    //                         body : JSON.stringify(
+    //                             {
+    //                             "sex_male": true,
+    //                             "age": 60,
+    //                             "health_issue": `Есть проблемы ${answers.health_issue}`,
+    //                             "sociality": `Мне больше нравится заниматься ${answers.sociality}`,
+    //                             "activity": `Мне больше нравятся ${activity}`
+    //                             }
+    //                         )
+    //                     });
+
+    //     let reccomends = await responce.json();
+
+    //     responce = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/categories`,
+    //         {
+    //             method : 'POST',
+    //             headers : {
+    //                 accept : 'application/json',
+    //                 'Content-Type' : 'application/json'
+    //             },
+    //             body : JSON.stringify(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()))
+    //         },
+    //     );
+
+    //     console.log(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()));
+    //     dispatch(setActivityCategories([]));
+    //     dispatch(setMainTab('activityCategories'));
+    //     setIsLoading(false);
+    // }
+
+    const getRecommendsFirst = async (activity) => {
 
         setIsLoading(true);
 
-        let responce = await fetch('https://alexhlins1.fvds.ru:1339/send/', {
+        let responce = await fetch('https://alexhlins1.fvds.ru:1339/send_q1/', {
                             method : 'POST',
                             headers : {
                                 accept : 'application/json',
@@ -49,8 +97,8 @@ export default function RecoPageThree (props) {
                             },
                             body : JSON.stringify(
                                 {
-                                "sex_male": true,
-                                "age": 60,
+                                "sex_male": gender == 1 ? false : true,
+                                "age": age,
                                 "health_issue": `Есть проблемы ${answers.health_issue}`,
                                 "sociality": `Мне больше нравится заниматься ${answers.sociality}`,
                                 "activity": `Мне больше нравятся ${activity}`
@@ -58,23 +106,35 @@ export default function RecoPageThree (props) {
                             )
                         });
 
-        let reccomends = await responce.json();
+        let resJSON = await responce.json();
+        console.log(resJSON);
 
-        responce = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/categories`,
-            {
-                method : 'POST',
-                headers : {
-                    accept : 'application/json',
-                    'Content-Type' : 'application/json'
-                },
-                body : JSON.stringify(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()))
-            },
-        );
+        dispatch(setHistory(resJSON.history));
+        const { questions }  = resJSON;
+        dispatch(setGigachatQuestion(
+            Object.keys(questions).map(item=>({
+                text : item,
+                answers : questions[item]
+            }))
+        ))
 
-        console.log(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()));
-        dispatch(setActivityCategories([]));
-        dispatch(setMainTab('activityCategories'));
+
         setIsLoading(false);
+        // responce = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/categories`,
+        //     {
+        //         method : 'POST',
+        //         headers : {
+        //             accept : 'application/json',
+        //             'Content-Type' : 'application/json'
+        //         },
+        //         body : JSON.stringify(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()))
+        //     },
+        // );
+
+        // console.log(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()));
+        // dispatch(setActivityCategories([]));
+        // dispatch(setMainTab('activityCategories'));
+        // setIsLoading(false);
     }
 
 
@@ -151,9 +211,12 @@ export default function RecoPageThree (props) {
             <Button
             disabled={isLoading}
             onClick={async ()=>{
-                await getRecommends('Активные занятия');
-                dispatch(selectedAndPrevPageResolver(3));
-                setTimeout(()=>navigation('/main'), 0);
+                await getRecommendsFirst('Активные занятия');
+                // await getRecommends('Активные занятия');
+                // dispatch(selectedAndPrevPageResolver(3));
+                // setTimeout(()=>navigation('/main'), 0);
+                dispatch(selectedAndPrevPageResolver(14));
+                setTimeout(()=>navigation('/secondrecogroup'), 0)
             }}
             className="questionButton"
             variant="contained">
@@ -162,9 +225,12 @@ export default function RecoPageThree (props) {
             <Button
             disabled={isLoading}
             onClick={async ()=>{
-                await getRecommends('Cпокойные занятия');
-                dispatch(selectedAndPrevPageResolver(3));
-                setTimeout(()=>navigation('/main'), 0);
+                await getRecommendsFirst('Cпокойные занятия');
+                // await getRecommends('Cпокойные занятия');
+                // dispatch(selectedAndPrevPageResolver(3));
+                // setTimeout(()=>navigation('/main'), 0);
+                dispatch(selectedAndPrevPageResolver(14));
+                setTimeout(()=>navigation('/secondrecogroup'), 0)
             }}
             className="questionButton"
             variant="contained">

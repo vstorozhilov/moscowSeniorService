@@ -57,6 +57,7 @@ export default function AddressScheduleAndTripTime (props) {
   }
 
   const postUserSettings = async () => {
+    console.log(maxTripTime);
     await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/settings`,
         {
             method : 'PUT',
@@ -119,7 +120,6 @@ export default function AddressScheduleAndTripTime (props) {
             </Menu>
             <TextField
                 disabled
-                // label='Адрес'
                 className='inputTextField'
                 value={ Object.keys(userSettings).length > 0 ? userSettings.location.address : 'Адрес'}
             />
