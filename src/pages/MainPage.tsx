@@ -62,6 +62,7 @@ export default function MainPage (props) {
     };
 
   return <>
+        <Stack ref={nodeRef} className='mainContainer' spacing={2}>
         <TransitionGroup
             component={null}
             appear
@@ -77,7 +78,6 @@ export default function MainPage (props) {
                 </CSSTransition>
             )}
         </TransitionGroup>
-        <Stack ref={nodeRef} className='mainContainer' spacing={2}>
             <Stack
                 position='relative'
                 direction='row'

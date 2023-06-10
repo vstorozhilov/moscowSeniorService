@@ -13,8 +13,9 @@ export default function DisplayThree() {
     paddingRight={2}
     paddingLeft={2}
     sx={{
+        left : -10,
         position : 'absolute',
-        width : '100%',
+        width : '110%',
         height : 'inherit',
         background : 'rgba(0, 0, 0, 0.8)',
         color : 'white',

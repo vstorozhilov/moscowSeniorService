@@ -89,7 +89,7 @@ export default function RecoPageThree (props) {
         {isLoading && <Box sx={{
             position : 'absolute',
             background : 'rgba(0, 0, 0, 0.6)',
-            width : '100%',
+            width : match ? 600 : 'inherit',
             height : '100%',
             zIndex : 10
         }}>
@@ -122,8 +122,8 @@ export default function RecoPageThree (props) {
         sx={{
             color : 'white',
             position : 'absolute',
-            top : '50vh',
-            left : '40vw',
+            top : 500,
+            left : 150,
             zIndex : 15
         }}/> : null}
         <Box sx={{
