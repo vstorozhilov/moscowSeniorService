@@ -213,8 +213,10 @@ export default function MainPage (props) {
                     setTimeout(()=>navigate('/inputsecond'), 0);
                 }}>Настройки профиля</MenuItem>
             </Menu>
+            <Stack spacing={2}>
             {tab == 'activityCategories' ? <ActivityCategories/> : null}
             {tab == 'bookings' ? <Bookings/> : null}
+            </Stack>
             {/* {activityCategoriesId.map(id=>{
                 return <ActivityCategoryCard activityCategoryId={id}/>
             })}

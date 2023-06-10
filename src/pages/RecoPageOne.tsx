@@ -11,8 +11,11 @@ import RecoLogo from '../pages/svg/recoLogo.svg';
 import { answerSlice } from '../stateManager/Answers';
 import { useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function RecoPageOne (props) {
+
+    const match = useMediaQuery('not (max-width:600px)');
 
     const nodeRef = useRef(null);
     const { pageIndex } = props;
@@ -32,7 +35,7 @@ export default function RecoPageOne (props) {
         key={pageIndex}>
         <Box ref={nodeRef} sx={{
             position : 'absolute',
-            width : 'inherit',
+            width : match ? 600 : 'inherit',
             height : 'inherit',
             overflow : 'hidden'
         }}>

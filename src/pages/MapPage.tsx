@@ -88,7 +88,9 @@ export default function MapPage(props) {
     unmountOnExit
     in={pageIndex == selectedPageIndex}
     key={pageIndex}>
-        <Box>
+        <Box className="mainContainer" sx={{
+                padding : 0
+            }}>
             <YMaps version={ '2.1.79' }>
                 <IconButton
                 onClick={()=>{

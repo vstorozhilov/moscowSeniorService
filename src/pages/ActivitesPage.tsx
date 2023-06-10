@@ -49,6 +49,7 @@ export default function ActivityPage (props) {
                 </IconButton>
                 <Box className='mainLabel'>Вам подойдут</Box>
             </Stack>
+            <Stack spacing={2}>
             <TransitionGroup
                 component={null}
                 appear
@@ -63,6 +64,7 @@ export default function ActivityPage (props) {
                 </CSSTransition>
             })}
             </TransitionGroup>
+            </Stack>
         </Stack>
         </CSSTransition>
 };

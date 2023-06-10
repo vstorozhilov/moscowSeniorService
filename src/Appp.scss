@@ -39,11 +39,28 @@
     letter-spacing: -0.02em;
 }
 
-.mainContainer {
-    width: 100%;
-    height: max-content;
-    padding: 20px;
-    position: absolute;
+*::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .mainContainer {
+        width: 100%;
+        height: 99%;
+        padding: 20px;
+        position: absolute;
+        overflow-y: scroll;
+    }
+}
+
+@media not (max-width: 600px) {
+    .mainContainer {
+        width: 600px;
+        height: 99%;
+        padding: 20px;
+        position: absolute;
+        overflow-y: scroll;
+    }
 }
 
 .hintLabel {
@@ -116,6 +133,7 @@ input {
     text-transform: none;
     font-size: 24px;
     border : 1px solid black;
+    line-height: 30px;
 }
 
 .toggleGroupButton button {

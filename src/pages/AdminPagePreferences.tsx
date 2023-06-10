@@ -38,10 +38,7 @@ export default function AdminPagePreferences(props) {
   return <>
         <Stack ref={nodeRef}
         className='mainContainer'
-        spacing={2}
-        sx={{
-            height : '100%'
-        }}>
+        spacing={2}>
             <Stack
                 direction='row'
                 alignItems='center'

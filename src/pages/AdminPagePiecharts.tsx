@@ -99,10 +99,7 @@ export default function AdminPagePiecharts(props) {
         className='mainContainer'
         direction='column'
         alignItems='center'
-        spacing={2.0}
-        sx={{
-            height : '100%'
-        }}>
+        spacing={2.0}>
             <Stack
                 direction='row'
                 alignItems='center'

@@ -33,10 +33,10 @@ export default function ActivityCard (params : { activityId : number, index : nu
             <Stack spacing={2}>
                 <Stack direction='row' justifyContent='space-between' alignItems='start'>
                     <Box sx={{width : 100, fontWeight : 700, fontSize : 20}}>{activityInfo?.title}</Box>
-                    <Stack sx={{fontSize : 14, fontWeight : 400}} direction='row' spacing={1} alignItems='center'>
+                    <Stack sx={{fontSize : 14, fontWeight : 400}} direction='column' spacing={1} alignItems='end'>
                         { activityInfo?.location.isNear ? <Box className="nearActivity">{"в двух шагах"}</Box> : null}
-                        <Box className="distanceToActivity">id: {activityInfo?.id}</Box>
                         <Box className="distanceToActivity">{activityInfo?.location.distance} м</Box>
+                        <Box className="distanceToActivity">id: {activityInfo?.id}</Box>
                     </Stack>
                 </Stack>
                 <Stack direction='row' justifyContent='space-between'>

@@ -14,10 +14,14 @@ import { useAppSelector,
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { useNavigate } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function Hello (props) {
 
-    const nodeRef = useRef(null);
+    const match = useMediaQuery('not (max-width:600px)');
+
+    console.log(match)
+
     const { pageIndex } = props;
     const dispatch = useAppDispatch();
     const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
@@ -27,9 +31,10 @@ export default function Hello (props) {
     console.log(selectedPageIndex, pageIndex)
 
 
-    return <Box ref={nodeRef} sx={{
+    return <Box
+        sx={{
             position : 'absolute',
-            width : 'inherit',
+            width : match ? 600 : 'inherit',
             height : 'inherit',
             overflow : 'hidden'
         }}>

@@ -18,10 +18,7 @@ export default function AdminPageMain(props) {
   return <>
         <Stack
         className='mainContainer'
-        spacing={0.6}
-        sx={{
-            height : '100%'
-        }}>
+        spacing={0.6}>
             <Stack
                 direction='row'
                 alignItems='center'

@@ -101,6 +101,8 @@ function RootPage () {
   style={{
     height : 'inherit',
     width : 'inherit',
+    display : 'flex',
+    justifyContent : 'center'
   }}>
     <CSSTransition
       timeout={500}

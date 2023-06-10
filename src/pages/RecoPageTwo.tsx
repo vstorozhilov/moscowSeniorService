@@ -2,14 +2,6 @@ import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import FormControl from '@mui/material/FormControl';
-import Text from './svg/text.svg';
-import GrandmomOne from './svg/hellopage_grandmom_one.svg';
-import GrandmomTwo from './svg/hellopage_grandmom_two.svg';
-import GrandDad from './svg/hellopage_granddad.svg';
-import PlateOne from './svg/hellopage_plate_one.svg';
-import PlateTwo from './svg/hellopage_plate_two.svg';
-import PlateThree from './svg/hellopage_plate_three.svg';
 import { CSSTransition } from 'react-transition-group';
 import { useAppSelector,
     useAppDispatch
@@ -19,8 +11,11 @@ import { answerSlice } from '../stateManager/Answers';
 import { useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import RecoTwo from '../pages/svg/recoTwo.svg';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function RecoPageTwo (props) {
+
+    const match = useMediaQuery('not (max-width:600px)');
 
     const nodeRef = useRef(null);
     const { pageIndex } = props;
@@ -40,7 +35,7 @@ export default function RecoPageTwo (props) {
         key={pageIndex}>
         <Box ref={nodeRef} sx={{
             position : 'absolute',
-            width : 'inherit',
+            width : match ? 600 : 'inherit',
             height : 'inherit',
             overflow : 'hidden'
         }}>

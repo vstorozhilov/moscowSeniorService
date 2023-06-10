@@ -78,7 +78,10 @@ export default function AddressScheduleAndTripTime (props) {
     fetchUserSettings();
   }, []);
 
-  return <Stack ref={nodeRef} className='mainContainer' spacing={4}>
+  return <Stack
+          ref={nodeRef}
+          className='mainContainer'
+          spacing={4}>
             <Stack
                 direction='row'
                 justifyContent='space-between'
