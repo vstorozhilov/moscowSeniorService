@@ -7,13 +7,14 @@ import { useAppSelector,
     useAppDispatch
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
-import RecoLogo from '../pages/svg/recoLogo.svg';
+import Pyramid from '../pages/svg/pyramid.svg';
 import { answerSlice } from '../stateManager/Answers';
 import CircularProgress from '@mui/material/CircularProgress';
 import { RecommendationSlice } from '../stateManager/Recommendations';
 import { ActivityCategorySlice } from '../stateManager/ActivityCategories';
 import { useNavigate } from 'react-router-dom';
 import { mainTabSlice } from '../stateManager/mainTab';
+import { Stack } from '@mui/material';
 
 export default function RecoPageThree (props) {
 
@@ -103,14 +104,13 @@ export default function RecoPageThree (props) {
             height : 'inherit',
             overflowY : 'scroll',
             overflowX : 'hidden',
-            background: 'linear-gradient(70deg, #cd3931, #ccb280)',
+            background: 'linear-gradient(0deg, #0D54CA, white)',
             }}>
-        <img src={RecoLogo}
+        <img src={Pyramid}
             style={{
                 position: 'absolute',
-                top : 280,
-                left : 140,
-                transform : 'rotate(-4deg)',
+                top : 500,
+                left : 30,
                 zIndex : 3,
             }}
         />
@@ -126,56 +126,55 @@ export default function RecoPageThree (props) {
         <Box sx={{
             position : 'absolute',
             top : 110,
-            left : 30,
+            right : 20,
             fontSize : 36,
-            color : 'white',
-            letterSpacing: '-0.015em'
+            color : '#0D54CA',
+            letterSpacing: '-0.015em',
+            fontWeight : 700,
+            textAlign : 'end'
         }}>
             Что вам больше нравится:<br></br>активные или спокойные<br></br>занятия?
         </Box>
 
-        <Button
-        disabled={isLoading}
-        onClick={async ()=>{
-            await getRecommends('Активные занятия');
-            dispatch(selectedAndPrevPageResolver(3));
-            setTimeout(()=>navigation('/main'), 0);
-        }}
-        className="actionButton"
-        variant="contained"
+        <Stack
+        spacing={1}
         sx={{
-            zIndex: 6,
-            position: 'absolute',
-            top : 330,
-            left : 30
+            zIndex : 3,
+            width : 280,
+            position : 'absolute',
+            top : 350,
+            right : 20
         }}>
-            <Box>Активные занятия</Box>
-        </Button>
-        <Button
-        disabled={isLoading}
-        onClick={async ()=>{
-            await getRecommends('Cпокойные занятия');
-            dispatch(selectedAndPrevPageResolver(3));
-            setTimeout(()=>navigation('/main'), 0);
-        }}
-        className="actionButton"
-        variant="contained"
-        sx={{
-            zIndex: 6,
-            position: 'absolute',
-            top : 380,
-            left : 30
-        }}>
-            <Box>Спокойные занятия</Box>
-        </Button>
+            <Button
+            disabled={isLoading}
+            onClick={async ()=>{
+                await getRecommends('Активные занятия');
+                dispatch(selectedAndPrevPageResolver(3));
+                setTimeout(()=>navigation('/main'), 0);
+            }}
+            className="questionButton"
+            variant="contained">
+                <Box>Активные занятия</Box>
+            </Button>
+            <Button
+            disabled={isLoading}
+            onClick={async ()=>{
+                await getRecommends('Cпокойные занятия');
+                dispatch(selectedAndPrevPageResolver(3));
+                setTimeout(()=>navigation('/main'), 0);
+            }}
+            className="questionButton"
+            variant="contained">
+                <Box>Спокойные занятия</Box>
+            </Button>
+        </Stack>
 
         <Button
-        // disabled={isLoading}
         onClick={async ()=>{
             dispatch(selectedAndPrevPageResolver(9));
             setTimeout(()=>navigation('/questiontwo'), 0);
         }}
-        className="actionButton"
+        className="questionButton"
         variant="contained"
         startIcon={<ArrowBackIcon/>}
         sx={{

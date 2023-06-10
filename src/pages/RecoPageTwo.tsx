@@ -15,9 +15,10 @@ import { useAppSelector,
     useAppDispatch
   } from '../stateManager/hooks';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
-import RecoLogo from '../pages/svg/recoLogo.svg';
 import { answerSlice } from '../stateManager/Answers';
 import { useNavigate } from 'react-router-dom';
+import { Stack } from '@mui/material';
+import RecoTwo from '../pages/svg/recoTwo.svg';
 
 export default function RecoPageTwo (props) {
 
@@ -49,13 +50,13 @@ export default function RecoPageTwo (props) {
             height : 'inherit',
             overflowY : 'scroll',
             overflowX : 'hidden',
-            background: 'linear-gradient(70deg, #cd3931, #ccb280)',
+            background: 'linear-gradient(30deg, #0D54CA, white)',
             }}>
-        <img src={RecoLogo}
+        <img src={RecoTwo}
             style={{
                 position: 'absolute',
-                top : 280,
-                left : 140,
+                top : 550,
+                left : 60,
                 transform : 'rotate(-4deg)',
                 zIndex : 3,
                 // backdropFilter: 'blur(10px)'
@@ -63,64 +64,64 @@ export default function RecoPageTwo (props) {
         />
         <Box sx={{
             position : 'absolute',
+            color : '#0D54CA',
             top : 110,
             left : 20,
             fontSize : 36,
-            color : 'white',
-            letterSpacing: '-0.015em'
+            letterSpacing: '-0.015em',
+            fontWeight : 700
         }}>
             Что вам больше нравится:<br></br>заниматься одному<br></br>или в группе?
         </Box>
 
-        <Button
-        onClick={()=>{
-            dispatch(changeAnswer(
-                {
-                    answer : 'sociality',
-                    value : 'Одному'
-                }
-            ));
-            dispatch(selectedAndPrevPageResolver(10))
-            setTimeout(()=>navigation('/questionthree'), 0);
-        }}
-        className="actionButton"
-        variant="contained"
+        <Stack
+        spacing={1}
         sx={{
-            zIndex: 6,
-            position: 'absolute',
-            top : 280,
-            left : 30
-        }}>
-            <Box>Одному</Box>
-        </Button>
-        <Button
-        onClick={()=>{
-            dispatch(changeAnswer(
-                {
-                    answer : 'sociality',
-                    value : 'В группе, коллективе'
-                }
-            ))
-            dispatch(selectedAndPrevPageResolver(10));
-            setTimeout(()=>navigation('/questionthree'), 0);
+            zIndex : 3,
+            width : 280,
+            position : 'absolute',
+            top : 350,
+            left : 20
         }}
-        className="actionButton"
-        variant="contained"
-        sx={{
-            zIndex: 6,
-            position: 'absolute',
-            top : 330,
-            left : 30
-        }}>
-            <Box>В группе, коллективе</Box>
-        </Button>
+        >
+            <Button
+            onClick={()=>{
+                dispatch(changeAnswer(
+                    {
+                        answer : 'sociality',
+                        value : 'Одному'
+                    }
+                ));
+                dispatch(selectedAndPrevPageResolver(10))
+                setTimeout(()=>navigation('/questionthree'), 0);
+            }}
+            className="questionButton"
+            variant="contained">
+                <Box>Одному</Box>
+            </Button>
+            <Button
+            onClick={()=>{
+                dispatch(changeAnswer(
+                    {
+                        answer : 'sociality',
+                        value : 'В группе, коллективе'
+                    }
+                ))
+                dispatch(selectedAndPrevPageResolver(10));
+                setTimeout(()=>navigation('/questionthree'), 0);
+            }}
+            className="questionButton"
+            variant="contained">
+                <Box>В группе, коллективе</Box>
+            </Button>
+        </Stack>
 
         <Button
         onClick={()=>{
             dispatch(selectedAndPrevPageResolver(8));
             setTimeout(()=>navigation('/questionone'), 0);
         }}
-        className="actionButton"
+        className="questionButton"
         variant="contained"
         startIcon={<ArrowBackIcon/>}
         sx={{

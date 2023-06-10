@@ -48,7 +48,7 @@ export default function RecoPageOne (props) {
             style={{
                 position: 'absolute',
                 top : 200,
-                left : 200,
+                right : 0,
                 // transform : 'rotate(-4deg)',
                 zIndex : 0,
             }}
