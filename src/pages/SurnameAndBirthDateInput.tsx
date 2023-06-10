@@ -109,7 +109,7 @@ export default function SurNameAndBirthDateInput (props) {
             </Stack>
             <Box height='2vh'/>
             <Box className='hintLabel'>
-                Выберете персонажа
+                Выберите пользователя
             </Box>
             <Menu
                 anchorEl={anchorEl}

@@ -40,7 +40,7 @@ export default function ScheduleConstructor () {
       fontWeight : 600,
       fontSize : 16
     }}
-    >Выберете удобное время для занятий</Box>
+    >Выберите удобное время для занятий</Box>
     {dayTimes.length &&
     <Stack direction='column'
     alignItems='center'
