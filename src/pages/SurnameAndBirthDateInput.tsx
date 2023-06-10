@@ -47,7 +47,7 @@ export default function SurNameAndBirthDateInput (props) {
     });
     let resJSON = await response.json();
 
-    console.log(resJSON);
+    //console.log(resJSON);
 
     setDemoUsers(resJSON.map(item=>({
       id : item.id,
@@ -63,7 +63,7 @@ export default function SurNameAndBirthDateInput (props) {
     setAnchorEl(null);
   };
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('clicked')
+    //console.log('clicked')
     setAnchorEl(prev=>{
         if (prev == null) return event.currentTarget;
         else return null;
@@ -148,7 +148,7 @@ export default function SurNameAndBirthDateInput (props) {
                 <Button
                 disabled={Object.keys(selectedCharacter).length == 0}
                 onClick={()=>{
-                  console.log(selectedCharacter);
+                  //console.log(selectedCharacter);
                   if (selectedCharacter.label?.includes('(новый)')) {
                     dispatch(setDisplayNumber(0));
                     dispatch(selectedAndPrevPageResolver(2));

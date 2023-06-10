@@ -20,7 +20,7 @@ export default function Hello (props) {
 
     const match = useMediaQuery('not (max-width:600px)');
 
-    console.log(match)
+    //console.log(match)
 
     const { pageIndex } = props;
     const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ export default function Hello (props) {
     const {selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer);
     const navigate = useNavigate();
 
-    console.log(selectedPageIndex, pageIndex)
+    //console.log(selectedPageIndex, pageIndex)
 
 
     return <Box

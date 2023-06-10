@@ -37,12 +37,13 @@ export default function RecoSecondCategory (props) {
     const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
     const [isLoading, setIsLoading] = useState(false);
 
-    console.log(selectedQuestionInfo);
+    //console.log(selectedQuestionInfo);
 
     const setRecos = async () => {
 
-        console.log(history);
+        //console.log(history);
 
+        console.log('User`s answers:');
         console.log(answers);
 
         let ttemp = answers.map(
@@ -71,6 +72,9 @@ export default function RecoSecondCategory (props) {
                         });
         
         let reccomends = await responce.json();
+
+        console.log('Model`s recommends:');
+        console.log(reccomends);
 
         responce = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/categories`,
             {

@@ -24,14 +24,14 @@ export default function ActivityCategoryCard (params : { activityCategoryId : nu
     const navigate = useNavigate();
 
     const fetchGroups = async () => {
-        console.log(userId, activityCategoryId);
+        //console.log(userId, activityCategoryId);
         const response = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/groups?category=${activityCategory.title}`);
         const resJSON = await response.json();
         const newRes = resJSON.map(item=>{
             item.location.estimatedTime = Math.floor(Math.random() * 100);
             return item;
         })
-        console.log(newRes);
+        //console.log(newRes);
         dispatch(setActivities(newRes));
     }
 

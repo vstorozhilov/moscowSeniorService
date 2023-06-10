@@ -50,14 +50,14 @@ export default function AddressScheduleAndTripTime (props) {
     const response = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/settings`);
     const resJSON = await response.json();
 
-    console.log(resJSON)
+    //console.log(resJSON)
     setUserSettings(resJSON);
-    console.log(resJSON.schedule);
+    //console.log(resJSON.schedule);
     dispatch(createSchedule(resJSON.schedule));
   }
 
   const postUserSettings = async () => {
-    console.log(maxTripTime);
+    //console.log(maxTripTime);
     await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/settings`,
         {
             method : 'PUT',

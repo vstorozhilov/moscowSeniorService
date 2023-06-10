@@ -195,7 +195,7 @@ export default function AdminPagePreferences(props) {
                 <Button
                     disabled={isDisabled}
                     onClick={()=>{
-                        console.log(prefOne, prefTwo, prefThree);
+                        //console.log(prefOne, prefTwo, prefThree);
                         fetch('https://alexhlins1.fvds.ru:1338/admin/preferences',
                             {
                                 method : 'POST',

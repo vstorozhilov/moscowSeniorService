@@ -14,7 +14,7 @@ export default function ScheduleConstructor () {
     const { changeSchedule } = scheduleSlice.actions;
     const dayTimes = useAppSelector(state=>state.scheduleReducer);
 
-    console.log(dayTimes);
+    //console.log(dayTimes);
 
     const [weekday, setWeekday] = React.useState<number>(0);
     // const handleWeekday = (

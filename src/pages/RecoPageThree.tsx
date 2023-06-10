@@ -42,8 +42,8 @@ export default function RecoPageThree (props) {
 
     const answers = useAppSelector(state=>state.AnswerReducer);
 
-    
-    console.log(history);
+
+    //console.log(history);
 
     // const getRecommends = async (activity) => {
 
@@ -79,7 +79,7 @@ export default function RecoPageThree (props) {
     //         },
     //     );
 
-    //     console.log(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()));
+    //     //console.log(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()));
     //     dispatch(setActivityCategories([]));
     //     dispatch(setMainTab('activityCategories'));
     //     setIsLoading(false);
@@ -88,6 +88,10 @@ export default function RecoPageThree (props) {
     const getRecommendsFirst = async (activity) => {
 
         setIsLoading(true);
+        console.log('Пользователь указал:');
+        console.log(`Есть проблемы ${answers.health_issue}`);
+        console.log(`Мне больше нравится заниматься ${answers.sociality}`);
+        console.log(`Мне больше нравятся ${activity}`)
 
         let responce = await fetch('https://alexhlins1.fvds.ru:1339/send_q1/', {
                             method : 'POST',
@@ -106,8 +110,15 @@ export default function RecoPageThree (props) {
                             )
                         });
 
+
+
         let resJSON = await responce.json();
+
+        console.log('');
+        console.log('Model answer');
         console.log(resJSON);
+        console.log(resJSON.history);
+        //console.log(resJSON);
 
         dispatch(setHistory(resJSON.history));
         const { questions }  = resJSON;
@@ -131,7 +142,7 @@ export default function RecoPageThree (props) {
         //     },
         // );
 
-        // console.log(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()));
+        // //console.log(reccomends.recomendation.filter(item=>(item != '')).map(item=>item.replaceAll('"', '').trim()));
         // dispatch(setActivityCategories([]));
         // dispatch(setMainTab('activityCategories'));
         // setIsLoading(false);

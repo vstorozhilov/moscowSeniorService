@@ -15,11 +15,14 @@ export default function ActivityCategories(props) {
     const recommendations = useAppSelector(state=>state.RecommendationReducer);
     const displayNumer = useAppSelector(state=>state.DisplayNUmberReducer);
 
-    console.log(recommendations)
+    //console.log(recommendations)
 
     const fetchRecs = async () => {
         const responce = await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/recommendations/categories`);
         const resJSON = await responce.json();
+
+        console.log('Responce:');
+        console.log(resJSON);
 
         dispatch(setActivityCategories(resJSON.map((item, index)=>{
             item.id = index;
