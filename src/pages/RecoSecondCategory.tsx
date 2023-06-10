@@ -37,20 +37,20 @@ export default function RecoSecondCategory (props) {
     const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
     const [isLoading, setIsLoading] = useState(false);
 
-    //console.log(selectedQuestionInfo);
+    const setRecos = async (answer) => {
 
-    const setRecos = async () => {
-
+        const myanswers = [...answers];
         //console.log(history);
-
+        if (myanswers.length < questionsNumber) myanswers.push(answer)
+        else myanswers[questionsNumber - 1] = answer;
         console.log('User`s answers:');
-        console.log(answers);
+        console.log(myanswers);
 
-        let ttemp = answers.map(
-            (item, index)=>({
-                [questions[index]['text']] : item
-            })
-         )
+        console.log(Object.fromEntries(myanswers.slice(0, questionsNumber).map(
+            (item, index)=>[
+                [questions[index]['text']], item
+            ]
+         )))
 
         setIsLoading(true);
         let responce = await fetch('https://alexhlins1.fvds.ru:1339/send_q2/', {
@@ -62,7 +62,7 @@ export default function RecoSecondCategory (props) {
                             body : JSON.stringify(
                                 {
                                  history : history,
-                                 answers : Object.fromEntries(answers.map(
+                                 answers : Object.fromEntries(myanswers.slice(0, questionsNumber).map(
                                     (item, index)=>[
                                         [questions[index]['text']], item
                                     ]
@@ -178,9 +178,11 @@ export default function RecoSecondCategory (props) {
                                 }));
                                 if (selectedQuestion < questionsNumber - 1) setSelectedQuestion(prev=>prev + 1);
                                 else {
-                                    await setRecos();
-                                    dispatch(selectedAndPrevPageResolver(3));
-                                    setTimeout(()=>navigation('/main'), 0);
+                                    setTimeout(async () => {
+                                        await setRecos(item);
+                                        dispatch(selectedAndPrevPageResolver(3));
+                                        setTimeout(()=>navigation('/main'), 0);
+                                    }, 0);
                                 }
                             }}
                             className="questionButton"

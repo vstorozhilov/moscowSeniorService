@@ -126,7 +126,7 @@ export default function RecoPageThree (props) {
             Object.keys(questions).map(item=>({
                 text : item,
                 answers : questions[item]
-            }))
+            })).filter(item=>item.answers.length > 0)
         ))
 
 
