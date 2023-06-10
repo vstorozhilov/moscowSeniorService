@@ -6,6 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
 import { useNavigate } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import PieChart, {
     Series,
@@ -21,10 +22,13 @@ export default function AdminPagePiecharts(props) {
   const [offlineTotal, setOfflineTotal] = useState(0);
   const [groupTotal, setGroupTotal] = useState(0);
   const [outdoorTotal, setOutdoorTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchStats = async () => {
+    setIsLoading(true);
     let responce = await fetch('https://alexhlins1.fvds.ru:1338/admin/stats');
     let resJSON = await responce.json();
+    setIsLoading(false);
 
     let offline = [
         {
@@ -121,17 +125,19 @@ export default function AdminPagePiecharts(props) {
             </Stack>
 
             <Box sx={{
-                paddingTop : 2
+                paddingTop : 2,
+                fontWeight : 600
             }}>Доли занятий онлайн/оффлайн в выдаче топ 5 рекомендаций</Box>
+            {isLoading ? <CircularProgress size={240}/> :
             <PieChart
                 id="pie"
                 dataSource={offline}
                 customizePoint={(e)=>{
                     switch (e.argument) {
                       case ('offline'):
-                        return { color : '#CC2222'};
+                        return { color : '#79BCFF'};
                       default:
-                        return { color : '#C5B577'};
+                        return { color : '#0D54CA'};
                     }
                   }}
                 palette="Bright"
@@ -143,7 +149,7 @@ export default function AdminPagePiecharts(props) {
                 />
                 <Legend visible={false}></Legend>
                 <Size width={240} height={240}/>
-            </PieChart>
+            </PieChart>}
             <Stack spacing={2} width={250} sx={{
                 paddingTop : 2
             }}>
@@ -151,44 +157,36 @@ export default function AdminPagePiecharts(props) {
                 direction='row'
                 spacing={2}
                 alignItems='center'><Box sx={{
-                    backgroundColor : '#CC2222',
+                    backgroundColor : '#79BCFF',
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>Оффлайн {offlineTotal * (offline.length ? offline[0].percentage : 0)} ({offline.length ? offline[0].percentage : 0}%)</Box></Stack>
+                }}/><Box sx={{fontWeight : 700}}>Оффлайн {offline.length ? offline[0].percentage : 0}%</Box></Stack>
                 <Stack 
                 direction='row'
                 spacing={2}
                 alignItems='center'><Box sx={{
-                    backgroundColor : '#C5B577',
+                    backgroundColor : '#0D54CA',
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>Онлайн {offlineTotal * (offline.length ? offline[1].percentage : 0)} ({offline.length ? offline[1].percentage : 0}%)</Box></Stack>
-                {/* <Stack 
-                direction='row'
-                spacing={2}
-                alignItems='center'><Box sx={{
-                    backgroundColor : '#F7F5ED',
-                    width : 20,
-                    height : 20,
-                    borderRadius : '50%',
-                    border : '1px solid #C5B577'
-                }}/><Box>Всего {offlineTotal}</Box></Stack> */}
+                }}/><Box sx={{fontWeight : 700}}>Онлайн {offline.length ? offline[1].percentage : 0}%</Box></Stack>
             </Stack>
 
             <Box sx={{
-                paddingTop : 5
+                paddingTop : 5,
+                fontWeight : 600
             }}>Доли занятий групповых/индивидуальных в выдаче топ 5 рекомендаций</Box>
+            {isLoading ? <CircularProgress size={240}/> :
             <PieChart
                 id="pie"
                 dataSource={group}
                 customizePoint={(e)=>{
                     switch (e.argument) {
                       case ('group'):
-                        return { color : '#CC2222'};
+                        return { color : '#79BCFF'};
                       default:
-                        return { color : '#C5B577'};
+                        return { color : '#0D54CA'};
                     }
                   }}
                 palette="Bright"
@@ -200,7 +198,7 @@ export default function AdminPagePiecharts(props) {
                 />
                 <Legend visible={false}></Legend>
                 <Size width={240} height={240}/>
-            </PieChart>
+            </PieChart>}
             <Stack spacing={2} width={250} sx={{
                 paddingTop : 2
             }}>
@@ -208,44 +206,36 @@ export default function AdminPagePiecharts(props) {
                 direction='row'
                 spacing={2}
                 alignItems='center'><Box sx={{
-                    backgroundColor : '#CC2222',
+                    backgroundColor : '#79BCFF',
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>Групповые {groupTotal * (group.length ? group[0].percentage : 0)} ({group.length ? group[0].percentage : 0}%)</Box></Stack>
+                }}/><Box sx={{fontWeight : 700}}>Групповые {group.length ? group[0].percentage : 0}%</Box></Stack>
                 <Stack 
                 direction='row'
                 spacing={2}
                 alignItems='center'><Box sx={{
-                    backgroundColor : '#C5B577',
+                    backgroundColor : '#0D54CA',
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>Индивидуальные {groupTotal * (group.length ? group[1].percentage : 0)} ({group.length ? group[1].percentage : 0}%)</Box></Stack>
-                {/* <Stack 
-                direction='row'
-                spacing={2}
-                alignItems='center'><Box sx={{
-                    backgroundColor : '#F7F5ED',
-                    width : 20,
-                    height : 20,
-                    borderRadius : '50%',
-                    border : '1px solid #C5B577'
-                }}/><Box>Всего {groupTotal}</Box></Stack>    */}
+                }}/><Box sx={{fontWeight : 700}}>Индивидуальные {group.length ? group[1].percentage : 0}%</Box></Stack>
             </Stack>
 
             <Box sx={{
-                paddingTop : 5
+                paddingTop : 5,
+                fontWeight : 600
             }}>Доли занятий на улице/в помещении в выдаче топ 5 рекомендаций</Box>
+            {isLoading ? <CircularProgress size={240}/> :
             <PieChart
                 id="pie"
                 dataSource={outdoor}
                 customizePoint={(e)=>{
                     switch (e.argument) {
                       case ('outdoor'):
-                        return { color : '#CC2222'};
+                        return { color : '#79BCFF'};
                       default:
-                        return { color : '#C5B577'};
+                        return { color : '#0D54CA'};
                     }
                   }}
                 palette="Bright"
@@ -257,7 +247,7 @@ export default function AdminPagePiecharts(props) {
                 />
                 <Legend visible={false}></Legend>
                 <Size width={240} height={240}/>
-            </PieChart>
+            </PieChart>}
             <Stack spacing={2} width={250} sx={{
                 paddingTop : 2,
                 paddingBottom : 10
@@ -266,30 +256,20 @@ export default function AdminPagePiecharts(props) {
                 direction='row'
                 spacing={2}
                 alignItems='center'><Box sx={{
-                    backgroundColor : '#CC2222',
+                    backgroundColor : '#79BCFF',
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>На улице {outdoorTotal * (outdoor.length ? outdoor[0].percentage : 0)} ({outdoor.length ? outdoor[0].percentage : 0}%)</Box></Stack>
+                }}/><Box sx={{fontWeight : 700}}>На улице {outdoor.length ? outdoor[0].percentage : 0}%</Box></Stack>
                 <Stack 
                 direction='row'
                 spacing={2}
                 alignItems='center'><Box sx={{
-                    backgroundColor : '#C5B577',
+                    backgroundColor : '#0D54CA',
                     width : 20,
                     height : 20,
                     borderRadius : '50%'
-                }}/><Box>В помещении {outdoorTotal * (outdoor.length ? outdoor[1].percentage : 0)} ({outdoor.length ? outdoor[1].percentage : 0}%)</Box></Stack>
-                {/* <Stack 
-                direction='row'
-                spacing={2}
-                alignItems='center'><Box sx={{
-                    backgroundColor : '#F7F5ED',
-                    width : 20,
-                    height : 20,
-                    borderRadius : '50%',
-                    border : '1px solid #C5B577'
-                }}/><Box>Всего {outdoorTotal}</Box></Stack>  */}
+                }}/><Box sx={{fontWeight : 700}}>В помещении {outdoor.length ? outdoor[1].percentage : 0}%</Box></Stack>
             </Stack>
             
         </Stack>

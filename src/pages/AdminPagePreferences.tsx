@@ -8,6 +8,7 @@ import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { useNavigate } from 'react-router-dom';
 import Slider from '@mui/material/Slider';
 import { useAppDispatch } from '../stateManager/hooks';
+import Checkbox from '@mui/material/Checkbox';
 
 export default function AdminPagePreferences(props) {
 
@@ -63,9 +64,9 @@ export default function AdminPagePreferences(props) {
             </Stack>
             <Box sx={{height : 30}}></Box>
             <Stack spacing={2} direction='column' alignItems='start' sx={{
-                fontWeight : 500
+                fontWeight : 600
             }}>
-                <Box>Увеличить вес групповых<br></br>активностей перед индивидуальными</Box>
+                <Box>Увеличить вес групповых занятий<br></br>перед индивидуальными</Box>
                 <Slider
                 value={prefTwo}
                 onChange={(__, newVal)=>{
@@ -75,7 +76,7 @@ export default function AdminPagePreferences(props) {
                 valueLabelDisplay="on"
                 sx={{
                     '& .MuiSlider-rail' : {
-                        background: 'linear-gradient(90deg, #C5B577, #CC2222) !important',
+                        background: 'linear-gradient(90deg, #F1F1F1 19.51%, #0D54CA 93.25%) !important',
                         borderRadius: 5,
                         height : 13,
                         //width : 350
@@ -103,7 +104,10 @@ export default function AdminPagePreferences(props) {
                         display : 'none'
                     }
                 }}/>
-                <Box>Увеличить оффлайн перед онлайном</Box>
+                <Stack direction='row' alignItems='center'>
+                    <Box sx={{fontSize : 14}}>Добавить одно групповое занятие с наивысшым рангом</Box><Checkbox/>
+                </Stack>
+                <Box>Увеличить вес оффлайн-занятий перед онлайн-занятиями</Box>
                 <Slider
                 value={prefOne}
                 onChange={(__, newVal)=>{
@@ -113,7 +117,7 @@ export default function AdminPagePreferences(props) {
                 valueLabelDisplay="on"
                 sx={{
                     '& .MuiSlider-rail' : {
-                        background: 'linear-gradient(90deg, #C5B577, #CC2222) !important',
+                        background: 'linear-gradient(90deg, #F1F1F1 19.51%, #0D54CA 93.25%) !important',
                         borderRadius: 5,
                         height : 13,
                         //width : 350
@@ -141,7 +145,10 @@ export default function AdminPagePreferences(props) {
                         display : 'none'
                     }
                 }}/>
-                <Box>Увеличить вес хобби на свежем воздухе</Box>
+                <Stack direction='row' alignItems='center'>
+                    <Box sx={{fontSize : 14}}>Добавить одно оффлайн-занятие с наивысшым рангом</Box><Checkbox/>
+                </Stack>
+                <Box>Увеличить вес занятий на свежем воздухе</Box>
                 <Slider
                 value={prefThree}
                 onChange={(__, newVal)=>{
@@ -151,7 +158,7 @@ export default function AdminPagePreferences(props) {
                 valueLabelDisplay="on"
                 sx={{
                     '& .MuiSlider-rail' : {
-                        background: 'linear-gradient(90deg, #C5B577, #CC2222) !important',
+                        background: 'linear-gradient(90deg, #F1F1F1 19.51%, #0D54CA 93.25%) !important',
                         borderRadius: 5,
                         height : 13
                     },
@@ -180,6 +187,9 @@ export default function AdminPagePreferences(props) {
                 }}
                 />
             </Stack>
+            <Stack direction='row' alignItems='center'>
+                    <Box sx={{fontSize : 14}}>Добавить одно занятие га свежем воздухе с наивысшым рангом</Box><Checkbox/>
+                </Stack>
             <Stack sx={{
                 height : '100%',
                 justifyContent : 'end',

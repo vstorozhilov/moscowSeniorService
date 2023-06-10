@@ -13,6 +13,7 @@ export default function ActivityCategories(props) {
     const { setActivityCategories } = ActivityCategorySlice.actions;
     const [ recs, setRecs ] = useState([]);
     const recommendations = useAppSelector(state=>state.RecommendationReducer);
+    const displayNumer = useAppSelector(state=>state.DisplayNUmberReducer);
 
     console.log(recommendations)
 
@@ -27,9 +28,11 @@ export default function ActivityCategories(props) {
     }
 
     useEffect(()=>{
-        setTimeout(()=>fetchRecs(), 0);
-        setTimeout(()=>setRecs(recommendations), 500)
-    }, []);
+        if (displayNumer == 3) {
+            setTimeout(()=>fetchRecs(), 0);
+            setTimeout(()=>setRecs(recommendations), 500)
+        }
+    }, [displayNumer]);
 
     const activityCategoriesId = useAppSelector(state=>state.ActivityCategoriesReducer.map(item=>item.id));
 

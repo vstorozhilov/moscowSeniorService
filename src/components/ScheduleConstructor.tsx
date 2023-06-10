@@ -14,31 +14,34 @@ export default function ScheduleConstructor () {
     const { changeSchedule } = scheduleSlice.actions;
     const dayTimes = useAppSelector(state=>state.scheduleReducer);
 
-    const [weekday, setWeekday] = React.useState<number>(0);
-    const handleWeekday = (
-        __: React.MouseEvent<HTMLElement>,
-        newWeekday: number | null
-      ) => {
-        if (newWeekday != null) {
-          setWeekday(newWeekday);
-        }
-      };
+    console.log(dayTimes);
 
-    const handleDaytime = (
-        __: React.MouseEvent<HTMLElement>,
-        dayTimes: Array<string>
-      ) => {
-        dispatch(changeSchedule({
-            weekday,
-            dayTimes
-        }));
-      };
+    const [weekday, setWeekday] = React.useState<number>(0);
+    // const handleWeekday = (
+    //     __: React.MouseEvent<HTMLElement>,
+    //     newWeekday: number | null
+    //   ) => {
+    //     if (newWeekday != null) {
+    //       setWeekday(newWeekday);
+    //     }
+    //   };
+
+    // const handleDaytime = (
+    //     __: React.MouseEvent<HTMLElement>,
+    //     dayTimes: Array<string>
+    //   ) => {
+    //     dispatch(changeSchedule({
+    //         weekday,
+    //         dayTimes
+    //     }));
+    //   };
 
     return <><Box sx={{
       fontWeight : 600,
       fontSize : 16
     }}
     >Выберете удобное время для занятий</Box>
+    {dayTimes.length &&
     <Stack direction='column'
     alignItems='center'
     spacing={-0.5}>
@@ -58,12 +61,12 @@ export default function ScheduleConstructor () {
           spacing={4}
           ><Box>{item}</Box>
           {['morning', 'noon', 'evening'].map(item=>(
-            <Checkbox
+            <Checkbox checked={dayTimes[index][item]}
             onChange={()=>{
               dispatch(changeSchedule({
-                index,
-                item
-            }));
+                weekday : index,
+                dayTime : item
+              }));
             }}
             size='large'
             sx={{
@@ -73,5 +76,6 @@ export default function ScheduleConstructor () {
         </Stack>)
         }
     </Stack>
+    }
     </>
 }

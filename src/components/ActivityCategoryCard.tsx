@@ -11,6 +11,7 @@ import { ActivityCategorySlice } from '../stateManager/ActivityCategories';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { ActivitySlice } from '../stateManager/Activities';
 import { useNavigate } from 'react-router-dom';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 export default function ActivityCategoryCard (params : { activityCategoryId : number, index : number}) {
 
@@ -40,55 +41,55 @@ export default function ActivityCategoryCard (params : { activityCategoryId : nu
         transitionDelay: `${200 * index}ms !important`
     }}>
         <CardContent className='visible'>
-            <Stack spacing={1.5}>
-            <Stack direction='row' justifyContent='space-between' alignItems='center'>
-                <Box sx={{
-                    fontSize : 24,
-                    fontWeight : 500
-                }}>
-                {activityCategory?.title}
+            <Stack spacing={1.2}>
+                <Stack direction='row' justifyContent='space-between' alignItems='center'>
+                    <Box sx={{
+                        fontSize : 24,
+                        fontWeight : 600
+                    }}>
+                    {activityCategory?.title}
+                    </Box>
+                    <IconButton onClick={()=>setIsExpanded(prev=>!prev)}>
+                        <AddCircleIcon fontSize='large' sx={{
+                            width : 50,
+                            height : 50,
+                            color : '#0D54CA',
+                            transform : isExpanded ? 'rotate(45deg)' : 'rotate(0)'
+                        }}/>
+                    </IconButton>
+                </Stack>
+                <Box sx={{fontSize : 14}}>
+                    сезон - {activityCategory?.season}
                 </Box>
-                <IconButton onClick={()=>setIsExpanded(prev=>!prev)}>
-                    <ExpandMoreIcon sx={{
-                        transform : isExpanded ? 'rotate(180deg)' : 'rotate(0)'
-                    }}/>
-                </IconButton>
-            </Stack>
-            <Box>
-                {activityCategory?.season}
-            </Box>
-            <Stack direction='row' spacing={2}>
-                {activityCategory?.tags.map((tag, index)=>{
-                    return <Box key={index} className={index ==0 ? 'activityTagsMain' : 'activityTagsOther'}>{tag}</Box>
-                })}
-            </Stack>
+                <Stack direction='row' spacing={1} width='100%'>
+                    <Button
+                    className="activityCategoryActionButtonMap"
+                    onClick={()=>{
+                        fetchGroups();
+                        dispatch(selectedAndPrevPageResolver(5));
+                        setTimeout(()=>navigate('/groupsmap'), 0);
+                    }}
+                    >Выбрать на карте</Button>
+                    <Button
+                    className="activityCategoryActionButtonList"
+                    onClick={()=>{
+                        fetchGroups();
+                        dispatch(selectedAndPrevPageResolver(4));
+                        setTimeout(()=>navigate('/groupslist'), 0);
+                    }}
+                    >Список адресов</Button>
+                </Stack>
             </Stack>
         </CardContent>
         <Collapse className='expanding' in={isExpanded}>
-            <CardContent>
+            <CardContent sx={{
+                backgroundColor : 'white',
+                borderTop : 'solid 1px black',
+                color : '#0D54CA',
+                textAlign : 'justify'
+            }}>
                 {activityCategory?.description}
             </CardContent>
-            <CardActions sx={{
-                display: 'flex',
-                justifyContent: 'space-around'
-            }}>
-                <Button
-                className="activityCategoryActionButtonList"
-                onClick={()=>{
-                    fetchGroups();
-                    dispatch(selectedAndPrevPageResolver(4));
-                    setTimeout(()=>navigate('/groupslist'), 0);
-                }}
-                >Выбрать в списке</Button>
-                <Button
-                className="activityCategoryActionButtonMap"
-                onClick={()=>{
-                    fetchGroups();
-                    dispatch(selectedAndPrevPageResolver(5));
-                    setTimeout(()=>navigate('/groupsmap'), 0);
-                }}
-                >Выбрать на карте</Button>
-            </CardActions>
         </Collapse>
     </Card>
 }

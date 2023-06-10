@@ -7,17 +7,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
 import { useNavigate } from 'react-router-dom';
-import { mainTabSlice } from '../stateManager/mainTab';
 
 export default function AdminPageMain(props) {
 
-  const displayNumber = useAppSelector(state=>state.DisplayNUmberReducer);
   const dispatch = useAppDispatch();
   const { selectedAndPrevPageResolver } = selectedAndPrevPagesSlice.actions;
   const navigate = useNavigate();
   const { selectedPageIndex, prevPageIndex} = useAppSelector(state=>state.selectedAndPrevPageReducer)
-
-  const tab = useAppSelector(state=>state.MainTabReducer);
 
   return <>
         <Stack
@@ -58,7 +54,7 @@ export default function AdminPageMain(props) {
                         color : 'black'
                     }}/>
                 </IconButton>
-                <Box className='mainLabel'>Админка</Box>
+                <Box className='mainLabel'>Управление<br></br>рекомендациями</Box>
             </Stack>
             <Button
                 onClick={()=>{
@@ -68,11 +64,12 @@ export default function AdminPageMain(props) {
             ><Stack
                 sx={{
                     textTransform : 'none',
-                    backgroundColor : '#CC2222',
-                    color : 'white',
+                    backgroundColor : 'white',
+                    color : 'black',
                     borderRadius : '16px',
                     paddingTop : 1.5,
-                    paddingLeft : 1.5
+                    paddingLeft : 1.5,
+                    border : '1px solid black'
                 }}
                 width='100%'
                 height='200px'
@@ -82,8 +79,12 @@ export default function AdminPageMain(props) {
                 spacing={1}
             >
                 <Box sx={{
-                    fontWeight : 500,
-                    fontSize : 24
+                    verticalAlign : 'middle',
+                    height : 30,
+                    backgroundColor : '#fbedb2',
+                    fontWeight : 700,
+                    fontSize : 24,
+                    paddingBottom : 5
                 }}>Приоритеты занятий</Box>
                 <Box sx={{
                     fontSize : 16,
@@ -98,11 +99,11 @@ export default function AdminPageMain(props) {
             }}><Stack
                 sx={{
                     textTransform : 'none',
-                    backgroundColor : '#F7F5ED',
+                    backgroundColor : '#0D54CA',
                     borderRadius : '16px',
                     paddingTop : 1.5,
                     paddingLeft : 1.5,
-                    color : 'black'
+                    color : 'white'
                 }}
                 width='100%'
                 height='200px'
@@ -112,7 +113,7 @@ export default function AdminPageMain(props) {
                 spacing={1}
             >
                 <Box sx={{
-                    fontWeight : 500,
+                    fontWeight : 600,
                     fontSize : 24
                 }}>Статистика</Box>
                 <Box sx={{
@@ -123,11 +124,11 @@ export default function AdminPageMain(props) {
 
             <Button><Stack
                 sx={{
-                    backgroundColor : '#F7F5ED',
+                    backgroundColor : '#0D54CA',
                     borderRadius : '16px',
                     paddingTop : 1.5,
                     paddingLeft : 1.5,
-                    color : 'black',
+                    color : 'white',
                     textTransform : 'none'
                 }}
                 width='100%'
@@ -138,7 +139,7 @@ export default function AdminPageMain(props) {
                 spacing={1}
             >
                 <Box sx={{
-                    fontWeight : 500,
+                    fontWeight : 600,
                     fontSize : 24
                 }}>Сценарии чата</Box>
                 <Box sx={{

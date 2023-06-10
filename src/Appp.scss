@@ -106,6 +106,18 @@ input {
     font-size: 16px;
 }
 
+.questionButton.MuiButtonBase-root,  .questionButton.MuiButtonBase-root:hover{
+    background-color: white;
+    box-shadow: none;
+    border-radius: 16px;
+    font-family: 'RF Dewi';
+    font-weight: 600;
+    color: black;
+    text-transform: none;
+    font-size: 24px;
+    border : 1px solid black;
+}
+
 .toggleGroupButton button {
     line-height: 20px !important;
     padding:  6px 10px !important;
@@ -133,12 +145,14 @@ input {
 }
 
 .activityCategoryCard .visible {
-    background: #F7F5ED;
+    background: white;
     border-radius: 10px;
 }
 
 .activityCategoryCard {
     box-shadow: none !important;
+    border: 1px solid black;
+    border-radius: 8px !important;
 }
 
 .activityCategoryCard-appear {
@@ -236,21 +250,24 @@ input {
 }
 
 .activityCategoryCard .activityCategoryActionButtonList, .activityCategoryCard .activityCategoryActionButtonList:hover{
-    background-color: #c5b577;
+    background-color: white;
     border-radius : 30px;
+    border: 1px solid black;
     color: black;
     text-transform: none;
-    font-family: 'GT Eesti Pro Text';
     width : 50%;
+    font-size: 14px;
 }
 
 .activityCategoryCard .activityCategoryActionButtonMap, .activityCategoryCard .activityCategoryActionButtonMap:hover{
-    background-color: #c22;
+    background-color: black;
     border-radius : 30px;
     color: white;
     text-transform: none;
-    font-family: 'GT Eesti Pro Text';
     width : 50%;
+    font-size: 14px;
+    padding-left : 0;
+    padding-right : 0;
 }
 
 .activityCategoryCard .activityTagsMain {
@@ -282,15 +299,15 @@ input {
     color : black;
     border-radius: 16px !important;
     border: none !important;
-    font-family: 'GT Eesti Pro Text';
-    font-weight: 400;
+    font-weight: 600;
     font-size: 18px;
     width : 49%;
 }
 
 .toggleGroupButton button.activityCategoriesBookingsTab.Mui-selected {
-    background-color: #c5b577 !important;
-    color: black !important;
+    background-color: white !important;
+    color: #0D54CA !important;
+    border : 2px solid #0D54CA !important;
 }
 
 // .activityCategoriesTab {
@@ -310,11 +327,11 @@ input {
 // -----
 
 .startChat.MuiButtonBase-root {
-    background-color: #c22 !important;
+    background-color: #0D54CA !important;
     color: white !important;
-    font-family: 'GT Eesti Pro Text' !important;
-    font-size: 20px !important;
-    font-weight: 500 !important;
+    // font-family: 'GT Eesti Pro Text' !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
     text-transform: none !important;
     border-radius: 16px !important;
     text-align: start !important;
@@ -407,12 +424,17 @@ input {
 }
 
 .bookButton {
-    background-color: #CC2222 !important;
+    background-color: black !important;
     color: white !important;
     border-radius: 10px !important;
     padding: 0 10px !important;
     text-transform: none !important;
-    font-family: 'GT Eesti Pro Text' !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    width : 150px !important;
+    height : 40px !important;
+    border-radius: 16px !important;
+    // font-family: 'GT Eesti Pro Text' !important;
 }
 
 .page-transition-forward-enter {

@@ -52,7 +52,7 @@ export default function BookCard (params : { activityId : number}) {
                 <Box sx={{
                     fontSize : 24,
                     fontWeight : 500,
-                    color : 'red'
+                    color : '#0D54CA'
                 }}>
                 {activityInfo?.title}
                 </Box>

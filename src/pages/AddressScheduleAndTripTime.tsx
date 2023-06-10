@@ -29,9 +29,10 @@ export default function AddressScheduleAndTripTime (props) {
   const userId = useAppSelector(state=>state.SelectedCharacterReducer.id);
   const [ userSettings, setUserSettings ] = useState({});
   const { createSchedule } = scheduleSlice.actions;
+  const navigate = useNavigate();
+
   const schedule = useAppSelector(state=>state.scheduleReducer);
   const { maxTripTime } = useAppSelector(state=>state.maxTripTimeReducer);
-  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const handleClose = () => {
@@ -51,7 +52,26 @@ export default function AddressScheduleAndTripTime (props) {
 
     console.log(resJSON)
     setUserSettings(resJSON);
-    createSchedule(resJSON.schedule);
+    console.log(resJSON.schedule);
+    dispatch(createSchedule(resJSON.schedule));
+  }
+
+  const postUserSettings = async () => {
+    await fetch(`https://alexhlins1.fvds.ru:1338/users/${userId}/settings`,
+        {
+            method : 'PUT',
+            headers : {
+                accept : 'application/json',
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({
+                address : userSettings.location.address,
+                schedule : schedule,
+                diseases : [],
+                travelTime : maxTripTime
+            })
+        }
+    );
   }
 
   useEffect(()=>{
@@ -108,8 +128,15 @@ export default function AddressScheduleAndTripTime (props) {
                 variant="contained"
                 endIcon={<ArrowForwardIcon/>}
                   onClick={async ()=>{
-                    dispatch(selectedAndPrevPageResolver(3));
-                    setTimeout(()=>navigate('/main'), 0);
+                    await postUserSettings();
+                    if (selectedPageIndex != 3) {
+                      dispatch(selectedAndPrevPageResolver(8));
+                      setTimeout(()=>navigate('/questionone'), 0);
+                    }
+                    else {
+                      dispatch(selectedAndPrevPageResolver(3));
+                      setTimeout(()=>navigate('/main'), 0);
+                    }
                   }
                 }>
                   <Box>Вперед</Box>

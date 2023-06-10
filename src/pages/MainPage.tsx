@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import { Stack } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { selectedAndPrevPagesSlice } from '../stateManager/SelectedAndPrevPage';
 import { useAppSelector, useAppDispatch } from '../stateManager/hooks';
@@ -116,10 +115,10 @@ export default function MainPage (props) {
                 }
             }}>
                 <Stack width='100%' direction='column' alignItems='start'>
-                    <Box>Подобрать активность</Box>
+                    <Box>Подобрать занятие</Box>
                     <Box sx={{
                         fontSize : 16,
-                        fontWeight : 400}}>Выбери новую активность</Box>
+                        fontWeight : 400}}>Интересное сегодня</Box>
                 </Stack>
             </Button>
             <ToggleButtonGroup
@@ -143,19 +142,24 @@ export default function MainPage (props) {
                         }
                     }
                 }>
-                    <Stack width='100%' spacing={2} direction='column' justifyContent='start' alignItems='start'>
+                    <Stack
+                    width='100%'
+                    spacing={2}
+                    direction='column'
+                    justifyContent='start'
+                    alignItems='start'>
                         <Stack direction='column' alignItems='start'>
                             <Box sx={{
-                                fontSize : 20,
+                                fontSize : 24,
                                 fontWeight: 700
                             }}>Вам</Box>
                             <Box sx={{
-                                fontSize : 20,
+                                fontSize : 24,
                                 fontWeight: 700
                             }}>подойдут</Box>
                         </Stack>
                         <Box sx={{
-                                fontSize : 14,
+                                fontSize : 16,
                                 fontWeight: 400
                             }}>находятся рядом</Box>
                     </Stack>
@@ -179,28 +183,24 @@ export default function MainPage (props) {
                     <Stack width='100%' spacing={2} direction='column' justifyContent='start' alignItems='start'>
                         <Stack direction='column' alignItems='start'>
                             <Box sx={{
-                                width : '100%',
-                                fontSize : 20,
+                                fontSize : 24,
                                 fontWeight: 700
-                            }}>Текущие</Box>
+                            }}>Ваши</Box>
                             <Box sx={{
-                                fontSize : 20,
+                                fontSize : 24,
                                 fontWeight: 700
                             }}>записи</Box>
                         </Stack>
                         <Box sx={{
-                                fontSize : 14,
+                                fontSize : 16,
                                 fontWeight: 400,
-                            }}>акутальные активности</Box>
+                            }}>занятия</Box>
                     </Stack>
                 </ToggleButton>
             </ToggleButtonGroup>
             <Menu
                 anchorEl={anchorEl}
                 open={open}
-                // MenuListProps={{
-                // 'aria-labelledby': 'basic-button',
-                // }}
             >
                 <MenuItem onClick={()=>{
                     handleClose();
