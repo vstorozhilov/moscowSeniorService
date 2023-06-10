@@ -20,7 +20,8 @@ export default function RecoSecondCategory (props) {
 
     const [selectedQuestion, setSelectedQuestion] = useState(0);
 
-    const selectedQuestionInfo = useAppSelector(state=>state.GigachatQuestionReducer)[selectedQuestion]
+    const selectedQuestionInfo = useAppSelector(state=>state.GigachatQuestionReducer)[selectedQuestion];
+    const questionsNumber = useAppSelector(state=>state.GigachatQuestionReducer).length;
 
     const match = useMediaQuery('not (max-width:600px)');
     const { pageIndex } = props;
@@ -153,7 +154,7 @@ export default function RecoSecondCategory (props) {
                                     index  : selectedQuestion,
                                     text : item
                                 }));
-                                if (selectedQuestion < 4) setSelectedQuestion(prev=>prev + 1);
+                                if (selectedQuestion < questionsNumber - 1) setSelectedQuestion(prev=>prev + 1);
                                 else {
                                     await setRecos();
                                     dispatch(selectedAndPrevPageResolver(3));
