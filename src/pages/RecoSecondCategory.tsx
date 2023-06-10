@@ -95,6 +95,15 @@ export default function RecoSecondCategory (props) {
         unmountOnExit
         in={pageIndex == selectedPageIndex}
         key={pageIndex}>
+        <>
+        {isLoading && <Box sx={{
+            position : 'absolute',
+            background : 'rgba(0, 0, 0, 0.6)',
+            width : match ? 600 : 'inherit',
+            height : '100%',
+            zIndex : 10
+        }}>
+        </Box>}
         <Box sx={{
             position : 'absolute',
             width : match ? 600 : 'inherit',
@@ -118,6 +127,15 @@ export default function RecoSecondCategory (props) {
                     zIndex : 0,
                 }}
             />
+             {isLoading ? <CircularProgress
+            size={80}
+            sx={{
+                color : 'white',
+                position : 'absolute',
+                top : 500,
+                left : 150,
+                zIndex : 15
+            }}/> : null}
         <TransitionGroup component={null} appear>
             <CSSTransition
                 timeout={500}
@@ -194,6 +212,7 @@ export default function RecoSecondCategory (props) {
             </Button>
         </Box>
     </Box>
+    </>
     {/* <Box></Box> */}
     </CSSTransition>
 }

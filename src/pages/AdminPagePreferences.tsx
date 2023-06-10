@@ -102,7 +102,7 @@ export default function AdminPagePreferences(props) {
                     }
                 }}/>
                 <Stack direction='row' alignItems='center'>
-                    <Box sx={{fontSize : 14}}>Добавить одно групповое занятие с наивысшым рангом</Box><Checkbox/>
+                    <Box sx={{fontSize : 14}}>Добавить одно групповое занятие с наивысшим рангом</Box><Checkbox/>
                 </Stack>
                 <Box>Увеличить вес оффлайн-занятий перед онлайн-занятиями</Box>
                 <Slider
@@ -143,7 +143,7 @@ export default function AdminPagePreferences(props) {
                     }
                 }}/>
                 <Stack direction='row' alignItems='center'>
-                    <Box sx={{fontSize : 14}}>Добавить одно оффлайн-занятие с наивысшым рангом</Box><Checkbox/>
+                    <Box sx={{fontSize : 14}}>Добавить одно оффлайн-занятие с наивысшим рангом</Box><Checkbox/>
                 </Stack>
                 <Box>Увеличить вес занятий на свежем воздухе</Box>
                 <Slider
@@ -185,7 +185,7 @@ export default function AdminPagePreferences(props) {
                 />
             </Stack>
             <Stack direction='row' alignItems='center'>
-                    <Box sx={{fontSize : 14}}>Добавить одно занятие га свежем воздухе с наивысшым рангом</Box><Checkbox/>
+                    <Box sx={{fontSize : 14}}>Добавить одно занятие га свежем воздухе с наивысшим рангом</Box><Checkbox/>
                 </Stack>
             <Stack sx={{
                 height : '100%',
